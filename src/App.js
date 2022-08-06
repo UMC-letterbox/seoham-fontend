@@ -14,6 +14,10 @@ import SelectLetterType from "./Pages/New";
 import FileEditor from "./Pages/FileEditor";
 import LetterEditor from "./Pages/LetterEditor";
 import SelectPaper from "./Pages/SelectPaper";
+import New_tag from "./Pages/New_tag";
+import View_tags from "./Pages/View_tags";
+import View_letter from "./Pages/View_letter";
+
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -105,10 +109,12 @@ function App() {
             <Route path="/letter" element={<Letter />} />
             <Route path="/view/:id" element={<View />} />
             <Route path="/selectlettertype" element={<SelectLetterType />} />
-        <Route path="/fileeditor" element={ <FileEditor />} />
-        <Route path="/lettereditor" element={<LetterEditor />} />
-        <Route path="/selectpaper" element={<SelectPaper />} />
-
+            <Route path="/fileeditor" element={ <FileEditor />} />
+            <Route path="/lettereditor" element={<LetterEditor />} />
+            <Route path="/selectpaper" element={<SelectPaper />} />
+            <Route path="/newTag" element={<New_tag />}/>
+            <Route path="/tags/:id" element={<View_tags />}/>
+            <Route path="/letter/:tagId/:id" element={<View_letter/>}/>
           </Routes>
         </BrowserRouter>
       </DiaryDispatchContext.Provider>

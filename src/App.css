@@ -24,3 +24,19 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+/*태그 */
+.sticky{
+  position: sticky;
+  top: 0px;
+  z-index: 1055;
+}
+
+.menuBtn {
+  position: fixed; 
+  opacity: 0; 
+  top: 10px; 
+  right: 40px;
+  z-index: 1055; 
+  opacity: 1; 
+}

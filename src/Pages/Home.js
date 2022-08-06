@@ -8,6 +8,7 @@ import MyButton from "../Components/MyButton";
 import MyHeader from "../Components/MyHeader";
 import MyButton1 from "../Components/MyButton1";
 import InitialTagbox from "../Components/InitialTagbox";
+import Tagbox_hy from "../Components/Tagbox_hy"
 
 const Home = () => {
   const tagList = useContext(DiaryStateContext);
@@ -53,10 +54,15 @@ const Home = () => {
           navigate("/selectlettertype");
         }}
       />
+      {/*
       <div class="py-4 flex-wrap">
         <InitialTagbox tagList={data} />
       </div>
-      <h2 class="text-red-400 pt-64">Hello World</h2>
+      */}
+      <div className="flex justify-center">
+        <Tagbox_hy />
+      </div>
+      {/*<h2 class="text-red-400 pt-64">Hello World</h2>*/}
     </div>
   );
 };
