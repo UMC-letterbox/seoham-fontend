@@ -41,7 +41,7 @@ function View_letter () {
     return(
         <div className='h-screen'>
 
-            <div className="flex justify-between p-5 mt-3">
+            <div className="flex justify-between p-5">
                 <button onClick={clickBack}>
                     <img src="/img/left-arrow.png" className="w-4 h-4"/>
                 </button>
@@ -51,7 +51,8 @@ function View_letter () {
                 </button>
             </div>
             <div className='mx-10 my-5'>
-                <span className='font-bold'>보낸이:</span> <span>&nbsp;{letter.writer}님</span>
+                <span>보낸이: {letter.writer}</span>
+                <span className='text-sm'>&nbsp;님</span>
             </div>
             <div className="h-3/6 mx-10 p-3 bg-gray-100 shadow-lg rounded-md">
                 <div className="w-11/12 h-5/6 m-2 overflow-y-auto">
