@@ -2,7 +2,7 @@ import ViewItem from "./ViewItem";
 
 const Viewbox = ({ tagList }) => {
   return (
-    <div>
+    <div className="m-2">
       {tagList.map((it) => (
         <ViewItem key={it.id} {...it} />
       ))}

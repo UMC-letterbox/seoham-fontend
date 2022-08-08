@@ -25,12 +25,12 @@ function New_tag() {
             <div className="flex justify-between m-5">
                 <Link to={'/'}>
                     <button>
-                        <img src="/img/close.png" className="w-6 h-6"/>
+                        <img src="/img/close.png" className="w-4 h-4"/>
                     </button>
                 </Link>
                 <p className="font-bold text-2xl">TAG</p>
                 <button>
-                    <img src="/img/check-green.png" className="w-7 h-7" onClick={clickCheck}/>
+                    <img src="/img/check-green.png" className="w-6 h-6" onClick={clickCheck}/>
                 </button>
             </div>
             <div className="body flex justify-center mt-10">
@@ -49,11 +49,11 @@ function New_tag() {
                 <div className="flex justify-center mx-3 mb-3 mt-8">
                     <span className="text-zinc-400">태그 색상</span>
                     <div className="flex justify-around w-6/12 ml-5">
-                        <button className="rounded-md bg-rose-300 w-6 h-6" onClick={()=>{setColor('rgb(253,164,175)');}}/>
-                        <button className="rounded-md bg-amber-100 w-6 h-6" onClick={()=>{setColor("rgb(254,243,199)")}}/>
-                        <button className="rounded-md bg-lime-200 w-6 h-6" onClick={()=>{setColor("rgb(217,249,157)")}}/>
-                        <button className="rounded-md bg-sky-100 w-6 h-6" onClick={()=>{setColor("rgb(224,242,254)")}}/>
-                        <button className="rounded-md bg-fuchsia-200 w-6 h-6" onClick={()=>{setColor("rgb(245,208,254)")}}/>
+                        <button className="rounded-md bg-[#BF1713] w-6 h-6" onClick={()=>{setColor('#BF1713');}}/>
+                        <button className="rounded-md bg-[#E93732] w-6 h-6" onClick={()=>{setColor("#E93732")}}/>
+                        <button className="rounded-md bg-[#FF5C58] w-6 h-6" onClick={()=>{setColor("#FF5C58")}}/>
+                        <button className="rounded-md bg-[#FE8F8F] w-6 h-6" onClick={()=>{setColor("#FE8F8F")}}/>
+                        <button className="rounded-md bg-[#FCD2D1] w-6 h-6" onClick={()=>{setColor("#FCD2D1")}}/>
                     </div>
                 </div>
             </div>

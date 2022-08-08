@@ -44,11 +44,11 @@ function View_tags() {
         <div>
             <div className="flex justify-between p-3">
                 <button onClick={clickBack}>
-                    <img src="/img/left-arrow.png" className="w-8 h-8"/>
+                    <img src="/img/left-arrow.png" className="w-4 h-4"/>
                 </button>
                 <p className="font-bold text-lg">태그 별 편지 조회</p>
                 <button onClick={onClick}>
-                    <img src="/img/dots.png" className="w-8 h-8"/>
+                    <img src="/img/dots.png" className="w-4 h-4"/>
                 </button>
             </div>
             <div className="sticky flex justify-center bg-white">

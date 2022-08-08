@@ -17,6 +17,11 @@ import SelectPaper from "./Pages/SelectPaper";
 import New_tag from "./Pages/New_tag";
 import View_tags from "./Pages/View_tags";
 import View_letter from "./Pages/View_letter";
+import FindId from "./Pages/FindId";
+import FindPw from "./Pages/FindPW";
+import Create from "./Pages/Create";
+import LoginPage from "./Pages/LoginPage";
+import Contract from "./Pages/Contract";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -115,6 +120,12 @@ function App() {
             <Route path="/newTag" element={<New_tag />}/>
             <Route path="/tags/:id" element={<View_tags />}/>
             <Route path="/letter/:tagId/:id" element={<View_letter/>}/>
+
+            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/findid" element={<FindId/>}/>
+            <Route path="/findpw" element={<FindPw/>}/>
+            <Route path="/create" element={<Create/>}/>
+            <Route path="/contract" element={<Contract/>}/>
           </Routes>
         </BrowserRouter>
       </DiaryDispatchContext.Provider>

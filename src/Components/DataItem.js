@@ -9,7 +9,7 @@ const DateItem = ({ id, tagName, sender, date }) => {
     <div class="inline-flex flex-row">
       <button
         onClick={getTag}
-        class="h-24 w-32 m-2 border cursor-pointer whitespace-nowrap rounded px-5 py-3 bg-[#92C7DF] text-white"
+        class="h-24 w-32 m-2 border cursor-pointer whitespace-nowrap rounded-md px-5 py-3 bg-[#92C7DF] text-white shadow-md"
       >
         <div class="text-left">{sender}</div>
         <br></br>

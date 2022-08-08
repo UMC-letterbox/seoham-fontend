@@ -8,7 +8,8 @@ import MyButton from "../Components/MyButton";
 import MyHeader from "../Components/MyHeader";
 import MyButton1 from "../Components/MyButton1";
 import InitialTagbox from "../Components/InitialTagbox";
-import Tagbox_hy from "../Components/Tagbox_hy"
+import Tagbox_hy from "../Components/Tagbox_hy";
+import MainHeader from "../Components/MainHeader";
 
 const Home = () => {
   const tagList = useContext(DiaryStateContext);
@@ -18,28 +19,24 @@ const Home = () => {
     setData(tagList);
   }, [tagList]);
   return (
-    <div class="sm: justify-center items-center m-0 px-3 bg-gray-200 min-h-screen">
-      <MyHeader
+    <div class="sm: justify-center items-center m-0 px-3 min-h-screen">
+      {/*<MyHeader
         headText={""}
         leftChild={<MyButton text={"서함"} onClick={() => alert("안녕")} />}
         rightChild={
           <MyButton1 text={"프로필"} onClick={() => alert("프로필")} />
         }
-      />
+      />*/}
+      <MainHeader />
       <Select
         TagText={
-          <MyButton
-            text={"태그별"}
-            onClick={() => {
-              navigate("/");
-            }}
-          />
+          <MyButton text={"태그별"} onClick={() => {navigate("/");}} isClick={true}/>
         }
         DateText={
-          <MyButton text={"날짜별"} onClick={() => navigate("/date")} />
+          <MyButton text={"날짜별"} onClick={() => navigate("/date")} isClick={false}/>
         }
         SenderText={
-          <MyButton text={"보낸이별"} onClick={() => navigate("/sender")} />
+          <MyButton text={"보낸이별"} onClick={() => navigate("/sender")} isClick={false}/>
         }
       />
       <UpButton

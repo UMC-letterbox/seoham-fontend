@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Letter({tagId, id, writer, year, month, day}) {
     console.log('id들', tagId, id)
     return(
-        <div className="relative w-full h-40 bg-red-50 m-3 p-5 rounded-md shadow-md">
+        <div className="relative w-full h-40 bg-zinc-100 m-3 p-5 rounded-md shadow-md">
             <Link to={`/letter/${tagId}/${id}`}>
                 <div className="">
                     <span>

@@ -1,8 +1,12 @@
-const MyButton = ({ text, onClick }) => {
+const MyButton = ({ text, onClick, isClick }) => {
+  console.log('isClick', isClick);
   return (
     <button
-      className="border border-pink-300 cursor-pointer rounded px-5 py-3 bg-[#FEB3DD] text-white"
+      className={`cursor-pointer rounded px-5 py-3 
+        ${isClick ? 'text-rose-300 border-b-4 border-rose-300' : 'text-zinc-400'}
+      `}
       onClick={onClick}
+      
     >
       {text}
     </button>
