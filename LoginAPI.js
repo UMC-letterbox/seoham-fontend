@@ -118,27 +118,26 @@ certifyEmail = (e) => {
     });
 };
 //그 닉네임 관련(중복확인) 사용가능 불가능 true/false
+const [usableId, setusableId] = React.useState(false);
 idCheck = (e) => {
   e.preventDefault();
-  const { usableId } = this.state;
-  fetch("API주소", {
+  fetch(“API 주소”, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type" : "application/json"
     },
-    body: JSON.stringify({ id: this.state.id }),
-  }).then((response) => {
-    if (response.status === 200) {
-      alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
-      this.setState({ id: true }); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
-    } else if (response.status === 409) {
-      alert("이미 사용중인 아이디 입니다."); // 이미 데이터베이스에 있는 아이디일 경우 409
-    } else {
-      // 그 외에는 사용 불가한 아이디
-      alert("사용 불가한 아이디입니다.");
-    }
-  });
-};
+    body: JSON.stringify({id: this.state.id})
+  })
+  .then(response => {if(response.status === 200){
+    alert("사용 가능한 닉네임입니다.");// 백엔드로 보낸 데이터 결과 200 일 경우
+    SetusableId(true);//사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
+  }else if(response.status === 409){
+    alert("이미 사용중인 아이디 입니다.") // 이미 데이터베이스에 있는 아이디일 경우 409
+  }else{ // 그 외에는 사용 불가한 아이디
+    alert("사용 불가한 아이디입니다.")
+  }
+ })
+}
 //비밀번호는 그냥 그 state 비밀번호랑 지금 친거랑 똑같은지만 확인하면 되니깐..
 const [isPasswordConfirm, setIsPasswordConfirm] = React.useState(false);
 const onChangePasswordConfirm = (e) => {
@@ -175,3 +174,25 @@ const onChangeEmail = (e) => {
     setIsEmail(true);
   }
 };
+
+//이메일 중복 체크
+const [usableEmail, setusableEmail] = React.useState(false);
+emailCheck = (e) => {
+  e.preventDefault();
+  fetch(“API 주소”, {
+    method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify({email: this.state.inputEmail})
+  })
+  .then(response => {if(response.status === 200){
+    alert("사용 가능한 닉네임입니다.");// 백엔드로 보낸 데이터 결과 200 일 경우
+    setUsableEmail(true)//사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
+  }else if(response.status === 409){
+    alert("이미 사용중인 이메일 입니다.") // 이미 데이터베이스에 있는 아이디일 경우 409
+  }else{ // 그 외에는 사용 불가한 아이디
+    alert("사용 불가한 이메일입니다.")
+  }
+ })
+}
