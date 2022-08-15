@@ -32,9 +32,11 @@ const signUp = () => {
       }
     });
 };
-  //request header에 access token 보내기
+  //request header에 access token 보내기(인가가 필요한 사이트에서 token 전달
   fetch("API주소", {
+    method : "GET",
     headers: {
+      'Content-Type': 'application/json',
       Authorization: localStorage.getItem("login_token"),
     },
   })
