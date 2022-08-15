@@ -105,6 +105,9 @@ checkEmail = (e) => {
   const { email_number } = inputEmail;
   fetch("API주소", {
     method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
     body: JSON.stringify({
       Email: email_number,
     }),
@@ -117,6 +120,9 @@ certifyEmail = (e) => {
   const { email_number } = inputEmail;
   fetch("API주소", {
     method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
     body: JSON.stringify({
       email: email_number,
     }),
@@ -182,6 +188,9 @@ handlePw = (e) => {
   const { pw } = inputPw;
   fetch("API주소", {
     method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
     body: JSON.stringify({
       password: pw,
     }),
