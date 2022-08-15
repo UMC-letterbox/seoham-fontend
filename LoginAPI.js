@@ -32,6 +32,17 @@ const signUp = () => {
       }
     });
 };
+  //request header에 access token 보내기
+  fetch("API주소", {
+    headers: {
+      Authorization: localStorage.getItem("login_token"),
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response.data);
+    });
+};
 
 //-body에 들어가는 객체의 키값은 백엔드가 정한 이름을 가져야한다.
 
@@ -86,18 +97,6 @@ clickSignup = (e) => {
       }
     });
   }
-  //request header에 access token 보내기
-  fetch("API주소", {
-    method: "POST",
-    headers: {
-      Authorization: localStorage.getItem("login_token"),
-    },
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      console.log(response.data);
-    });
-};
 
 //이메일 넘겨주기(그 인증번호 보내줄때)
 checkEmail = (e) => {
