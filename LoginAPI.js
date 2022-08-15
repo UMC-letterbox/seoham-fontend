@@ -111,6 +111,7 @@ checkEmail = (e) => {
   });
 };
 //이메일 인증번호 검사(수정된 부분)
+const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
 certifyEmail = (e) => {
   e.preventDefault();
   const { email_number } = inputEmail;
@@ -124,6 +125,7 @@ certifyEmail = (e) => {
     .then((res) => {
       if (res.MESSAGE === "SUCCESS") {
         alert("이메일이 유효합니다 비밀번호 변경을 진행해주세요");
+        setIsEmailConfirmed(true);
       } else {
         alert("이메일이 유효하지 않거나 존재하지 않습니다.");
       }
@@ -152,7 +154,6 @@ idCheck = (e) => {
     }
   });
 };
-
 const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 const onPwConfirm = () => {
   if (inputPw === inputPwre) {
