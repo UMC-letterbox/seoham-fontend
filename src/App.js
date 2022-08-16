@@ -22,6 +22,7 @@ import FindPw from "./Pages/FindPW";
 import Create from "./Pages/Create";
 import LoginPage from "./Pages/LoginPage";
 import Contract from "./Pages/Contract";
+import Mypage from "./Pages/Mypage";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -63,7 +64,7 @@ const dummyData = [
     id: 3,
     tagName: "Spring",
     sender: "무지",
-    date: 1738179241917,
+    date: 1738179241923,
     content: "봄이 그렇게 좋냐 멍청이들아",
     randid: Math.floor(Math.random() * 3) + 1,
   },
@@ -73,6 +74,46 @@ const dummyData = [
     sender: "앨리스",
     date: 1738179241918,
     content: "아임 쏘 매드",
+    randid: Math.floor(Math.random() * 3) + 1,
+  },
+  {
+    id: 5,
+    tagName: "NewYear",
+    sender: "래비",
+    date: 1660469314000,
+    content: "새해복 많이 받으렴",
+    randid: Math.floor(Math.random() * 3) + 1,
+  },
+  {
+    id: 6,
+    tagName: "NewYear",
+    sender: "래비",
+    date: 1738179241923,
+    content: "새해복 많이 받으렴",
+    randid: Math.floor(Math.random() * 3) + 1,
+  },
+  {
+    id: 7,
+    tagName: "NewYear",
+    sender: "래비",
+    date: 1738179241923,
+    content: "새해복 많이 받으렴",
+    randid: Math.floor(Math.random() * 3) + 1,
+  },
+  {
+    id: 8,
+    tagName: "NewYear",
+    sender: "래비",
+    date: 1738179241923,
+    content: "새해복 많이 받으렴",
+    randid: Math.floor(Math.random() * 3) + 1,
+  },
+  {
+    id: 9,
+    tagName: "NewYear",
+    sender: "래비",
+    date: 1660469314000,
+    content: "새해복 많이 받으렴",
     randid: Math.floor(Math.random() * 3) + 1,
   },
 ];
@@ -120,6 +161,8 @@ function App() {
             <Route path="/newTag" element={<New_tag />}/>
             <Route path="/tags/:id" element={<View_tags />}/>
             <Route path="/letter/:tagId/:id" element={<View_letter/>}/>
+            <Route path="/lettereditor/:postId" element={<LetterEditor />} />
+            <Route path="/mypage" element={<Mypage />} />
 
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/findid" element={<FindId/>}/>

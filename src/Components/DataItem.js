@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const DateItem = ({ id, tagName, sender, date }) => {
+const DateItem = ({id, tagName, sender, date}) => {
   const navigate = useNavigate();
   const getTag = () => {
     navigate(`/view/${id}`);

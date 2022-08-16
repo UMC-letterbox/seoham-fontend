@@ -22,6 +22,11 @@ const ControlMenu = ({ value, onChange, optionList }) => {
   );
 };
 
+const getDate = (timestamp) => {
+  let date = new Date(timestamp);
+  return date;
+}
+
 const Datebox = ({ tagList }) => {
   const [sortType, setSortType] = useState("latest");
   const getProcessedDateBox = () => {
@@ -36,6 +41,31 @@ const Datebox = ({ tagList }) => {
     const sortedList = copyList.sort(compare);
     return sortedList;
   };
+
+  var letters = getProcessedDateBox();
+  // var new_letters = []
+  // console.log(letters);
+  // letters.map((it) => (
+  //   new_letters.push({date: it.date, letter: it})
+  // ))
+
+  let pre = 0;
+  const sortedLetter = [];
+  let tmp = [] 
+  letters.map((it, index) => {
+    if(it.date !== pre){
+      if(pre !== 0) sortedLetter.push(tmp);
+      tmp = []
+      tmp.push(it)
+      if(index === letters.length - 1) sortedLetter.push(tmp);
+    }
+    else{
+      tmp.push(it)
+      if(index === letters.length - 1) sortedLetter.push(tmp);
+    }
+    pre = it.date;
+  })
+
   return (
     <div>
       <div class="flex justify-end">
@@ -45,11 +75,32 @@ const Datebox = ({ tagList }) => {
           optionList={sortOptionList}
         />
       </div>
+
+      {/*
       <div class="overflow-x-scroll whitespace-nowrap">
         {getProcessedDateBox().map((it) => (
           <DateItem key={it.id} {...it} />
         ))}
       </div>
+        */}
+      {
+        sortedLetter.map((array, index) => 
+          {
+            return <div key={index} className="mt-5 ml-5">
+              <h1>{getDate(array[0].date).getFullYear()}년 {getDate(array[0].date).getMonth()+1}월 {getDate(array[0].date).getDate()}일</h1>
+              {console.log(array[0].date)}
+              <div  className="overflow-x-scroll whitespace-nowrap mt-5">
+            {
+            array.map(it => (
+              <DateItem key={it.id} {...it} />
+            ))
+            }
+              </div>
+            </div>
+          }
+        )
+      }
+      
     </div>
   );
 };

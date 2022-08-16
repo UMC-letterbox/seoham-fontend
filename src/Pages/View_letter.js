@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
 import Menubox from '../Components/Menubox';
 import * as Data from '../getTags';
@@ -17,6 +17,22 @@ function View_letter () {
     console.log('편지 확인 ', getData.letter, letter, 'tag확인', getData.tag, tag);
     //console.log(Data.getLetter(tagId, id));
     
+    // 14~17번째 줄에서 api로 대체하기
+    let data = [];
+    useEffect(()=>{
+        fetch('api(/posts/{postIdx})',{  //postIdx == useParams의 id // ~/posts/{id} 이렇게 쓰면 될 듯
+            headers: {
+                Authorization: localStorage.getItem('login_token')
+            },
+        })
+        .then(res => res.json())
+        .then(res => data = res.result)
+        .catch(err => console.log(err))
+    }, [])
+
+    // letterId, content, date, sender, tagName 정보 획득
+    //
+
     const [isopen, setOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -29,12 +45,33 @@ function View_letter () {
 
     const modiLetter = () => {
         console.log("편지 수정");
+        navigate(`/lettereditor/${id}`);
         //navigate로 넘기기?
     }
 
     const deleteLetter = () => {
         console.log("편지 삭제");
         Data.deleteLetter(tagId, id);
+
+        //
+        fetch('api (/posts/{postIdx}', {
+            method: "POST",
+            headers : {
+                Authorization: localStorage.getItem('login_token')
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.isSuccess === true){
+                window.alert("편지가 삭제되었습니다.")
+            }
+            else {
+                window.alert("오류가 발생했습니다.")
+            }
+        })
+        .catch(err => console.log(err))
+        //
+
         navigate(-1);
     }
 
