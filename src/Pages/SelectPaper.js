@@ -1,10 +1,22 @@
+import { useLocation } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate, Navigate } from 'react-router-dom';
 
-const LetterPaper = (props) => {
+const LetterPaper = ({setSelectedPaper, id, src}) => {
     
     return (
         <div className="flex flex-col items-center mx-5 my-2" >
-            <button className="w-32 h-28 rounded-md bg-lime-200"> </button>
-            <span> {props.name}</span>
+            <button 
+            onClick= {(e)=> {
+                console.log(e.target.value);
+                setSelectedPaper(e.target.value);
+            }}
+            className="w-32 h-28 rounded-md "
+            style={{background: `url(${src})`}}
+            value = {id} >
+                {/* <img src={props.src} value = {props.id}/> */}
+            </button>
+            <span> 편지지{id}</span>
         </div>
     )
 };
@@ -12,19 +24,55 @@ const LetterPaper = (props) => {
 
 
 const SelectPaper = () => {
+    const papers = [
+        {
+            id: 0,
+            src: "img/paper1.jpg"
+        },
+        {
+            id: 1,
+            src: "img/paper2.jpg"
+        },
+        {
+            id: 2,
+            src: "img/paper3.jpg"
+        },
+        {
+            id: 3,
+            src: "img/paper4.jpg"
+        },
+        {
+            id: 4,
+            src: "img/paper5.jpg"
+        },
+        {
+            id: 5,
+            src: "img/paper6.jpg"
+        },
+    ];
+    const [selectedPaper, setSelectedPaper] = useState("");
+    const navi = useNavigate();
+    function goLetterEditor(){
+        navi("/lettereditor", {
+            state: selectedPaper
+            });
+    }
     return (
         <div>
             <header>
                 <h1 className="text-center font-bold text-lg">편지지 선택</h1>
             </header>
             <div className="flex flex-wrap justify-center items-center">
-                <LetterPaper color="#F9E3E3" name="편지지1" />
-                <LetterPaper color="#F9E3E3" name="편지지2" />
-                <LetterPaper color="#F9E3E3" name="편지지3" />
-                <LetterPaper color="#F9E3E3" name="편지지4" />
-                <LetterPaper color="#F9E3E3" name="편지지5" />
-                <LetterPaper color="#F9E3E3" name="편지지6" />
+                {
+                    papers.map((paper) => (
+                        <LetterPaper key={paper.id} id={paper.id} src= {paper.src} setSelectedPaper={setSelectedPaper}/>
+                    ))
+                }
             </div>
+            <button
+                className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
+                onClick = {goLetterEditor}
+            > 편지지 선택완료</button>
         </div>
     )
 }
