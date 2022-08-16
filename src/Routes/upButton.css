@@ -1,0 +1,8 @@
+.upBtn:hover{
+    background-color:#FF5C58;
+    transition: .6s;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+    transform: translate(0, -10%);
+    color: #fff;
+    border: #fff;
+}
