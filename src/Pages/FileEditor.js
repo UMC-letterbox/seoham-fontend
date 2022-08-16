@@ -1,46 +1,39 @@
 import React, { useEffect } from "react";
 import {useRef, useState} from "react";
 import axios from 'axios';
+
 const FileEditor = () => {
     const dropBox=useRef();
     const img_box = useRef();
-    const [file, setFile] = useState("");
-    
-    useEffect( () => {
-        preview();
-        return () => preview();
-    });
+    const [imgsrc, setImgsrc] = useState("");
+    // useEffect( () => {
+    //     preview();
+    //     return () => preview();
+    // });
 
-    const preview = () => {
-        if(!file) return false;
+    // const preview = () => {
+    //     if(!file) return false;
 
-        const imgEl = img_box;
-        const reader = new FileReader;
+    //     const imgEl = img_box;
+    //     const reader = new FileReader;
 
-        reader.onLoad = () => (
-            imgEl.style.backgroundImage = `urL(${reader.result})`
-        );
-        reader.readAsDataURL(file[0]);
-    };
+    //     reader.onLoad = () => (
+    //         imgEl.style.backgroundImage = `urL(${reader.result})`
+    //     );
+    //     reader.readAsDataURL(file[0]);
+    // };
     
     function handleFiles(f){
         //input으로 들어온 파일 처리하는 함수
-        const newfile = f.target.files;
-        setFile(newfile);
-        console.log(file);
+        const newfile = f.target.files[0];
+        console.log(newfile);
+        encodeFile(newfile);
     }
     function handleClick(e){
         //저장하기 버튼 클릭시 
         const formdata = new FormData();
-        formdata.append('uploadImage', file[0]);
-        console.log(formdata);
-        const config = {
-            Headers: {
-                'content-type' : 'multipart/form-data',
-            },
-        };
-        axios.post('api', formdata,config); //api대신 URL주소
-        //
+        // formdata.append('uploadImage', file[0]);
+        // console.log(formdata);
     
     }
 
@@ -57,40 +50,60 @@ const FileEditor = () => {
         e.stopPropagation();
         e.preventDefault();
         
-        const newfile = e.dataTransfer.files; //배열
-        setFile(newfile);
+        const newfile = e.dataTransfer.files[0]; //배열
         console.log(newfile);
+        encodeFile(newfile);
+    }
+    function encodeFile(fileBlob){
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            reader.onload = () => {
+                setImgsrc(reader.result);
+                resolve();
+            };
+        });
     }
     return (
         <div>
-            <header>
-                <h1 className="text-center font-bold text-lg">파일 불러오기</h1>
+            <header className="flex justify-center items-center">
+                <h1 className=" inline-block my-7 text-center mg-auto font-bold text-lg">사진 불러오기</h1>
             </header>
-            <div>
-            <input 
-                type="file"
-                id="input"
-                accept="img/*"
-                onChange={handleFiles}
-                />
-            </div>
-            
-            <div
-                className="bg-slate-200 h-52 text-center"
-                onDragEnter={handleDragEnter}
-                onDragOver= {handleDragOver}
-                onDrop = {handleDrop}
-                ref={dropBox}>
-                드롭박스 안에 사진을 옮겨주세요!
-            </div>
+            <div className="mx-8 ">
+                
+                <div
+                    className="flex flex-col justify-around bg-[#F5F5F5] h-52 text-center relative"
+                    onDragEnter={handleDragEnter}
+                    onDragOver= {handleDragOver}
+                    onDrop = {handleDrop}
+                    ref={dropBox}>
+                    <div>드롭박스 안에 사진을 옮겨주세요!</div>
+                    <div className="flex justify-center items-center">
+                        <label for="input">
+                            <div className="flex flex-col flex-nowrap">
+                                <img className="w-14 h-14"src="/img/uploadImg.png"/>
+                                <div className="text-xs text-[#5a5b5c]">파일 업로드</div>
+                            </div>
+                            
+                        </label>
+                        <input 
+                            type="file"
+                            id="input"
+                            accept="img/*"
+                            onChange={handleFiles}
+                            className="hidden"
+                            />
+                    </div>
+                </div>
 
-            <div
-                className="flex justify-center">
-            <button 
-            className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
-            onClick={handleClick}> 저장하기 </button>
-            </div>
-            <div ref={img_box}>
+                <div ref={img_box} className="my-3">
+                    {imgsrc && <img src={imgsrc} alt="preview-img" />}
+                </div>
+                <div className="flex justify-center">
+                    <button 
+                    className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
+                    onClick={handleClick}> 저장하기 </button>
+                </div>
             </div>
         </div>
     )
