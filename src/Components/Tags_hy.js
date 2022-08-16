@@ -1,9 +1,9 @@
 import {Link} from "react-router-dom";
-
+import "../css/pulse.css";
 function Tags({id, name, letters, color}) {
     console.log(id, name, color)
     return(
-        <div>
+        <div className="effect">
             {
                 id === -1 ? 
                 <button className="w-32 h-20 bg-gray-200 m-3 font-bold rounded-md shadow-md">
