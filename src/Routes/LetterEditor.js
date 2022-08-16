@@ -150,7 +150,7 @@ const LetterEditor=() => {
     React.useEffect(()=>{
         setData({
             ...data,
-            date: daySelected[0]+daySelected[1],
+            date: parseInt(`${daySelected[0]}${daySelected[1]}${daySelected[2]}`),
         });
 
     },[daySelected]);
@@ -219,14 +219,16 @@ const LetterEditor=() => {
                 <div className="text-center my-2.5">
                     <button className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#EF9F9F] border border-[#EF9F9F]"
                     onClick = {goSelectPaper}> 편지지선택</button>
-                    <button onClick = {
+                    
+                </div>
+                <div className="text-center ">
+                <button className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
+                onClick = {
                         () => {
                             console.log(state);
                             setInit();
                         }
-                    }>편지지확인</button>
-                </div>
-                <div className="text-center ">
+                    }>체크</button>
                     <button 
                     className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
                     onClick={handleSubmit}> 저장하기 </button>
