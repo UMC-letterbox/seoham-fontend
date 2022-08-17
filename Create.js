@@ -65,7 +65,7 @@ const Create = () => {
         } else {
           // 아니라면 가입 완료!
           alert("가입 완료 !");
-          navigate("/"); //로그인이 되면 메인페이지로 이동
+          navigate("/login"); //로그인이 되면 메인페이지로 이동
         }
       });
     }
