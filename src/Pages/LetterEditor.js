@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import ModalContainer from "../Components/ModalContainer";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { render } from "@testing-library/react";
-
 const jsonLocalStorage = {
     setItem: (key, value) => {
         localStorage.setItem(key, JSON.stringify(value));
@@ -15,13 +14,14 @@ const jsonLocalStorage = {
 };
 const LetterEditor=() => {
     const [data, setData]= useState({
+        
         userIdx:0,
         sender: "",
         content: "",
         date: 0,
         tagId: 0,
         letterIdx: 0, //편지지 ID
-        postIdx: 0, //발행된 편지 Id -> 수정, 삭제시 사용
+        //postIdx: 0, 발행된 편지 Id -> 수정, 삭제시 사용
     });
     
     const [errorMsg, setErrorMsg]= useState("");
@@ -32,6 +32,7 @@ const LetterEditor=() => {
     const contentInput=useRef();
     const navigate = useNavigate();
     const {state} = useLocation();
+    let letsgo = 0;
     // const {paper} = state;
     const goSelectPaper = () => {
         jsonLocalStorage.setItem('letterobj', data);
@@ -41,24 +42,16 @@ const LetterEditor=() => {
         //로컬스토리지에서 기존의 데이터 불러오기
         let chk = jsonLocalStorage.getItem('letterobj');
         if(chk != null){
-            //원래의 데이터가 있을 경우 , 즉 편지지를 선택한 이후
-            //data객체 정보넣기
-            
             setData({
                 sender: chk.sender,
                 content: chk.content,
-                tagId: chk.tagId,
-                date: chk.date,
-                
-            });
-            console.log("setINIT내부에서도 실행됨");
+            }
+            );
+            console.log(data);
         }else {
             return ;
         }
     }
-    
-    //let checkIcon = isWritten ? "✅" : "✔";
-
     //select 작동 확인용 배열 변수 (getTags 함수 썼다가 헷갈릴까봐 이걸로 사용합니다!) - hy 추가
     const tags = [
         {
@@ -72,88 +65,94 @@ const LetterEditor=() => {
             color: "#FCD2D1"
         }
     ];
-
+    const chkCondition= () => {
+        if(data.sender.length >= 3 && data.content.length >=10){
+            setIswritten( true);
+        }else{
+            setIswritten(false);
+        }
+    }
     const handleChangeState = (e)=> {
         setData({
             ...data,
             [e.target.name]: e.target.value,
         });
-        if(data.sender.length >= 3 && data.content.length >=10){
-            setIswritten(true);
-        }else{
-            setIswritten(false);
-        }
+        chkCondition();
     }
     const onCreate = () => {
         //새로운 편지 만들기
-        
+        const userId = jsonLocalStorage.getItem("userIdx");
+        const temp = jsonLocalStorage.getItem('letterobj');
         const {paper} = state;
         const newItem = {
-            //userIdx추가
-            "sender" : data.sender,
-            "date" : data.date,
-            "tagIdx" : data.tagId,
-            "content" : data.content,
-            "letterIdx": state,
+            userIdx : userId,
+            sender : temp.sender,
+            date : temp.date,
+            tagIdx : temp.tagId,
+            content : temp.content,
+            letterIdx: state,
         };
         console.log("서버에 전달될 newItem",newItem);
         return newItem;
     }
 
     const handleSubmit = () => {
-        if(data.sender.length <3){
-            //focus
-            senderInput.current.focus();
-            return ;
-        }
-        if(data.content.length < 10){
-            //focus
-            contentInput.current.focus();
-            setErrorMsg("편지가 너무 짧습니다. 편지는 10글자 이상이여야 합니다.");
-            return ;
-        }else{
-            setErrorMsg("");
-        }
+        // if(data.sender.length <3){
+        //     //focus
+        //     senderInput.current.focus();
+        //     return ;
+        // }
+        // if(data.content.length < 10){
+        //     //focus
+        //     contentInput.current.focus();
+        //     setErrorMsg("편지가 너무 짧습니다. 편지는 10글자 이상이여야 합니다.");
+        //     return ;
+        // }else{
+        //     setErrorMsg("");
+        // }
         console.log("최종 data", data);
         let newItem = onCreate();
         register(newItem);
-        //초기화
-        setData({
-            userIdx:0,
-            sender: "",
-            content: "",
-            date: 0,
-            tagId: 0,
-            letterIdx: 0,
-            postIdx: 0,
-        });
-        localStorage.removeItem("letterobj");
     }
     function register(newItem){
         console.log(newItem);
-        // fetch("/post/new", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(newItem),
-        // })
-        // .then((res) => res.json())
-        // .then((data)=> {
-        //     console.log(data);
-        // })
+        fetch("/post/new", {
+                method: "POST",
+                headers: {
+                    Authorization: localStorage.getItem('login_token')
+                },
+                body: JSON.stringify(newItem),
+        })
+        .then((res) => res.json())
+        .then((res)=> {
+            if(res.isSuccess === true){
+                console.log(res.result);
+                //초기화
+                setData({
+                    userIdx:0,
+                    sender: "",
+                    content: "",
+                    date: 0,
+                    tagId: 0,
+                    letterIdx: 0,
+                });
+                localStorage.removeItem("letterobj");
+            }
+        })
     }
     React.useEffect(() => {
+        console.log("[] UI그려짐");
         setInit();
-        console.log("setINIT 실행");
     },[]);
     React.useEffect(()=>{
         setData({
             ...data,
             date: parseInt(`${daySelected[0]}${daySelected[1]}${daySelected[2]}`),
         });
-
     },[daySelected]);
+    React.useEffect(()=>{
+        chkCondition();
+    }, [data]);
     return (
         <div className="overflow-scroll">
             <header className="flex flex-row mx-11 mt-9 mb-2.5">
@@ -163,12 +162,7 @@ const LetterEditor=() => {
                 <h2 className="text-center font-bold text-lg flex-grow">편지 작성</h2>
                 <button
                     disabled={isWritten}
-                    onClick={
-                        ()=> {
-                            register();
-                        }
-                    }
-                > 
+                    onClick={handleSubmit}> 
                     {isWritten ? <img src="/img/check-green.png" className="w-4"/> : <img src="/img/check-empty.png" className="w-4"/>}
                 </button>
             </header>
@@ -202,7 +196,6 @@ const LetterEditor=() => {
                 
             </div>
             
-            
             <ModalContainer setSelected={setDaySelected} selected={daySelected}/>
 
             <div className="flex flex-col justify-center">
@@ -227,11 +220,9 @@ const LetterEditor=() => {
                         () => {
                             console.log(state);
                             setInit();
+                            chkCondition();
                         }
-                    }>체크</button>
-                    <button 
-                    className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
-                    onClick={handleSubmit}> 저장하기 </button>
+                    }>작성중인 편지내용 불러오기</button>
                 </div>
             </div>
         </div>
