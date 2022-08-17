@@ -44,7 +44,7 @@ const FindId = () => {
         .then((res) => res.json())
         .then((res) => {
           if (res.MESSAGE === "SUCCESS") {
-            setEmailMessage(`당신의 이메일은 ${res.user.email}입니다.`);
+            setEmailMessage(`당신의 이메일은 ${res.data.email}입니다.`);
           } else {
             alert("이메일이 유효하지 않거나 존재하지 않습니다.");
           }
