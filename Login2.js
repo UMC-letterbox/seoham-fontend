@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login2 = () => {
+  const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -11,6 +12,26 @@ const Login2 = () => {
 
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
+  };
+
+  const signUp = () => {
+    fetch("api주소", {
+      method: "POST",
+      body: JSON.stringify({
+        email: inputEmail,
+        password: inputPw,
+      }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem("login_token", response.token);
+          alert("로그인 되었습니다");
+          navigate("/");
+        } else {
+          alert("이메일과 비밀번호를 다시 한 번 확인해 주세요.");
+        }
+      });
   };
 
   return (
@@ -29,7 +50,7 @@ const Login2 = () => {
       <div class="my-3 flex justify-center">
         <input
           class="rounded border w-4/5 leading-loose"
-          placeholder="비밀번호 입력"
+          placeholder="비밀번호 입력(영문,숫자,특수문자 조합 8~16자)"
           type="password"
           name="input_pw"
           value={inputPw}
@@ -37,8 +58,11 @@ const Login2 = () => {
         />
       </div>
       <div class="flex justify-center py-10">
-        <Link to="/Home">
-          <button class="border rounded-full cursor-pointer rounded px-12 py-2 bg-[#64c964] text-white">
+        <Link to="/">
+          <button
+            // onClick={signUp}
+            class="border rounded-full cursor-pointer rounded px-12 py-2 bg-[#64c964] text-white"
+          >
             로그인
           </button>
         </Link>
