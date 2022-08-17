@@ -27,7 +27,7 @@ const Login2 = () => {
         if (response.token) {
           localStorage.setItem("login_token", response.token);
           console.log(res.data);
-          localStorage.setItem("userIdx", res.data);
+          localStorage.setItem("userIdx", JSON.stringify(res.data));
           alert("로그인 되었습니다");
           navigate("/");
         } else {
@@ -35,6 +35,7 @@ const Login2 = () => {
         }
       });
   };
+  
   return (
     <div class="m-5 px-5 py-4">
       <h1 class="my-10 py-5 text-4xl text-center text-red-300">서함</h1>
