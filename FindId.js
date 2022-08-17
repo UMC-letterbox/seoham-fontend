@@ -3,12 +3,55 @@ import { Link } from "react-router-dom";
 
 const FindId = () => {
   const [inputId, setInputId] = useState("");
-
+  const [isId, setIsId] = useState(false);
+  const [EmailMessage, setEmailMessage] = useState("");
   const handleInputId = (e) => {
     setInputId(e.target.value);
   };
   const onClick = () => {
     alert("확인되었습니다");
+  };
+  const onConfirm = () => {
+    alert("일단은 맞다하자");
+  };
+  const certifyId = (e) => {
+    e.preventDefault();
+    const { id_number } = inputId;
+    fetch("API주소", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.MESSAGE === "SUCCESS") {
+          alert("닉네임이 유효합니다. 이메일 찾기를 눌러주세요");
+          setIsId(true);
+        } else {
+          alert("닉네임이 유효하지 않거나 존재하지 않습니다.");
+        }
+      });
+  };
+  const findEmail = () => {
+    if (isId === true) {
+      fetch("API주소", {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.MESSAGE === "SUCCESS") {
+            setEmailMessage(`당신의 이메일은 ${res.user.email}입니다.`);
+          } else {
+            alert("이메일이 유효하지 않거나 존재하지 않습니다.");
+          }
+        });
+    } else {
+      alert("닉네임 확인을 먼저 해주세요");
+    }
   };
   return (
     <div>
@@ -42,6 +85,7 @@ const FindId = () => {
           이메일 찾기
         </button>
       </div>
+      <p>{EmailMessage}</p>
     </div>
   );
 };
