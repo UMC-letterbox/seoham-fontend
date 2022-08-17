@@ -26,6 +26,8 @@ const Login2 = () => {
       .then((response) => {
         if (response.token) {
           localStorage.setItem("login_token", response.token);
+          console.log(res.data);
+          localStorage.setItem("userIdx", res.data);
           alert("로그인 되었습니다");
           navigate("/");
         } else {
@@ -33,7 +35,6 @@ const Login2 = () => {
         }
       });
   };
-
   return (
     <div class="m-5 px-5 py-4">
       <h1 class="my-10 py-5 text-4xl text-center text-red-300">서함</h1>
@@ -83,3 +84,16 @@ const Login2 = () => {
 };
 
 export default Login2;
+
+export function GetToken() {
+  fetch("API주소", {
+    method: "POST",
+    headers: {
+      Authorization: localStorage.getItem("access_token"),
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res.data);
+    });
+}
