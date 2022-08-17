@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FindPw = () => {
+  const navigate = useNavigate();
   const [inputPw, setInputPw] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputAdmire, setInputAdmire] = useState("");
   const [newPw, setNewpw] = useState("");
+  const [isPassword, setIsPassword] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
+  const [passwordMessage, setPasswordMessage] = useState("");
 
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
@@ -30,7 +34,65 @@ const FindPw = () => {
   const onConfirm = () => {
     alert("일단은 맞다하자");
   };
-
+  const certifyEmail = (e) => {
+    e.preventDefault();
+    const { email_number } = inputEmail;
+    fetch("API주소", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.MESSAGE === "SUCCESS") {
+          alert("이메일이 유효합니다 비밀번호 변경을 진행해주세요");
+          setIsEmail(true);
+        } else {
+          alert("이메일이 유효하지 않거나 존재하지 않습니다.");
+        }
+      });
+  };
+  const onChangePassword = (e) => {
+    setInputPw(e.target.value);
+    const passwordRegExp =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    if (!passwordRegExp.test(inputPw)) {
+      setPasswordMessage(
+        "숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!"
+      );
+    } else {
+      setPasswordMessage("안전한 비밀번호 입니다.");
+      setIsPassword(true);
+    }
+  };
+  const onPwConfirm = () => {
+    if (isEmail === true && isPassword === true && inputPw === newPw) {
+      fetch("API주소", {
+        // 백엔드로 api호출!
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: inputEmail,
+          password: inputPw,
+        }),
+      }).then((res) => {
+        if (res.MESSAGE === "SUCCESS") {
+          alert("비밀번호 변경되었습니다.");
+          navigate("/login");
+        } else {
+          alert("조금 있다가 다시 시도해주십시오");
+        }
+      });
+    } else {
+      alert("비밀번호를 확인해주세요");
+    }
+  };
   return (
     <div>
       <h1 class="my-5 py-2 text-xl text-center">계정 / 비밀번호찾기</h1>
@@ -97,14 +159,12 @@ const FindPw = () => {
         />
       </div>
       <div class="flex justify-center">
-        <Link to="/">
-          <button
-            onClick={onClick}
-            class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white"
-          >
-            비밀번호 변경
-          </button>
-        </Link>
+        <button
+          onClick={onClick}
+          class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white"
+        >
+          비밀번호 변경
+        </button>
       </div>
     </div>
   );
