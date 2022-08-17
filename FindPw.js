@@ -79,7 +79,7 @@ const FindPw = () => {
         },
         body: JSON.stringify({
           email: inputEmail,
-          password: inputPw,
+          password: newPw,
         }),
       }).then((res) => {
         if (res.MESSAGE === "SUCCESS") {
