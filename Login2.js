@@ -27,7 +27,7 @@ const Login2 = () => {
         if (response.token) {
           localStorage.setItem("login_token", response.token);
           console.log(res.data);
-          localStorage.setItem("userIdx", JSON.stringify(res.data));
+          localStorage.setItem("userIdx", res.data);
           alert("로그인 되었습니다");
           navigate("/");
         } else {
