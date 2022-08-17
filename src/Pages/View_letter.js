@@ -55,10 +55,7 @@ function View_letter () {
 
         //
         fetch('api (/posts/{postIdx}', {
-            method: "POST",
-            headers : {
-                Authorization: localStorage.getItem('login_token')
-            }
+            method: "DELETE",
         })
         .then(res => res.json())
         .then(res => {
