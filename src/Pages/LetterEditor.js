@@ -32,6 +32,7 @@ const LetterEditor=() => {
     const contentInput=useRef();
     const navigate = useNavigate();
     const {state} = useLocation();
+    const userId = jsonLocalStorage.getItem("userIdx");
     let letsgo = 0;
     // const {paper} = state;
     const goSelectPaper = () => {
@@ -65,6 +66,7 @@ const LetterEditor=() => {
             color: "#FCD2D1"
         }
     ];
+    const currentTags = [];
     const chkCondition= () => {
         if(data.sender.length >= 3 && data.content.length >=10){
             setIswritten( true);
@@ -81,7 +83,6 @@ const LetterEditor=() => {
     }
     const onCreate = () => {
         //새로운 편지 만들기
-        const userId = jsonLocalStorage.getItem("userIdx");
         const temp = jsonLocalStorage.getItem('letterobj');
         const {paper} = state;
         const newItem = {
@@ -95,7 +96,6 @@ const LetterEditor=() => {
         console.log("서버에 전달될 newItem",newItem);
         return newItem;
     }
-
     const handleSubmit = () => {
         // if(data.sender.length <3){
         //     //focus
@@ -140,9 +140,23 @@ const LetterEditor=() => {
             }
         })
     }
+    function getTagList(userId){
+        fetch("API주소",{
+            method: "GET",
+            headers: {
+                Authorization: localStorage.getItem('login_token')
+            },
+            body: JSON.stringify(userId),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            data.map(item => currentTags.push(item))
+        })
+        .catch(err => console.log(err))
+    }
     React.useEffect(() => {
-        console.log("[] UI그려짐");
-        setInit();
+        //태그목록 불러오기
+        getTagList(userId);
     },[]);
     React.useEffect(()=>{
         setData({
@@ -152,7 +166,7 @@ const LetterEditor=() => {
     },[daySelected]);
     React.useEffect(()=>{
         chkCondition();
-    }, [data]);
+    },[data]);
     return (
         <div className="overflow-scroll">
             <header className="flex flex-row mx-11 mt-9 mb-2.5">
@@ -206,6 +220,10 @@ const LetterEditor=() => {
                             tags.map((tag) => (
                                 <option key={tag.id} value={tag.id}>{tag.name}</option>
                             ))
+                            //api로 태그목록 불러오기 성공하면 아래 주석 해제
+                            // currentTags.map((tag) => (
+                            //     <option key={tag.id} value={tag.id}>{tag.name}</option>
+                            // ))
                         }
                     </select>   
                 </div>
