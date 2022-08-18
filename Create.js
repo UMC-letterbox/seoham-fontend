@@ -50,7 +50,7 @@ const Create = () => {
       alert("유효성 및 중복확인부분을 전부해주세요");
     } else {
       // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
-      fetch("API주소", {
+      fetch("http://www.duke0410.shop:8000/user/join", {
         // 백엔드로 api호출!
         method: "POST",
         headers: {
@@ -75,7 +75,7 @@ const Create = () => {
   const idCheck = (e) => {
     e.preventDefault();
     const { usableId } = isId;
-    fetch("API주소", {
+    fetch("http://www.duke0410.shop:8000/user/check-nickname", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const Create = () => {
       window.alert("이메일의 형식이 올바르지 않습니다!");
     } else {
       const { email_number } = inputEmail;
-      fetch("API주소", {
+      fetch("http://www.duke0410.shop:8000/user/check-email", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const Create = () => {
     e.preventDefault();
     const { email_number } = inputEmail;
     const {certification_number} = inputAdmire;
-    fetch("API주소", {
+    fetch("http://www.duke0410.shop:8000/user/check/code", {
       method: "POST",
       body: JSON.stringify({
         authNum : certification_number,
