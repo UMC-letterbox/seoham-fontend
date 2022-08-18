@@ -14,6 +14,7 @@ const Create = () => {
   const [isNumber, setIsNumber] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
   const handleInputId = (e) => {
     setInputId(e.target.value);
   };
@@ -25,6 +26,13 @@ const Create = () => {
   };
   const handleInputEmail = (e) => {
     setInputEmail(e.target.value);
+    const emailRegExp =
+      /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+    if (!emailRegExp.test(inputEmail)) {
+      ("이메일의 형식이 올바르지 않습니다!");
+    } else {
+      setEmailMessage("");
+    }
   };
   const handleInputAdmire = (e) => {
     setInputAdmire(e.target.value);
@@ -94,13 +102,7 @@ const Create = () => {
       }
     });
   };
-  const onChangeEmail = (e) => {
-    setInputEmail(e.target.value);
-    const emailRegExp =
-      /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-    if (!emailRegExp.test(inputEmail)) {
-      window.alert("이메일의 형식이 올바르지 않습니다!");
-    } else {
+  const onChangeEmail = () => {
       const { email_number } = inputEmail;
       fetch(`/user/check/${inputEmail}`, {
       method: "GET",
