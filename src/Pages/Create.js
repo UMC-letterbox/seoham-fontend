@@ -113,7 +113,6 @@ const Create = () => {
         alert("이미 사용이거나 유효하지 않는 이메일입니다.");
       }
     });
-    }
   };
   const certifyNumber = (e) => {
     e.preventDefault();
