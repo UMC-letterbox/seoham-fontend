@@ -64,8 +64,7 @@ const FindPw = () => {
   fetch("API주소", {
     method: "POST",
     body: JSON.stringify({
-      email: email_number,
-      certificationNumber : certification_number,
+      authNum : certification_number,
     }),
   })
     .then((res) => res.json())
