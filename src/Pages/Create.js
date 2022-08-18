@@ -50,7 +50,7 @@ const Create = () => {
       alert("유효성 및 중복확인부분을 전부해주세요");
     } else {
       // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
-      fetch("http://www.duke0410.shop:8000/user/join", {
+      fetch("/user/join", {
         // 백엔드로 api호출!
         method: "POST",
         headers: {
@@ -75,12 +75,11 @@ const Create = () => {
   const idCheck = (e) => {
     e.preventDefault();
     const { usableId } = isId;
-    fetch("http://www.duke0410.shop:8000/user/check-nickname", {
+    fetch(`/user/check/${usableId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ nickName: inputId }),
     }).then((response) => {
       if (response.isSuccess == true ) {
         alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
@@ -99,12 +98,11 @@ const Create = () => {
       window.alert("이메일의 형식이 올바르지 않습니다!");
     } else {
       const { email_number } = inputEmail;
-      fetch("http://www.duke0410.shop:8000/user/check-email", {
+      fetch(`/user/check/${email_number}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email_number,}),
     }).then((response) => {
       if (response.isSuccess == true ) {
         window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
@@ -119,7 +117,7 @@ const Create = () => {
     e.preventDefault();
     const { email_number } = inputEmail;
     const {certification_number} = inputAdmire;
-    fetch("http://www.duke0410.shop:8000/user/check/code", {
+    fetch("/user/check/code", {
       method: "POST",
       body: JSON.stringify({
         authNum : certification_number,
