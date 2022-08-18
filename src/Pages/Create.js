@@ -43,8 +43,8 @@ const Create = () => {
       isId === false ||
       isEmail === false ||
       isPasswordConfirm === false ||
-      isPassword === false ||
-      isNumber === false
+      isPassword === false 
+      // || isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
       alert("유효성 및 중복확인부분을 전부해주세요");
@@ -62,7 +62,7 @@ const Create = () => {
           nickName: inputId,
         }),
       }).then((res) => {
-        if (res.isSuccess == true ) {
+        if (res.status === 200 ) {
           alert("가입 완료 !");
           navigate("/login"); 
         } else {
@@ -125,7 +125,7 @@ const Create = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.isSuccess == true) {
+        if (res.status === 200) {
           alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
           setIsNumber(true);
         } else {
