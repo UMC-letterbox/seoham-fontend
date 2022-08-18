@@ -98,7 +98,8 @@ const Create = () => {
       }
     });
   };
-  const onChangeEmail = () => {
+  const onChangeEmail = (e) => {
+      e.preventDefault();
       const { email_number } = inputEmail;
       fetch(`/user/check/${inputEmail}`, {
       method: "GET",
