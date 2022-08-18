@@ -23,7 +23,7 @@ const FindId = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: id_number,
+        nickName : id_number,
       }),
     })
       .then((res) => res.json())
