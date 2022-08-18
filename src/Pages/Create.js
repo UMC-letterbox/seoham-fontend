@@ -53,6 +53,9 @@ const Create = () => {
       fetch("/user/join", {
         // 백엔드로 api호출!
         method: "POST",
+        headers: {
+        'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           email: inputEmail,
           passWord: inputPw,
