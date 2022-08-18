@@ -81,7 +81,7 @@ const Create = () => {
         "Content-Type": "application/json",
       },
     }).then((response) => {
-      if (response.isSuccess == true ) {
+      if (response.status === 200 ) {
         alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
         setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
       }else {
@@ -104,7 +104,7 @@ const Create = () => {
         "Content-Type": "application/json",
       },
     }).then((response) => {
-      if (response.isSuccess == true ) {
+      if (response.status === 200 ) {
         window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
         setIsEmail(true);
       }else {
