@@ -37,7 +37,7 @@ const Create = () => {
     alert("일단은 맞다하자");
   };
 
-  const clickSignup = (e) => {
+  const clickSignup = () => {
     if (
       isId === false ||
       isEmail === false ||
