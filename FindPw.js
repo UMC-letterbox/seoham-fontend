@@ -38,7 +38,7 @@ const FindPw = () => {
   const certifyEmail = (e) => {
     e.preventDefault();
     const { email_number } = inputEmail;
-    fetch("API주소", {
+    fetch("http://www.duke0410.shop:8000/user/check-email", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const FindPw = () => {
   const { email_number } = inputEmail;
   const {certification_number} = inputAdmire;
   fetch("API주소", {
-    method: "POST",
+    method: "http://www.duke0410.shop:8000/user/code",
     body: JSON.stringify({
       authNum : certification_number,
     }),
@@ -92,7 +92,7 @@ const FindPw = () => {
   };
   const onPwConfirm = () => {
     if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
-      fetch("API주소", {
+      fetch("http://www.duke0410.shop:8000/user/find", {
         // 백엔드로 api호출!
         method: "PATCH",
         headers: {
