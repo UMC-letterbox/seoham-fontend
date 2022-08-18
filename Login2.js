@@ -19,7 +19,7 @@ const Login2 = () => {
       method: "POST",
       body: JSON.stringify({
         email: inputEmail,
-        password: inputPw,
+        passWord: inputPw,
       }),
     })
       .then((response) => response.json())
