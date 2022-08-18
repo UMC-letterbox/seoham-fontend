@@ -17,7 +17,7 @@ const FindId = () => {
   const certifyId = (e) => {
     e.preventDefault();
     const { id_number } = inputId;
-    fetch("API주소", {
+    fetch("http://www.duke0410.shop:8000/user/check-email", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const FindId = () => {
   const findEmail = () => {
     const { id_number } = inputId;
     if (isId === true) {
-      fetch("API주소", {
+      fetch("http://www.duke0410.shop:8000/user/find-nickname", {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
