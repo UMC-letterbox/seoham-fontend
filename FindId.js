@@ -37,9 +37,16 @@ const FindId = () => {
       });
   };
   const findEmail = () => {
+    const { id_number } = inputId;
     if (isId === true) {
       fetch("API주소", {
         method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nickName : id_number,
+      }),
       })
         .then((res) => res.json())
         .then((res) => {
