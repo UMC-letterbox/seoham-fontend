@@ -39,7 +39,7 @@ const FindPw = () => {
     e.preventDefault();
     const { email_number } = inputEmail;
     fetch("API주소", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
