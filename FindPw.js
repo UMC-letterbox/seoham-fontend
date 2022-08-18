@@ -9,6 +9,7 @@ const FindPw = () => {
   const [newPw, setNewpw] = useState("");
   const [isPassword, setIsPassword] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
+  const [isNumber, setIsNumber] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
 
   const handleInputPw = (e) => {
@@ -56,6 +57,27 @@ const FindPw = () => {
         }
       });
   };
+  const certifyNumber = (e) => {
+  e.preventDefault();
+  const { email_number } = inputEmail;
+  const {certification_number} = inputAdmire;
+  fetch("API주소", {
+    method: "POST",
+    body: JSON.stringify({
+      email: email_number,
+      certificationNumber : certification_number,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.isSuccess == true) {
+        alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
+        setIsNumber(true);
+      } else {
+        alert("인증번호가 맞지 않습니다.");
+      }
+    });
+};
   const onChangePassword = (e) => {
     setInputPw(e.target.value);
     const passwordRegExp =
@@ -70,7 +92,7 @@ const FindPw = () => {
     }
   };
   const onPwConfirm = () => {
-    if (isEmail === true && isPassword === true && inputPw === newPw) {
+    if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
       fetch("API주소", {
         // 백엔드로 api호출!
         method: "POST",
@@ -131,7 +153,7 @@ const FindPw = () => {
           onChange={handleInputAdmire}
         />
         <button
-          onClick={onConfirm}
+          onClick={certifyNumber}
           class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           확인
