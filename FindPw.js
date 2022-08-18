@@ -48,7 +48,7 @@ const FindPw = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.MESSAGE === "SUCCESS") {
+        if (res.isSuccess == true ) {
           alert("이메일이 유효합니다 비밀번호 변경을 진행해주세요");
           setIsEmail(true);
         } else {
@@ -82,7 +82,7 @@ const FindPw = () => {
           password: newPw,
         }),
       }).then((res) => {
-        if (res.MESSAGE === "SUCCESS") {
+        if (res.isSuccess == true) {
           alert("비밀번호 변경되었습니다.");
           navigate("/login");
         } else {
