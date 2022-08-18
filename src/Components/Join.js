@@ -72,8 +72,7 @@ function Join() {
 
   const onClick = () => {
     if (SeohamCheck === true && useCheck === true) {
-      alert("회원가입 성공!");
-      navigate("/");
+      navigate("/create");
     } else {
       alert("필수에 체크해주세요");
     }
