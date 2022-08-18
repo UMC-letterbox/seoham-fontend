@@ -49,7 +49,7 @@ const FindPw = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.isSuccess == true ) {
-          alert("이메일이 유효합니다 비밀번호 변경을 진행해주세요");
+          alert("이메일이 유효합니다 인증번호를 전송했습니다");
           setIsEmail(true);
         } else {
           alert("이메일이 유효하지 않거나 존재하지 않습니다.");
