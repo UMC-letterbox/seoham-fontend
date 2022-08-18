@@ -38,7 +38,6 @@ const Create = () => {
   };
 
   const clickSignup = (e) => {
-    e.preventDefault();
     if (
       isId === false ||
       isEmail === false ||
