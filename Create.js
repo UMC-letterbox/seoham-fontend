@@ -60,12 +60,12 @@ const Create = () => {
           nickname: inputId,
         }),
       }).then((res) => {
-        if (res.status === 400) {
-          alert("다시 한 번 확인해주세요!");
-        } else {
-          // 아니라면 가입 완료!
+        if (res.isSuccess == true ) {
           alert("가입 완료 !");
-          navigate("/login"); //로그인이 되면 메인페이지로 이동
+          navigate("/login"); 
+        } else {
+          // 가입완료부분
+          alert("다시 한번 확인해주세요!"); //이게 error부분
         }
       });
     }
@@ -83,14 +83,12 @@ const Create = () => {
       },
       body: JSON.stringify({ id: usableId }),
     }).then((response) => {
-      if (response.status === 200) {
+      if (response.isSuccess == true ) {
         alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
         setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
-      } else if (response.status === 409) {
-        alert("이미 사용중인 아이디 입니다."); // 이미 데이터베이스에 있는 아이디일 경우 409
-      } else {
+      }else {
         // 그 외에는 사용 불가한 아이디
-        alert("사용 불가한 아이디입니다.");
+        alert("사용 불가한 아이디거나 중복됩니다.");
       }
     });
   };
