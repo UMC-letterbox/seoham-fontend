@@ -48,6 +48,9 @@ const Create = () => {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
       alert("유효성 및 중복확인부분을 전부해주세요");
     } else {
+      const { email } = inputEmail;
+      const { passWord } = inputPw;
+      const { nickName } = inputId;
       // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
       fetch("/user/join", {
         // 백엔드로 api호출!
@@ -56,9 +59,9 @@ const Create = () => {
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: inputEmail,
-          passWord: inputPw,
-          nickName: inputId,
+          email: email,
+          passWord: passWord,
+          nickName: nickName,
         }),
       }).then((res) => {
         if (res.status === 200 ) {
