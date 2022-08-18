@@ -115,7 +115,7 @@ const FindPw = () => {
           onChange={handleInputEmail}
         />
         <button
-          onClick={onEmail}
+          onClick={certifyEmail}
           class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           인증번호 전송
@@ -160,7 +160,7 @@ const FindPw = () => {
       </div>
       <div class="flex justify-center">
         <button
-          onClick={onClick}
+          onClick={onPwConfirm}
           class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white"
         >
           비밀번호 변경
