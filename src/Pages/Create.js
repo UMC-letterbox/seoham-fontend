@@ -114,7 +114,7 @@ const Create = () => {
         window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
         setIsEmail(true);
       }else {
-        alert("이미 사용하고 있는 이메일입니다 다시 시도해주세요");
+        alert("이미 사용이거나 유효하지 않는 이메일입니다.");
       }
     });
     }
