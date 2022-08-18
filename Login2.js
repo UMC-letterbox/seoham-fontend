@@ -15,7 +15,7 @@ const Login2 = () => {
   };
 
   const signUp = () => {
-    fetch("api주소", {
+    fetch("http://www.duke0410.shop:8000/user/login", {
       method: "POST",
       body: JSON.stringify({
         email: inputEmail,
