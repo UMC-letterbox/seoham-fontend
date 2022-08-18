@@ -76,7 +76,7 @@ const Create = () => {
     e.preventDefault();
     const { usableId } = isId;
     fetch("API주소", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -100,7 +100,7 @@ const Create = () => {
     } else {
       const { email_number } = inputEmail;
       fetch("API주소", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
