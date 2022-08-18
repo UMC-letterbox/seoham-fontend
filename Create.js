@@ -58,8 +58,8 @@ const Create = () => {
         },
         body: JSON.stringify({
           email: inputEmail,
-          password: inputPw,
-          nickname: inputId,
+          passWord: inputPw,
+          nickName: inputId,
         }),
       }).then((res) => {
         if (res.isSuccess == true ) {
@@ -80,7 +80,7 @@ const Create = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: usableId }),
+      body: JSON.stringify({ nickName: inputId }),
     }).then((response) => {
       if (response.isSuccess == true ) {
         alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
@@ -122,8 +122,7 @@ const Create = () => {
     fetch("API주소", {
       method: "POST",
       body: JSON.stringify({
-        email: email_number,
-        certificationNumber : certification_number,
+        authNum : certification_number,
       }),
     })
       .then((res) => res.json())
