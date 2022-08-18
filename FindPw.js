@@ -94,7 +94,7 @@ const FindPw = () => {
     if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
       fetch("API주소", {
         // 백엔드로 api호출!
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
