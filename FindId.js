@@ -74,14 +74,16 @@ const FindId = () => {
           onChange={handleInputId}
         />
         <button
-          onClick={onClick}
+          onClick={certifyId}
           class="text-center border rounded-full text-red-300 w-1/5 border-red-300"
         >
           확인
         </button>
       </div>
       <div class="flex justify-center">
-        <button class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white">
+        <button
+          onClick = {findEmail}
+          class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white">
           이메일 찾기
         </button>
       </div>
