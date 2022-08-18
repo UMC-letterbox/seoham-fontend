@@ -60,14 +60,12 @@ const Login2 = () => {
         />
       </div>
       <div class="flex justify-center py-10">
-        <Link to="/">
           <button
-            // onClick={signUp}
+            onClick={signUp}
             class="border rounded-full cursor-pointer rounded px-12 py-2 bg-[#64c964] text-white"
           >
             로그인
           </button>
-        </Link>
       </div>
       <div class="flex justify-evenly">
         <Link to="/findid">
