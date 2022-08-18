@@ -8,6 +8,7 @@ const Create = () => {
   const [inputAdmire, setInputAdmire] = useState("");
   const [inputPwre, setInputPwre] = useState("");
   const [inputId, setInputId] = useState("");
+  const [validmail,setValidmail] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
@@ -32,6 +33,7 @@ const Create = () => {
       setEmailMessage("이메일의 형식이 올바르지 않습니다!");
     } else {
       setEmailMessage("");
+      setValidmail(true);
     }
   };
   const handleInputAdmire = (e) => {
@@ -50,7 +52,8 @@ const Create = () => {
       isId === false ||
       isEmail === false ||
       isPasswordConfirm === false ||
-      isPassword === false 
+      isPassword === false ||
+      validmail === false
       // || isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
