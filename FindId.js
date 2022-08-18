@@ -18,7 +18,7 @@ const FindId = () => {
     e.preventDefault();
     const { id_number } = inputId;
     fetch("API주소", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
