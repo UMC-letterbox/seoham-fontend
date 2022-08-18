@@ -44,8 +44,10 @@ const LetterEditor=() => {
         let chk = jsonLocalStorage.getItem('letterobj');
         if(chk != null){
             setData({
+                ...data,
                 sender: chk.sender,
                 content: chk.content,
+                date: chk.date,
             }
             );
             console.log(data);
@@ -146,23 +148,29 @@ const LetterEditor=() => {
             headers: {
                 Authorization: localStorage.getItem('login_token')
             },
-            body: JSON.stringify(userId),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            data.map(item => currentTags.push(item))
-        })
+        .then((res) => {console.log(res);})
+        // .then((data) => {
+        //     data.map(item => currentTags.push(item));
+        // })
         .catch(err => console.log(err))
     }
     React.useEffect(() => {
         //태그목록 불러오기
         getTagList(userId);
+        setInit();
     },[]);
     React.useEffect(()=>{
-        setData({
-            ...data,
-            date: parseInt(`${daySelected[0]}${daySelected[1]}${daySelected[2]}`),
-        });
+        let tempdate = parseInt(`${daySelected[0]}${daySelected[1]}${daySelected[2]}`);
+        console.log(tempdate);
+        if(isNaN(tempdate)){
+            return ;
+        }else{
+            setData({
+                ...data,
+                date: tempdate,
+            });
+        }
     },[daySelected]);
     React.useEffect(()=>{
         chkCondition();
@@ -232,16 +240,7 @@ const LetterEditor=() => {
                     onClick = {goSelectPaper}> 편지지선택</button>
                     
                 </div>
-                <div className="text-center ">
-                <button className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
-                onClick = {
-                        () => {
-                            console.log(state);
-                            setInit();
-                            chkCondition();
-                        }
-                    }>작성중인 편지내용 불러오기</button>
-                </div>
+                
             </div>
         </div>
     )
