@@ -74,7 +74,7 @@ const Login2 = () => {
         <Link to="/findpw">
           <button>비밀번호찾기</button>
         </Link>
-        <Link to="/create">
+        <Link to="/contract">
           <button>회원가입</button>
         </Link>
       </div>
