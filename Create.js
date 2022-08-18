@@ -11,6 +11,7 @@ const Create = () => {
   const [isId, setIsId] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
+  const [isNumber, setIsNumber] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
   const handleInputId = (e) => {
@@ -42,7 +43,8 @@ const Create = () => {
       isId === false ||
       isEmail === false ||
       isPasswordConfirm === false ||
-      isPassword === false
+      isPassword === false ||
+      isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
       alert("유효성 및 중복확인부분을 전부해주세요");
@@ -78,9 +80,6 @@ const Create = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({ id: usableId }),
     }).then((response) => {
       if (response.isSuccess == true ) {
@@ -93,16 +92,49 @@ const Create = () => {
     });
   };
   const onChangeEmail = (e) => {
-    const currentEmail = inputEmail;
-    setInputEmail(currentEmail);
+    setInputEmail(e.target.value);
     const emailRegExp =
       /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-    if (!emailRegExp.test(currentEmail)) {
+    if (!emailRegExp.test(inputEmail)) {
       window.alert("이메일의 형식이 올바르지 않습니다!");
     } else {
-      window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
-      setIsEmail(true);
+      const { email_number } = inputEmail;
+      fetch("API주소", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email_number,}),
+    }).then((response) => {
+      if (response.isSuccess == true ) {
+        window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
+        setIsEmail(true);
+      }else {
+        alert("이미 사용하고 있는 이메일입니다 다시 시도해주세요");
+      }
+    });
     }
+  };
+  const certifyNumber = (e) => {
+    e.preventDefault();
+    const { email_number } = inputEmail;
+    const {certification_number} = inputAdmire;
+    fetch("API주소", {
+      method: "POST",
+      body: JSON.stringify({
+        email: email_number,
+        certificationNumber : certification_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.isSuccess == true) {
+          alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
+          setIsNumber(true);
+        } else {
+          alert("인증번호가 맞지 않습니다.");
+        }
+      });
   };
   const onChangePassword = (e) => {
     setInputPw(e.target.value);
@@ -156,7 +188,7 @@ const Create = () => {
           onChange={handleInputAdmire}
         />
         <button
-          onClick={onConfirm}
+          onClick={certifyNumber}
           class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           확인
@@ -173,7 +205,7 @@ const Create = () => {
           onChange={handleInputId}
         />
         <button
-          onClick={onClick}
+          onClick={idCheck}
           class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           중복확인
@@ -209,7 +241,7 @@ const Create = () => {
       </div>
       <div class="flex justify-center ">
         <button
-          onClick={onPwConfirm}
+          onClick={clickSignup}
           class="h-12 w-5/6 my-3 mx-10 border cursor-pointer rounded px-10 py-3 bg-[#FFB6C1] text-white"
         >
           확인
