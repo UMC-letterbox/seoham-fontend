@@ -51,6 +51,7 @@ const Create = () => {
       const { email } = inputEmail;
       const { passWord } = inputPw;
       const { nickName } = inputId;
+      console.log(email);
       // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
       fetch("/user/join", {
         // 백엔드로 api호출!
