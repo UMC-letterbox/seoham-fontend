@@ -75,7 +75,7 @@ const Create = () => {
   const idCheck = (e) => {
     e.preventDefault();
     const { usableId } = isId;
-    fetch(`/user/check/${usableId}`, {
+    fetch(`/user/check/${inputId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const Create = () => {
       window.alert("이메일의 형식이 올바르지 않습니다!");
     } else {
       const { email_number } = inputEmail;
-      fetch(`/user/check/${email_number}`, {
+      fetch(`/user/check/${inputEmail}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
