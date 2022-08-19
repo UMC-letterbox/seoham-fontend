@@ -18,6 +18,11 @@ const Create = () => {
   const [emailMessage, setEmailMessage] = useState("");
   const handleInputId = (e) => {
     setInputId(e.target.value);
+    if (e.target.length < 2 || e.target.length > 10) {
+      setIsId(false);
+    } else {
+      setIsId(true);
+    }
   };
   const onClick = () => {
     alert("닉네임 설정이 완료되었습니다");
@@ -84,21 +89,26 @@ const Create = () => {
   };
   const idCheck = (e) => {
     e.preventDefault();
-    const { usableId } = isId;
-    fetch(`/user/check/${inputId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.status === 200 ) {
-        alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
-        setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
-      }else {
-        // 그 외에는 사용 불가한 아이디
-        alert("사용 불가한 아이디거나 중복됩니다.");
-      }
-    });
+    if (isId === false) {
+      alert("닉네임 설정을 다시해주세요");
+    } else {
+      e.preventDefault();
+      const { usableId } = isId;
+      fetch(`/user/check/${inputId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
+          setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
+        } else {
+          // 그 외에는 사용 불가한 아이디
+          alert("사용 불가한 아이디거나 중복됩니다.");
+        }
+      });
+    }
   };
   const onChangeEmail = (e) => {
     e.preventDefault();
@@ -203,7 +213,7 @@ const Create = () => {
       <div class="flex justify-center">
         <input
           class="rounded border-b-2 w-3/5 leading-loose"
-          placeholder="닉네임을 입력해주세요"
+          placeholder="닉네임을 입력해주세요(2~10자)"
           type="text"
           name="input_email"
           value={inputId}
