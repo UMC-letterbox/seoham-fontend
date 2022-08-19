@@ -22,17 +22,14 @@ const FindId = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        nickName : id_number,
-      }),
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200 ) {
+          alert("닉네임이 유효하지 않거나 존재하지 않습니다.");
+        } else {
           alert("닉네임이 유효합니다. 이메일 찾기를 눌러주세요");
           setIsId(true);
-        } else {
-          alert("닉네임이 유효하지 않거나 존재하지 않습니다.");
         }
       });
   };
@@ -44,9 +41,6 @@ const FindId = () => {
         headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        nickName : id_number,
-      }),
       })
         .then((res) => res.json())
         .then((res) => {
