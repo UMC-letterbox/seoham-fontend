@@ -28,7 +28,7 @@ const FindId = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.isSuccess == true) {
+        if (res.status === 200 ) {
           alert("닉네임이 유효합니다. 이메일 찾기를 눌러주세요");
           setIsId(true);
         } else {
@@ -50,7 +50,7 @@ const FindId = () => {
       })
         .then((res) => res.json())
         .then((res) => {
-          if (res.isSuccess == true ) {
+          if (res.status === 200 ) {
             setEmailMessage(`당신의 이메일은 ${res.data.email}입니다.`);
           } else {
             alert("이메일이 유효하지 않거나 존재하지 않습니다.");
