@@ -18,7 +18,7 @@ const Create = () => {
   const [emailMessage, setEmailMessage] = useState("");
   const handleInputId = (e) => {
     setInputId(e.target.value);
-    if (e.target.length < 2 || e.target.length > 10) {
+    if (e.target.value.length < 2 || e.target.value.length > 10) {
       setIsId(false);
     } else {
       setIsId(true);
