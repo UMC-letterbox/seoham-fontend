@@ -38,7 +38,7 @@ const FindPw = () => {
   const certifyEmail = (e) => {
     e.preventDefault();
     const { email_number } = inputEmail;
-    fetch("http://www.duke0410.shop:8000/user/check-email", {
+    fetch(`/user/check/${inputEmail}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const FindPw = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.isSuccess == true ) {
+        if (res.status == 200 ) {
           alert("이메일이 유효합니다 인증번호를 전송했습니다");
           setIsEmail(true);
         } else {
@@ -62,14 +62,14 @@ const FindPw = () => {
   const { email_number } = inputEmail;
   const {certification_number} = inputAdmire;
   fetch("API주소", {
-    method: "http://www.duke0410.shop:8000/user/code",
+    method: "/user/code",
     body: JSON.stringify({
       authNum : certification_number,
     }),
   })
     .then((res) => res.json())
     .then((res) => {
-      if (res.isSuccess == true) {
+      if (res.status == 200) {
         alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
         setIsNumber(true);
       } else {
@@ -92,7 +92,7 @@ const FindPw = () => {
   };
   const onPwConfirm = () => {
     if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
-      fetch("http://www.duke0410.shop:8000/user/find", {
+      fetch("/user/find", {
         // 백엔드로 api호출!
         method: "PATCH",
         headers: {
@@ -103,7 +103,7 @@ const FindPw = () => {
           passWord: newPw,
         }),
       }).then((res) => {
-        if (res.isSuccess == true) {
+        if (res.status == 200) {
           alert("비밀번호 변경되었습니다.");
           navigate("/login");
         } else {
