@@ -57,7 +57,7 @@ const Create = () => {
       isId === false ||
       isEmail === false ||
       isPasswordConfirm === false ||
-      isPassword === false ||
+      isPassword === false
       // || isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
@@ -87,6 +87,43 @@ const Create = () => {
       });
     }
   };
+  //이건 formdata로 시도해본것!
+  const clickSignup2 = () => {
+  if (
+    isId === false ||
+    isEmail === false ||
+    isPasswordConfirm === false ||
+    isPassword === false
+    // || isNumber === false
+  ) {
+    // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
+    alert("유효성 및 중복확인부분을 전부해주세요");
+  } else {
+    // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
+    fetch("/user/join", {
+      // 백엔드로 api호출!
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        //application/x-www-form-urlencoded; charset=UTF-8  으로 바꿔도 된다.
+      },
+      cache : 'no-cache',
+      body: new URLSearchParams({
+        email: inputEmail,
+        passWord: inputPw,
+        nickName: inputId,
+      }),
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("가입 완료 !");
+        navigate("/login");
+      } else {
+        // 가입완료부분
+        alert("다시 한번 확인해주세요!"); //이게 error부분
+      }
+    });
+  }
+};
   const idCheck = (e) => {
     e.preventDefault();
     if (isId === false) {
