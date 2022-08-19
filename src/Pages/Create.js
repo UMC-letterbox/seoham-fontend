@@ -53,7 +53,6 @@ const Create = () => {
       isEmail === false ||
       isPasswordConfirm === false ||
       isPassword === false ||
-      validmail === false
       // || isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
@@ -102,21 +101,25 @@ const Create = () => {
     });
   };
   const onChangeEmail = (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    if (validmail === false) {
+      alert("이메일 형식을 지켜주세요!");
+    } else {
       const { email_number } = inputEmail;
       fetch(`/user/check/${inputEmail}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.status === 200 ) {
-        window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
-        setIsEmail(true);
-      }else {
-        alert("이미 사용이거나 유효하지 않는 이메일입니다.");
-      }
-    });
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response.status === 200) {
+          window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
+          setIsEmail(true);
+        } else {
+          alert("이미 사용이거나 유효하지 않는 이메일입니다.");
+        }
+      });
+    }
   };
   const certifyNumber = (e) => {
     e.preventDefault();
