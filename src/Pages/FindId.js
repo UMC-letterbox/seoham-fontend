@@ -17,7 +17,7 @@ const FindId = () => {
   const certifyId = (e) => {
     e.preventDefault();
     const { id_number } = inputId;
-    fetch(`/user/check-find-email/${inputId}`, { 
+    fetch(`/user/check-find-email/?nickName=${inputId}`, { 
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const FindId = () => {
   const findEmail = () => {
     const { id_number } = inputId;
     if (isId === true) {
-      fetch(`/user/find-email/${inputId}`, {
+      fetch(`/user/find-email/?nickName=${inputId}`, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
