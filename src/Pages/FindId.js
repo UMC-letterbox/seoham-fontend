@@ -17,7 +17,7 @@ const FindId = () => {
   const certifyId = (e) => {
     e.preventDefault();
     const { id_number } = inputId;
-    fetch(`/user/check/${inputId}`, { 
+    fetch(`/user/check-find-email/${inputId}`, { 
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,17 +26,17 @@ const FindId = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200 ) {
-          alert("닉네임이 존재하지 않습니다."); //여기 부분이 말이... 차암...
-        } else {
           alert("닉네임이 유효합니다. 이메일 찾기를 눌러주세요");
-          setIsId(true);
+          setIsId(true); //여기 부분이 말이... 차암...
+        } else {
+          alert("닉네임이 존재하지 않습니다.");
         }
       });
   };
   const findEmail = () => {
     const { id_number } = inputId;
     if (isId === true) {
-      fetch(`/user/find/${inputId}`, {
+      fetch(`/user/find-email/${inputId}`, {
         method: "GET",
         headers: {
         "Content-Type": "application/json",
