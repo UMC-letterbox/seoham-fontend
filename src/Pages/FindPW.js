@@ -38,7 +38,7 @@ const FindPw = () => {
   const certifyEmail = (e) => {
     e.preventDefault();
     const { email_number } = inputEmail;
-    fetch(`/user/check/${inputEmail}`, {
+    fetch(`/user/check-find-password/${inputEmail}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const FindPw = () => {
   };
   const onPwConfirm = () => {
     if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
-      fetch("/user/find", {
+      fetch("/user/find-password", {
         // 백엔드로 api호출!
         method: "PATCH",
         headers: {
