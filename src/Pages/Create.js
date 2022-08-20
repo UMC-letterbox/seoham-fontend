@@ -102,6 +102,9 @@ const Create = () => {
     // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
     alert("유효성 및 중복확인부분을 전부해주세요");
   } else {
+     console.log(inputEmail);
+     console.log(inputPw);
+     console.log(inputId);
     // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
     fetch("/user/join", {
       // 백엔드로 api호출!
