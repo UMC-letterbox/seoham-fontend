@@ -131,7 +131,7 @@ const Create = () => {
     } else {
       e.preventDefault();
       const { usableId } = isId;
-      fetch(`/user/check/${inputId}`, {
+      fetch(`/user/check-join-nickname/${inputId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const Create = () => {
       alert("이메일 형식을 지켜주세요!");
     } else {
       const { email_number } = inputEmail;
-      fetch(`/user/check/${inputEmail}`, {
+      fetch(`/user/check-join-email/${inputEmail}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
