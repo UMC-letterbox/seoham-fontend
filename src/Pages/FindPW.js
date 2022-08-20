@@ -45,7 +45,7 @@ const FindPw = () => {
       },
     })
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           alert("이메일이 유효합니다 인증번호를 전송했습니다"); 
           setIsEmail(true);
         } else {
@@ -99,7 +99,7 @@ const FindPw = () => {
           passWord: newPw,
         }),
       }).then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           alert("비밀번호 변경되었습니다.");
           navigate("/login");
         } else {
