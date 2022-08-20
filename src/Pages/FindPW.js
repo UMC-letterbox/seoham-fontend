@@ -38,7 +38,7 @@ const FindPw = () => {
   const certifyEmail = (e) => {
     e.preventDefault();
     const { email_number } = inputEmail;
-    fetch(`/user/check-find-password/${inputEmail}`, {
+    fetch(`/user/check-find-password/?email=${inputEmail}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
