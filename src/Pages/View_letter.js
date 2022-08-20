@@ -54,11 +54,12 @@ function View_letter () {
         Data.deleteLetter(tagId, id);
 
         //
-        fetch('api (/posts/{postIdx}', {
+        fetch(`/posts/delete/${id}`, {
             method: "DELETE",
         })
         .then(res => res.json())
         .then(res => {
+            //console.log(res)
             if (res.isSuccess === true){
                 window.alert("편지가 삭제되었습니다.")
             }
