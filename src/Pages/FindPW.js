@@ -46,7 +46,7 @@ const FindPw = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.status == 200 ) {
+        if (res.isSuccess === true ) {
           alert("이메일이 유효합니다 인증번호를 전송했습니다"); 
           setIsEmail(true);
         } else {
@@ -66,7 +66,7 @@ const FindPw = () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      if (res.status == 200) {
+      if (res.isSuccess === true) {
         alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
         setIsNumber(true);
       } else {
