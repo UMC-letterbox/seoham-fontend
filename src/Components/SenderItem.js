@@ -81,13 +81,13 @@ const SenderItem = ({ randid, sender }) => {
             }
           </div></div>
           
-          <div className="mt-3 mx-4 content-between h-20 ">
+          <div className="mt-4 mx-4 content-between h-20 ">
             <div className="flex items-center">
-              <span>{sender}</span>
+              <span className="mr-1">{sender}</span>
               <span className="text-sm">  님으로부터 온 편지</span>
             </div>
-            <div className="flex items-center  mt-1">
-              <div className="w-5">
+            <div className="flex items-center text-[#F47C7C] mt-1 text-xs">
+              <div className="w-4 mr-1">
                 <svg  viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M18.833 0.166668H2.16634C1.02051 0.166668 0.0830078 1.10417 0.0830078 2.25V14.75C0.0830078 15.8958 1.02051 16.8333 2.16634 16.8333H18.833C19.9788 16.8333 20.9163 15.8958 20.9163 14.75V2.25C20.9163 1.10417 19.9788 0.166668 18.833 0.166668ZM18.4163 4.59375L11.6038 8.85417C10.9268 9.28125 10.0726 9.28125 9.39551 8.85417L2.58301 4.59375C2.32259 4.42708 2.16634 4.14584 2.16634 3.84375C2.16634 3.14584 2.92676 2.72917 3.52051 3.09375L10.4997 7.45834L17.4788 3.09375C18.0726 2.72917 18.833 3.14584 18.833 3.84375C18.833 4.14584 18.6768 4.42708 18.4163 4.59375Z" fill="#F47C7C"/>
                 </svg>
