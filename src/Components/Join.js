@@ -79,7 +79,7 @@ function Join() {
   };
 
   return (
-    <form class="rounded-xl min-h-screen bg-[#FFB5C5]">
+    <div class="rounded-xl min-h-screen bg-[#FFB5C5]">
       <div class="py-5 px-5 m-5">
         <label class="text-xl text-white">약관동의</label>
         <div>
@@ -146,11 +146,10 @@ function Join() {
       <button
         onClick={onClick}
         class="py-2 mx-12 text-center bg-white border rounded-full text-red-300 cursor-pointer w-3/5"
-        type="submit"
       >
         확인
       </button>
-    </form>
+    </div>
   );
 }
 
