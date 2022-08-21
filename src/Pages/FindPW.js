@@ -87,7 +87,7 @@ const FindPw = () => {
     }
   };
   const onPwConfirm = () => {
-    if (isEmail === true && isNumber === true && isPassword === true && inputPw === newPw) {
+    if (isEmail === true && isPassword === true && inputPw === newPw) {
       fetch("/user/find-password", {
         // 백엔드로 api호출!
         method: "PATCH",
@@ -162,7 +162,7 @@ const FindPw = () => {
           type="password"
           name="input_pw"
           value={inputPw}
-          onChange={handleInputPw}
+          onChange={onChangePassword}
         />
       </div>
       <div class="py-5 flex ">
