@@ -10,7 +10,7 @@ import Select from "../Components/Select";
 import UpButton from "../Components/UpButton";
 import Viewbox from "../Components/ViewBox";
 import Menubox from "../Components/Menubox";
-
+import "../css/font.css";
 const SenderUser = () => {
   const tagList = useContext(DiaryStateContext);
   const { sender } = useParams();
@@ -41,21 +41,18 @@ const SenderUser = () => {
     console.log("보낸이 삭제 버튼");
     navigate(-1);
   }
-
+  const UserSvgPink = () => {
+    return(
+      <svg  viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="100" fill="#EF9F9F"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M88.9344 110.246C72.1782 110.246 58.3578 122.816 56.3882 139.04C56.1219 141.233 57.9384 143.033 60.1475 143.033H139.852C142.062 143.033 143.878 141.233 143.612 139.04C141.642 122.816 127.822 110.246 111.066 110.246H88.9344Z" fill="#FFF2F2"/>
+      <circle cx="100" cy="77.4591" r="22.9508" fill="black" fillOpacity="0.4"/>
+      <circle cx="100" cy="77.4591" r="22.9508" fill="#FFF2F2"/>
+    </svg>
+    )
+    }
   return (
     <div class="sm: justify-center items-center m-0 px-3 min-h-screen">
-      {/*<MyHeader
-        leftChild={
-          <MyButton2
-            text={"<--"}
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        }
-        headText={""}
-        rightChild={<MyButton1 text={"..."} onClick={() => alert("프로필")} />}
-      />*/}
       <div className="flex justify-between px-3 py-5">
         <button onClick={()=>{navigate(-1);}}>
           <img src="/img/left-arrow.png" className="w-4 h-4"/>
@@ -64,21 +61,26 @@ const SenderUser = () => {
           <img src="/img/dots.png" className="w-4 h-4" onClick={onClick}/>
         </button>
       </div>
-      {/*<Select
-        TagText={
-          <MyButton text={"일단 이걸로"} onClick={() => alert("안녕")} />
-        }
-        DateText={""}
-        SenderText={""}
-      />*/}
-      <div className="flex justify ml-5"> {/* 프로필 표시 부분 - 컴포넌트로 옮겨도 괜찮을 듯?*/}
-        <img src="/img/user.png" className="w-10 h-10 self-center mr-2.5"/> {/*임의로 넣음 - 랜덤으로 수정 필요*/}
-        <div className="grid content-between">
-          <div className="text-rose-300"><span>{sender}</span><span className="text-sm">님</span></div>
-          <div>
-            <img src="/img/email.png" className="w-4 inline-block align-baseline"/>
-            <span className="text-rose-300">&nbsp;{numLetter}개</span>
+
+      <div className="buri flex justify h-20 w-full m-auto  cursor-pointer  bg-white">
+        <div className="h-20 flex justify-center items-center">
+          <div className=" ml-5 w-12">
+            <UserSvgPink />
           </div>
+        </div>
+        <div className = "mt-4 mx-5">
+          <div className="text-[#F47C7C] flex items-center">
+              <span className="mr-3">{sender}</span>
+              <span className="text-sm">  님</span>
+            </div>
+            <div className="flex items-center text-[#F47C7C] mt-1 text-xs">
+              <div className="w-4 mr-1">
+                <svg  viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.833 0.166668H2.16634C1.02051 0.166668 0.0830078 1.10417 0.0830078 2.25V14.75C0.0830078 15.8958 1.02051 16.8333 2.16634 16.8333H18.833C19.9788 16.8333 20.9163 15.8958 20.9163 14.75V2.25C20.9163 1.10417 19.9788 0.166668 18.833 0.166668ZM18.4163 4.59375L11.6038 8.85417C10.9268 9.28125 10.0726 9.28125 9.39551 8.85417L2.58301 4.59375C2.32259 4.42708 2.16634 4.14584 2.16634 3.84375C2.16634 3.14584 2.92676 2.72917 3.52051 3.09375L10.4997 7.45834L17.4788 3.09375C18.0726 2.72917 18.833 3.14584 18.833 3.84375C18.833 4.14584 18.6768 4.42708 18.4163 4.59375Z" fill="#F47C7C"/>
+                </svg>
+              </div>
+              &nbsp;{numLetter}개
+            </div>
         </div>
       </div>
       <UpButton
