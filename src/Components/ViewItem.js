@@ -11,7 +11,7 @@ const ViewItem = ({ id, tagName, date }) => {
       <div>
         <button
           onClick={getTag}
-          class="h-28 w-36 m-3 border float-left cursor-pointer rounded-md px-5 py-3 bg-[#92C7DF] text-white"
+          class="h-28 w-36 m-3  buri float-left cursor-pointer rounded-xl px-5 py-3 bg-[#E3B7A0] text-white"
         >
           <div class="text-left py-2">#{tagName}</div>
           <br></br>
