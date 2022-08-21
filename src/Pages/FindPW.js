@@ -44,8 +44,9 @@ const FindPw = () => {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => {
-        if (res.status === 200) {
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.result.exist === true){
           alert("이메일이 유효합니다 인증번호를 전송했습니다"); 
           setIsEmail(true);
         } else {
@@ -98,8 +99,9 @@ const FindPw = () => {
           email: inputEmail,
           passWord: newPw,
         }),
-      }).then((res) => {
-        if (res.status === 200) {
+      }).then((response) => response.json())
+        .then((response) => {
+          if (response.isSuccess === true)  {
           alert("비밀번호 변경되었습니다.");
           navigate("/login");
         } else {
