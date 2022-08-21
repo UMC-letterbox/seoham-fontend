@@ -23,7 +23,7 @@ import Create from "./Pages/Create";
 import LoginPage from "./Pages/LoginPage";
 import Contract from "./Pages/Contract";
 import Mypage from "./Pages/Mypage";
-
+import Landing from "./Pages/Landing";
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -145,6 +145,8 @@ function App() {
       <DiaryDispatchContext.Provider value={{ onCreate }}>
         <BrowserRouter>
           <Routes>
+            <Route path="/landing" element={<Landing />} />
+
             <Route path="/" element={<Home />} />
             <Route path="/next" element={<Next />} />
             <Route path="/new" element={<New />} />
