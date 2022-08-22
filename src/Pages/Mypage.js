@@ -5,12 +5,9 @@ import ModalContainer_name from "../Components/modalContainer_name";
 import Modal_password from "../Components/Modal_password";
 import "../css/font.css";
 function Mypage() {
-    //이건 api로 받아와야하는 부분
-    const LetterNum = 25; 
-    const userName = "닉네임";
-    const currentEmail = "abc123@gmail.com"
-
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [letterNum, setLetterNum] = useState();
     const [pass, setPassword] = useState("");
     const [btn, setBtn] = useState(false);
     const [modal, setModal] = useState(false);
@@ -18,7 +15,20 @@ function Mypage() {
 
     // 해당 api 없음.
     useEffect(() => {
-        setName(userName);
+        fetch('/mypage/info', {
+            method: "GET",
+            headers: {
+                "x-access-token" : localStorage.getItem('login_token'),
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            setName(res.result.nickname);
+            setEmail(res.result.email);
+            setLetterNum(res.result.letter);
+        })
+        .catch(err => console.log(err))
     }, []);
     //
 
@@ -132,7 +142,7 @@ function Mypage() {
                 </div>
                 <div className="flex justify-center items-center mt-5">
                     <LetterIcon />
-                    <p className="text-white buri">{LetterNum}</p>
+                    <p className="text-white buri">{letterNum}</p>
                 </div>
                 <div className="flex justify-center mt-2.5 pb-6">
                     <div className="text-white buri">
@@ -144,7 +154,7 @@ function Mypage() {
             <div className="flex justify-center"> {/* 입력칸 부분 */}
             <div>
                 <p className="mb-2.5 mt-5 buri">이메일</p>
-                <p>{currentEmail}</p>
+                <p>{email}</p>
 
                 <p className="my-2.5 buri">닉네임</p>
                 <div className="flex justify">
