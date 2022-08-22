@@ -17,6 +17,7 @@ const Login2 = () => {
   const signUp = () => {
     fetch("/user/login", {
       method: "POST",
+      headers: {"Content-Type" : "application/json"},
       body: JSON.stringify({
         email: inputEmail,
         passWord: inputPw,
@@ -24,6 +25,7 @@ const Login2 = () => {
     })
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
         if (response.isSuccess === true) {
           localStorage.setItem("login_token", response.result.jwt);
           console.log(response.data);
