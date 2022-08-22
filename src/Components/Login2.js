@@ -27,7 +27,7 @@ const Login2 = () => {
       .then((response) => {
         console.log(response);
         if (response.isSuccess === true) {
-          localStorage.setItem("login_token", response.result.jwt);
+          localStorage.setItem("X-ACCESS-TOKEN", response.result.jwt);
           console.log(response.data);
           localStorage.setItem("userIdx", response.result.userIdx);
           alert("로그인 되었습니다");
