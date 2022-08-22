@@ -14,9 +14,39 @@ const Date = () => {
   const tagList = useContext(DiaryStateContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  
+  //받아온 날짜별 편지 저장용 배열--------------------------------------
+  let postsByDates = [];
+  //날짜별 편지 받는 api
+  function getPostbyDates(){
+    const userId = JSON.parse(localStorage.getItem("userIdx"));
+    fetch(`/posts/date?userIdx=${userId}`,{
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem('login_token')
+      }
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if(res.isSuccess == true){
+        res.result.map(item => postsByDates.push(item));
+      }
+      else {
+        console.log("실패");
+      }
+    })
+  }
+  useEffect(() => {
+    //날짜별편지조회 Api 연결부분. 이후 test시 주석해제--------------------
+    //getPostbyDates();
+  },[])
+
+
   useEffect(() => {
     setData(tagList);
   }, [tagList]);
+
   return (
     <div class="m-0 px-3 min-h-screen">
       {/*<MyHeader
