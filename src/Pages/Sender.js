@@ -17,6 +17,37 @@ const Sender = () => {
   useEffect(() => {
     setData(tagList);
   }, [tagList]);
+
+  //보낸이목록 저장용 배열
+  let senders = [];
+  //보낸이 목록조회
+  function getSenderList(){
+    const userId = JSON.parse(localStorage.getItem("userIdx"));
+    fetch(`/posts/senders?userIdx=${userId}`,{
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem('login_token')
+      }
+    })
+    .then((res)=>res.json())
+    .then((res) => {
+      console.log(res);
+      if(res.isSuccess == true){
+        res.result.map(item => senders.push(item));
+      }
+      else{
+        console.log("실패");
+      }
+    })
+  }
+  useEffect(() => {
+    //보낸이목록 불러오기 API 부분, 이후 test 시 주석해제
+    //getSenderList();
+  }, [])
+
+
+
+
   return (
     <div class="sm: justify-center items-center m-0 px-3 min-h-screen">
       {/*<MyHeader
