@@ -183,7 +183,7 @@ const Create = () => {
     fetch("/user/check/code", {
       method: "POST",
       body: JSON.stringify({
-        authNum : certification_number,
+        num: parseInt(inputAdmire),
       }),
     })
       .then((res) => res.json())
