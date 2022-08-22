@@ -56,9 +56,9 @@ function Modal_password({modalClose}) {
                         "x-access-token": localStorage.getItem("login_token"),
                         "Content-Type": "application/json",   
                     },                
-                    body : {
+                    body : JSON.stringify({
                         newPassword : new2_pass
-                    }
+                    })
                 })
                 .then(res => res.json())
                 .then(res => {
