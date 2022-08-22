@@ -18,10 +18,11 @@ function New_tag() {
             Data.addTag(tagName, color); //api 연결 후 삭제
 
             //
-            fetch('api(/posts/tags)', {
-                method: 'post',
+            fetch('/posts/tags/new', {
+                method: 'POST',
                 headers: {
-                    Authorization: localStorage.getItem("login_token")
+                    Authorization: localStorage.getItem("login_token"),
+                    "Content-Type" : "application/json",
                 },
                 body: JSON.stringify({
                     tagName: tagName,

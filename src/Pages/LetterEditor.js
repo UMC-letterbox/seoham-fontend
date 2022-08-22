@@ -33,6 +33,7 @@ const LetterEditor=() => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const userId = jsonLocalStorage.getItem("userIdx");
+
     let letsgo = 0;
     // const {paper} = state;
     const goSelectPaper = () => {
@@ -57,16 +58,16 @@ const LetterEditor=() => {
     }
     //select 작동 확인용 배열 변수 (getTags 함수 썼다가 헷갈릴까봐 이걸로 사용합니다!) - hy 추가
     const tags = [
-        {
-            id: 0,
-            name: "#HBD",
-            color: "#FE8F8F"
-        },
-        {
-            id: 1,
-            name: "#Friends",
-            color: "#FCD2D1"
-        }
+        // {
+        //     id: 0,
+        //     name: "#HBD",
+        //     color: "#FE8F8F"
+        // },
+        // {
+        //     id: 1,
+        //     name: "#Friends",
+        //     color: "#FCD2D1"
+        // }
     ];
     const currentTags = [];
     const chkCondition= () => {
@@ -91,9 +92,9 @@ const LetterEditor=() => {
             userIdx : userId,
             sender : temp.sender,
             date : temp.date,
-            tagIdx : temp.tagId,
+            tagIdx : parseInt(temp.tagId),
             content : temp.content,
-            letterIdx: state,
+            letterIdx: parseInt(state),
         };
         console.log("서버에 전달될 newItem",newItem);
         return newItem;
@@ -118,15 +119,17 @@ const LetterEditor=() => {
     }
     function register(newItem){
         console.log(newItem);
-        fetch("/post/new", {
+        fetch("/posts/new", {
                 method: "POST",
                 headers: {
-                    Authorization: localStorage.getItem('login_token')
+                    Authorization: localStorage.getItem('login_token'),
+                    "Content-Type" : "application/json",
                 },
                 body: JSON.stringify(newItem),
         })
         .then((res) => res.json())
         .then((res)=> {
+            console.log(res);
             if(res.isSuccess === true){
                 console.log(res.result);
                 //초기화
@@ -143,16 +146,17 @@ const LetterEditor=() => {
         })
     }
     function getTagList(userId){
-        fetch("API주소",{
+        fetch(`/post/tags?${userId}=`,{
             method: "GET",
             headers: {
                 Authorization: localStorage.getItem('login_token')
             },
         })
         .then((res) => {console.log(res);})
-        // .then((data) => {
-        //     data.map(item => currentTags.push(item));
-        // })
+        .then((res) => {
+            // data.map(item => currentTags.push(item));
+            console.log(res.result);
+        })
         .catch(err => console.log(err))
     }
     React.useEffect(() => {
@@ -183,7 +187,7 @@ const LetterEditor=() => {
                 </Link>
                 <h2 className="text-center font-bold text-lg flex-grow">편지 작성</h2>
                 <button
-                    disabled={isWritten}
+                    disabled={!isWritten}
                     onClick={handleSubmit}> 
                     {isWritten ? <img src="/img/check-green.png" className="w-4"/> : <img src="/img/check-empty.png" className="w-4"/>}
                 </button>
