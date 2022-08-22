@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Modal_password({modalClose, modalCheck}) {
+function Modal_password({modalClose}) {
     const onCloseModal = (e) => {
         console.log('e.target: ', e.target);
         console.log('e.tarcurrentTargetget: ', e.currentTarget)
@@ -44,21 +44,36 @@ function Modal_password({modalClose, modalCheck}) {
         }
         // 비번 수정 - 400 오류
         else if (new_pass === new2_pass) {
-            fetch('/mypage/password/modify', {
-                method : 'PATCH',
-                headers : {
-                    Authorization: localStorage.getItem("login_token"),
-                    "Content-Type": "application/json",   
-                },                
-                body : {
-                    newPassword : new2_pass
-                }
-            })
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
-
-            modalClose();
+            const passwordRegExp =
+                /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+            if (!passwordRegExp.test(new_pass)) {
+                setText("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
+            } else {
+                setText("안전한 비밀번호 입니다.");
+                fetch('/mypage/password/modify', {
+                    method : 'PATCH',
+                    headers : {
+                        "x-access-token": localStorage.getItem("login_token"),
+                        "Content-Type": "application/json",   
+                    },                
+                    body : {
+                        newPassword : new2_pass
+                    }
+                })
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    if(res.isSuccess){
+                        alert(res.result)
+                    }
+                    else{
+                        alert('오류가 발생했습니다.')
+                    }
+                })
+                .catch(err => console.log(err))
+    
+                modalClose();
+            }            
         }
         else {
             setText("비밀번호를 다시 확인해주세요.") //window.alert("비밀번호를 다시 확인해주세요.");

@@ -22,19 +22,21 @@ function Modal_name({modalClose, modalCheck, setNickname}){
     const onClick = () => {
         /* 중복체크 api 연결하기 - 400 에러*/
         console.log(name, typeof(name))
-        fetch("/mypage/nickname/check", {
+        
+        fetch("/mypage/nickname/check/", {
             method: "POST",
             headers : {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify({
-                nickName : name,
+                newNickname : name,
               }),
         })
         .then(res => res.json())
         .then(res => {
             console.log(res)
-            if (res.isSuccess === true) {
+            if (res.result.valid) {
                 setCheck("사용 가능한 닉네임입니다.");
                 setIsValid(true);
             }
@@ -52,10 +54,10 @@ function Modal_name({modalClose, modalCheck, setNickname}){
             /* 닉네임 수정 api 연결하기 - 400 에러 */
             fetch('/mypage/nickname/modify', {
                 method : "PATCH",
-                headers : localStorage.getItem("login_token"),/* {
-                    //Authorization: localStorage.getItem("login_token"),
+                headers :  {
+                    "x-access-token" : localStorage.getItem("login_token"),
                     "Content-Type": "application/json",   
-                },*/
+                },
                 body: JSON.stringify({
                     newNickname : name,
                 }),                

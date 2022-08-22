@@ -2,6 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState, useRef, useEffect} from "react";
 import ModalContainer_pass from "../Components/ModalContainer_pass";
 import ModalContainer_name from "../Components/modalContainer_name";
+import Modal_password from "../Components/Modal_password";
 import "../css/font.css";
 function Mypage() {
     //이건 api로 받아와야하는 부분
@@ -10,7 +11,9 @@ function Mypage() {
     const currentEmail = "abc123@gmail.com"
 
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [pass, setPassword] = useState("");
+    const [btn, setBtn] = useState(false);
+    const [modal, setModal] = useState(false);
     const navigate = useNavigate();
 
     // 해당 api 없음.
@@ -19,6 +22,39 @@ function Mypage() {
     }, []);
     //
 
+    const passRef = useRef();
+    useEffect(() => {
+        console.log(passRef.current.value)
+        console.log(pass)
+        //setPassword(passRef.current.value)
+    }, [btn])
+
+    const onClick = () => {
+        setPassword(passRef.current.value)
+        console.log(passRef.current.value)
+        fetch('/mypage/password/check', {
+            method: 'POST',
+            headers: {
+                "x-access-token": localStorage.getItem("login_token"),
+                "Content-Type": "application/json",   
+            },
+            body: JSON.stringify({
+                password: passRef.current.value,
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            if(res.result.valid){
+                setModal((current) => !current)
+            }
+            else{
+                alert('다시 비밀번호를 확인해주세요.')
+            }
+        }) //여기에 true,false를 받아서 변수에 넣어두자
+        .catch(err => console.log(err))    
+
+    }
 
     const handlePassChange = (e) => {
         setPassword(e.target.value);
@@ -45,7 +81,7 @@ function Mypage() {
 
             fetch('/mypage/delete', {
                 method: 'DELETE',
-                headers: {Authorization : localStorage.getItem('login_token')}
+                headers: {"x-access-token" : localStorage.getItem('login_token')}
             })
             .then(res => res.json())
             .then(res => {
@@ -124,10 +160,18 @@ function Mypage() {
                             placeholder="현재 비밀번호 입력"
                             name="password"
                             type="password"
+                            ref = {passRef}
                             //value= {password}
                             //onChange={handlePassChange}
                         />
-                    <ModalContainer_pass password={password}/>
+                    {/*<ModalContainer_pass password={password} setBtn={setBtn}/>*/}
+                    <button className="rounded-full border border-2 border-[#EF9F9F] w-16 text-[#EF9F9F]" 
+                            onClick={onClick}>
+                        변경
+                    </button>
+                    {
+                        modal == true ? <Modal_password modalClose={setModal}/> : null
+                    }
                 </div>
 
             </div>
@@ -142,5 +186,4 @@ function Mypage() {
         </div>
     );
 }
-
 export default Mypage;
