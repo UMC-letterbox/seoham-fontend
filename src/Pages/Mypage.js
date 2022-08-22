@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState, useRef, useEffect} from "react";
 import ModalContainer_pass from "../Components/ModalContainer_pass";
 import ModalContainer_name from "../Components/modalContainer_name";
@@ -11,6 +11,8 @@ function Mypage() {
 
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
     // 해당 api 없음.
     useEffect(() => {
         setName(userName);
@@ -25,30 +27,34 @@ function Mypage() {
 
     const logout = () => {
         console.log("로그아웃");
-        console.log(localStorage.getItem("login_token"))
-        // 
-        fetch('/user/', {
-            method : 'POST',
-            headers : localStorage.getItem('login_token'),
-        })
-        .then(res => res.json())
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        //console.log(localStorage.getItem('login_token'), localStorage.getItem('userIdx'));
+        localStorage.removeItem("login_token");
+        localStorage.removeItem("userIdx");
+        //console.log(localStorage.getItem('login_token'), localStorage.getItem('userIdx'));
+        alert('로그아웃 되었습니다.');
+        navigate('/login');
         //메인화면-로그인화면으로 돌아가기
     }
 
     // 회원 탈퇴 - jwt 토큰 없어서 오류 나는 상태
     const Withdrawal = () => {
+        console.log(localStorage.getItem('login_token'))
         if (window.confirm("정말로 탈퇴하시겠습니까?")){
             console.log("회원탈퇴");
+            console.log(localStorage.getItem('login_token'))
+
             fetch('/mypage/delete', {
                 method: 'DELETE',
-                headers: localStorage.getItem('login_token')
+                headers: {Authorization : localStorage.getItem('login_token')}
             })
             .then(res => res.json())
             .then(res => {
                 //console.log(res)
-                if (res.isSuccess) {window.alert(res.result)}
+                if (res.isSuccess) {
+                    window.alert(res.result);
+                    localStorage.removeItem('login_token');
+                    navigate('/login');
+                }
                 else {console.log(res.code, res.message)}
             })
             .catch(err => console.log(err))
