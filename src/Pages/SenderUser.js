@@ -11,6 +11,8 @@ import UpButton from "../Components/UpButton";
 import Viewbox from "../Components/ViewBox";
 import Menubox from "../Components/Menubox";
 import "../css/font.css";
+import Modal_sender from "../Components/Modal_sender";
+
 const SenderUser = () => {
   const tagList = useContext(DiaryStateContext);
   const { sender } = useParams();
@@ -18,6 +20,7 @@ const SenderUser = () => {
   const [data, setData] = useState([]);
   const numLetter = 1; //편지 개수 입력받기
   const [isopen, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const User = `${sender}`;
@@ -35,10 +38,29 @@ const SenderUser = () => {
   const modiTag = () => {
     console.log("보낸이 정보 수정 버튼");
     //함수 내부에서 바로 페이지를 넘기는 방법이 없나? 아니면 또 인자를 추가해야하는데..
+    setModal((current) => !current)
   }
   //  삭제
   const deleteTag = () => {
     console.log("보낸이 삭제 버튼");
+    /* 보낸이 id 값 확인 필요 메시지... */
+    fetch(`/posts/senders/delete/${sender}`,{
+      method: 'DELETE',
+      headers: {
+        'x-access-token': localStorage.getItem('login_token')
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      if(res.isSuccess){
+        alert('보낸이 정보를 삭제했습니다.')
+      }
+      else{
+        alert('오류가 발생했습니다.')
+      }
+    })
+    .catch(err => console.log(err))
     navigate(-1);
   }
   const UserSvgPink = () => {
@@ -97,6 +119,7 @@ const SenderUser = () => {
       />
       <Viewbox tagList={data} />
       {isopen ? <Menubox menuContents={["선택", "보낸이 정보 수정", "보낸이 정보 삭제"]} menuFunc={[selectTag, modiTag, deleteTag]}/> : null}
+      {modal === true ? <Modal_sender modalClose={setModal} sender={sender}/> : null}
     </div>
   );
 };
