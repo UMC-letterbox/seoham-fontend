@@ -16,7 +16,7 @@ function ModalContainer_pass({password}){
 
     let tf = null;
     const onClick = () => {
-        //이렇게 바꾸고 갑자기 오류 alert가 뭘 작성할때마다 2번씩 뜸
+        //이렇게 바꾸고 갑자기 오류 alert가 뭘 작성할때마다 2번씩 뜸 - input value, onchange에 state를 적어놔서 그런듯(적을 때마다 리렌더링)
         fetch('/mypage/password/check', {
             method: 'POST',
             headers: {

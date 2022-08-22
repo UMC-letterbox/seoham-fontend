@@ -25,7 +25,9 @@ function Mypage() {
 
     const logout = () => {
         console.log("로그아웃");
-        fetch('api', {
+        console.log(localStorage.getItem("login_token"))
+        // 
+        fetch('/user/', {
             method : 'POST',
             headers : localStorage.getItem('login_token'),
         })
@@ -115,8 +117,9 @@ function Mypage() {
                     <input className="w-61 border-b-2"
                             placeholder="현재 비밀번호 입력"
                             name="password"
-                            value= {password}
-                            onChange={handlePassChange}
+                            type="password"
+                            //value= {password}
+                            //onChange={handlePassChange}
                         />
                     <ModalContainer_pass password={password}/>
                 </div>
