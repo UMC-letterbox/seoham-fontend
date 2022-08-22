@@ -32,6 +32,9 @@ function View_tags() {
     const modiTag = () => {
         console.log("태그정보수정 버튼");
         //함수 내부에서 바로 페이지를 넘기는 방법이 없나? 아니면 또 인자를 추가해야하는데..
+        console.log(id);
+        navigate(`/modiTag/${id}`)
+
     }
     // 태그 삭제
     const deleteTag = () => {
