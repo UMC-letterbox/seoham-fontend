@@ -16,27 +16,40 @@ function ModalContainer_pass({password}){
 
     let tf = null;
     const onClick = () => {
-        /*
-        fetch('api', {
-            method: '',
-            body: {
-
-            }
+        //이렇게 바꾸고 갑자기 오류 alert가 뭘 작성할때마다 2번씩 뜸
+        fetch('/mypage/password/check', {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.getItem("login_token"),
+                "Content-Type": "application/json",   
+            },
+            body: JSON.stringify({
+                password : password,
+            }),
         })
         .then(res => res.json())
-        .then(res => console.log(res)) //여기에 true,false를 받아서 변수에 넣어두자
+        .then(res => {
+            console.log(res)
+            if(res.isSuccess){
+                setModalOpen((modalOpen) => !modalOpen);
+                setState(true);
+            }
+            else{
+                setState(false);
+            }
+        }) //여기에 true,false를 받아서 변수에 넣어두자
         .catch(err => console.log(err))    
-        */
+        
 
         // 이 부분이 다 then 안으로 들어가면 될듯.
-        tf = true;
+        /*tf = true;
         if (tf) {
             setModalOpen((modalOpen) => !modalOpen);
             setState(true);
         }
         else{
             setState(false);
-        }
+        }*/
     }
 
     return(
