@@ -24,10 +24,10 @@ const Login2 = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response.token) {
-          localStorage.setItem("login_token", response.token);
+        if (response.isSuccess === true) {
+          localStorage.setItem("login_token", response.result.jwt);
           console.log(response.data);
-          localStorage.setItem("userIdx", response.data);
+          localStorage.setItem("userIdx", response.result.userIdx);
           alert("로그인 되었습니다");
           navigate("/");
         } else {
