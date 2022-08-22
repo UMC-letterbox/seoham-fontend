@@ -50,29 +50,47 @@ function Modal_password({modalClose}) {
                 setText("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
             } else {
                 setText("안전한 비밀번호 입니다.");
-                fetch('/mypage/password/modify', {
-                    method : 'PATCH',
-                    headers : {
-                        "x-access-token": localStorage.getItem("login_token"),
-                        "Content-Type": "application/json",   
-                    },                
-                    body : JSON.stringify({
-                        newPassword : new2_pass
+                fetch('/mypage/password/check', {
+                    method: 'POST',
+                    headers: {
+                        "x-access-token" : localStorage.getItem('login_token'),
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify({
+                        password: new_pass
                     })
                 })
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res)
-                    if(res.isSuccess){
-                        alert(res.result)
+                    if(res.result.valid){
+                        setText('현재 비밀번호와 같습니다. 다른 비밀번호를 입력해주세요.')
                     }
                     else{
-                        alert('오류가 발생했습니다.')
+                        fetch('/mypage/password/modify', {
+                            method : 'PATCH',
+                            headers : {
+                                "x-access-token": localStorage.getItem("login_token"),
+                                "Content-Type": "application/json",   
+                            },                
+                            body : JSON.stringify({
+                                newPassword : new2_pass
+                            })
+                        })
+                        .then(res => res.json())
+                        .then(res => {
+                            console.log(res)
+                            if(res.isSuccess){
+                                alert(res.result)
+                            }
+                            else{
+                                alert('오류가 발생했습니다.')
+                            }
+                        })
+                        .catch(err => console.log(err))
+            
+                        modalClose();
                     }
                 })
-                .catch(err => console.log(err))
-    
-                modalClose();
             }            
         }
         else {
