@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Modal_name from './Modal_name';
 
-function ModalContainer_name(){
+function ModalContainer_name({setNickname}){
     const [modalOpen, setModalOpen] = useState(false);
     const modalClose = () => {
         console.log("닫기");
@@ -17,7 +17,7 @@ function ModalContainer_name(){
             <button className="rounded-full border border-2 border-[#EF9F9F] w-16 text-[#EF9F9F]" onClick={modalCheck}>
                 변경
             </button>
-            { modalOpen && <Modal_name modalClose={modalClose} modalCheck={modalCheck}/>}
+            { modalOpen && <Modal_name modalClose={modalClose} modalCheck={modalCheck} setNickname={setNickname}/>}
         </div>
     );
 }

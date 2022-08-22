@@ -9,19 +9,15 @@ function Mypage() {
     const userName = "닉네임";
     const currentEmail = "abc123@gmail.com"
 
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
     // 해당 api 없음.
     useEffect(() => {
-
+        setName(userName);
     }, []);
     //
 
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
 
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-        console.log('닉네임 변경: ', e.target.value);
-    }
     const handlePassChange = (e) => {
         setPassword(e.target.value);
         console.log('비밀번호 변경: ', e.target.value);
@@ -39,15 +35,20 @@ function Mypage() {
         //메인화면-로그인화면으로 돌아가기
     }
 
+    // 회원 탈퇴 - jwt 토큰 없어서 오류 나는 상태
     const Withdrawal = () => {
         if (window.confirm("정말로 탈퇴하시겠습니까?")){
             console.log("회원탈퇴");
-            fetch('api(/mypage/{userid})', {
+            fetch('/mypage/delete', {
                 method: 'DELETE',
                 headers: localStorage.getItem('login_token')
             })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                //console.log(res)
+                if (res.isSuccess) {window.alert(res.result)}
+                else {console.log(res.code, res.message)}
+            })
             .catch(err => console.log(err))
         }
     }
@@ -91,7 +92,7 @@ function Mypage() {
                 </div>
                 <div className="flex justify-center mt-2.5 pb-6">
                     <div className="text-white buri">
-                        <span>{userName}</span>
+                        <span>{name}</span>
                         <span className="text-sm buri"> 님</span>
                     </div>
                 </div>
@@ -105,10 +106,9 @@ function Mypage() {
                 <div className="flex justify">
                     <input className="w-61 border-b-2"
                             name="nickname"
-                            value= {name}
-                            onChange={handleNameChange}
+                            disabled
                         />
-                    <ModalContainer_name/>
+                    <ModalContainer_name setNickname={setName}/>
                 </div>
                 <p className="my-2.5 buri">현재 비밀번호</p>
                 <div className="flex justify">            
@@ -118,17 +118,17 @@ function Mypage() {
                             value= {password}
                             onChange={handlePassChange}
                         />
-                    <ModalContainer_pass pass={password}/>
+                    <ModalContainer_pass password={password}/>
                 </div>
 
             </div>
             </div>
             <div className="grid place-items-center">
-                <button className="rounded-2xl w-64 mt-14 mb-3 py-2.5 bg-[#F47C7C] text-white text-lg"
+                <button className="rounded-2xl w-64 mt-14 mb-3 py-2.5 bg-[#F47C7C] text-white text-lg buri"
                         onClick={logout}>
                             로그아웃
                 </button>
-                <button onClick={Withdrawal}>회원탈퇴</button>
+                <button className="buri" onClick={Withdrawal}>회원탈퇴</button>
             </div>
         </div>
     );

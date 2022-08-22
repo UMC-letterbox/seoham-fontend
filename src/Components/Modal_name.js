@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/Modal.css';
 import {useEffect, useState} from 'react';
 
-function Modal_name({modalClose, modalCheck}){
+function Modal_name({modalClose, modalCheck, setNickname}){
     const onCloseModal = (e) => {
         //console.log('e.target: ', e.target);
         //console.log('e.tarcurrentTargetget: ', e.currentTarget)
@@ -20,15 +20,20 @@ function Modal_name({modalClose, modalCheck}){
 
     const [check, setCheck] = useState("");
     const onClick = () => {
-        /* api 연결하기
-        fetch('api(/user/check/{nickname}', {
+        /* 중복체크 api 연결하기 - 400 에러*/
+        console.log(name, typeof(name))
+        fetch("/mypage/nickname/check", {
             method: "POST",
+            headers : {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
-                nickName : name
-            })
+                nickName : name,
+              }),
         })
         .then(res => res.json())
         .then(res => {
+            console.log(res)
             if (res.isSuccess === true) {
                 setCheck("사용 가능한 닉네임입니다.");
                 setIsValid(true);
@@ -38,37 +43,34 @@ function Modal_name({modalClose, modalCheck}){
                 setIsValid(false);
             }
         })
-        */
-
-        if (isValid === true) {
-            setCheck("사용 가능한 닉네임입니다.");
-        }
-        else {
-            setCheck("사용 불가한 닉네임입니다.");
-        }
     }
 
     const ChangeName = () => {
+        //console.log(name, setNickname)
+        //setNickname(name)
         if (isValid) {
-            /* api 연결하기
-            fetch('api', {
-                method: 'PATCH',
+            /* 닉네임 수정 api 연결하기 - 400 에러 */
+            fetch('/mypage/nickname/modify', {
+                method : "PATCH",
+                headers : localStorage.getItem("login_token"),/* {
+                    //Authorization: localStorage.getItem("login_token"),
+                    "Content-Type": "application/json",   
+                },*/
                 body: JSON.stringify({
-                    nickName: name
-                })
+                    newNickname : name,
+                }),                
             })
             .then(res => res.json())
             .then(res => {
-                if (res.isSuccess === true){
-                    window.alert(res.result)
+                console.log(res);
+                if(res.isSuccess) {
+                    alert(res.message);
+                    setNickname(name);
+                    modalClose();
                 }
-                else{
-                    window.alert("오류가 발생하였습니다.")
-                }
+                else alert("오류가 발생하였습니다.");
             })
             .catch(err => console.log(err))
-            */
-            modalClose();
         }
         else {
             window.alert("해당 닉네임을 사용할 수 없습니다.");
@@ -77,9 +79,10 @@ function Modal_name({modalClose, modalCheck}){
 
     return (
         <div className='modal_container' onClick={onCloseModal}>
-            <div className='modal w-10/12 h-2/6 rounded-xl shadow-md px-8 py-4'>
+            <div className='modal w-10/12 h-56 rounded-xl shadow-md px-8 py-4'>
                 <h1>닉네임 중복 확인</h1>
                 <div>
+                <div className='flex justify-center'>
                 <input className="w-40 border-b-2 mt-3 mr-1"
                             name="nickname"
                             value= {name}
@@ -90,6 +93,7 @@ function Modal_name({modalClose, modalCheck}){
                     >
                         중복 확인
                 </button>
+                </div>
                 </div>
                 <p className='text-center py-5'>
                     {check}
