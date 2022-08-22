@@ -59,10 +59,10 @@ const FindPw = () => {
   const { email_number } = inputEmail;
   const {certification_number} = inputAdmire;
   fetch("API주소", {
-    method: "/user/code",
-    body: JSON.stringify({
-      authNum : certification_number,
-    }),
+    method: "/user/check/code",
+      body: JSON.stringify({
+        num: parseInt(inputAdmire),
+      }),
   })
     .then((res) => res.json())
     .then((res) => {
