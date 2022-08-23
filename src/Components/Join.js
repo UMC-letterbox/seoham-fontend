@@ -79,11 +79,11 @@ function Join() {
   };
 
   return (
-    <div class="rounded-xl min-h-screen bg-[#FFB5C5]">
+    <div class="rounded-xl min-h-screen bg-[#EF9A9A]">
       <div class="py-5 px-5 m-5">
-        <label class="text-xl text-white">약관동의</label>
+        <label class="text-l text-white buri">약관동의</label>
         <div>
-          <div class="text-white my-5 border-b-2 border-white">
+          <div class="text-white text-sm my-5 border-b-2 border-white">
             <input
               class="mx-2"
               type="checkbox"
@@ -91,63 +91,65 @@ function Join() {
               checked={allCheck}
               onChange={allBtnEvent}
             />
-            <label for="all-check">전체동의</label>
+            <label for="all-check">약관 전체동의</label>
           </div>
-          <div class="text-white text-sm my-3">
-            <input
-              class="mx-2"
-              type="checkbox"
-              id="check1"
-              checked={SeohamCheck}
-              onChange={SeohamBtnEvent}
-            />
-            <label for="check1">
-              <span>(필수)</span>서함 서비스 이용 약관
-            </label>
-          </div>
-          <div class="text-white text-sm my-3">
-            <input
-              class="mx-2"
-              type="checkbox"
-              id="check2"
-              checked={useCheck}
-              onChange={useBtnEvent}
-            />
-            <label for="check2">
-              <span>(필수)</span> 개인정보 수집 및 이용 동의서
-            </label>
-          </div>
-          <div class="text-white text-sm my-3">
-            <input
-              class="mx-2"
-              type="checkbox"
-              id="check3"
-              checked={otherCheck}
-              onChange={otherBtnEvent}
-            />
-            <label for="check3">
-              <span>(선택)</span>제 3자 정보 제공 동의
-            </label>
-          </div>
-          <div class="text-white text-sm my-3">
-            <input
-              class="mx-2"
-              type="checkbox"
-              id="check4"
-              checked={marketingCheck}
-              onChange={marketingBtnEvent}
-            />
-            <label for="check4">
-              <span>(선택)</span>E-mail 및 SMS 광고성 정보 수신동의
-            </label>
+          <div class="py-1">
+            <div class="text-white text-xs my-3">
+              <input
+                class="mx-2"
+                type="checkbox"
+                id="check1"
+                checked={SeohamCheck}
+                onChange={SeohamBtnEvent}
+              />
+              <label for="check1">
+                <span>(필수)</span>서함 서비스 이용 약관
+              </label>
+            </div>
+            <div class="text-white text-xs my-3">
+              <input
+                class="mx-2"
+                type="checkbox"
+                id="check2"
+                checked={useCheck}
+                onChange={useBtnEvent}
+              />
+              <label for="check2">
+                <span>(필수)</span> 개인정보 수집 및 이용 동의서
+              </label>
+            </div>
+            <div class="text-white text-xs my-3">
+              <input
+                class="mx-2"
+                type="checkbox"
+                id="check3"
+                checked={otherCheck}
+                onChange={otherBtnEvent}
+              />
+              <label for="check3">
+                <span>(선택)</span>제 3자 정보 제공 동의
+              </label>
+            </div>
+            <div class="text-white text-xs my-3">
+              <input
+                class="mx-2"
+                type="checkbox"
+                id="check4"
+                checked={marketingCheck}
+                onChange={marketingBtnEvent}
+              />
+              <label for="check4">
+                <span>(선택)</span>E-mail 및 SMS 광고성 정보 수신동의
+              </label>
+            </div>
           </div>
         </div>
       </div>
       <button
         onClick={onClick}
-        class="py-2 mx-12 text-center bg-white border rounded-full text-red-300 cursor-pointer w-3/5"
+        class="py-1 m-auto block text-center bg-white border rounded-full text-red-300 cursor-pointer w-3/5"
       >
-        확인
+        다음
       </button>
     </div>
   );
