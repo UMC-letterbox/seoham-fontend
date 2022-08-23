@@ -27,18 +27,20 @@ const getDate = (timestamp) => {
   return date;
 }
 
-const Datebox = ({ tagList }) => {
+const Datebox = ({ dataList }) => {
   const [sortType, setSortType] = useState("latest");
   const getProcessedDateBox = () => {
     const compare = (a, b) => {
+      //console.log('timestamp 두개 비교' ,getDate(a.date).getTime(), getDate(b.date).getTime())
       if (sortType === "latest") {
-        return parseInt(b.date) - parseInt(a.date);
+        return parseInt(getDate(b.date).getTime()) - parseInt(getDate(a.date).getTime());
       } else {
-        return parseInt(a.date) - parseInt(b.date);
+        return parseInt(getDate(a.date).getTime()) - parseInt(getDate(b.date).getTime());
       }
     };
-    const copyList = JSON.parse(JSON.stringify(tagList));
+    const copyList = JSON.parse(JSON.stringify(dataList));
     const sortedList = copyList.sort(compare);
+    console.log(sortedList);
     return sortedList;
   };
 
@@ -92,7 +94,7 @@ const Datebox = ({ tagList }) => {
               <div  className="overflow-x-scroll whitespace-nowrap mt-5">
             {
             array.map(it => (
-              <DateItem key={it.id} {...it} />
+              <DateItem key={it.postIdx} {...it} />
             ))
             }
               </div>
@@ -106,7 +108,7 @@ const Datebox = ({ tagList }) => {
 };
 
 Datebox.defaultProps = {
-  tagList: [],
+  dataList: [],
 };
 
 export default Datebox;

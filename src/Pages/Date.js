@@ -19,11 +19,10 @@ const Date = () => {
   let postsByDates = [];
   //날짜별 편지 받는 api
   function getPostbyDates(){
-    const userId = JSON.parse(localStorage.getItem("userIdx"));
-    fetch(`/posts/date?userIdx=${userId}`,{
+    fetch(`/posts/date`,{
       method: "GET",
       headers: {
-        Authorization: localStorage.getItem('login_token')
+        'X-ACCESS-TOKEN': localStorage.getItem('login_token')
       }
     })
     .then((res) => res.json())
@@ -31,6 +30,8 @@ const Date = () => {
       console.log(res);
       if(res.isSuccess == true){
         res.result.map(item => postsByDates.push(item));
+        setData(postsByDates)
+        console.log(postsByDates);
       }
       else {
         console.log("실패");
@@ -39,13 +40,13 @@ const Date = () => {
   }
   useEffect(() => {
     //날짜별편지조회 Api 연결부분. 이후 test시 주석해제--------------------
-    //getPostbyDates();
+    getPostbyDates();
   },[])
 
-
+/*
   useEffect(() => {
     setData(tagList);
-  }, [tagList]);
+  }, [tagList]);*/
 
   return (
     <div class="m-0 px-3 min-h-screen">
@@ -81,7 +82,7 @@ const Date = () => {
         }}
       />
       <div class="py-4">
-        <Datebox tagList={data} />
+        <Datebox dataList={data} />
       </div>
     </div>
   );
