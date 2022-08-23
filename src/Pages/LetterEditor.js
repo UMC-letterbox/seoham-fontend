@@ -28,6 +28,7 @@ const LetterEditor=() => {
     const [isWritten, setIswritten]= useState(false);
     const [daySelected, setDaySelected] = useState([]); //날짜 선택 여부 - hy 추가
     const [tagSelected, setTagSelected] = useState(""); //태그 선택 여부 - hy 추가
+    const [tags, setTags]= useState([]);
     const senderInput=useRef(); //DOM요소 접근
     const contentInput=useRef();
     const navigate = useNavigate();
@@ -40,6 +41,7 @@ const LetterEditor=() => {
         jsonLocalStorage.setItem('letterobj', data);
         navigate("/selectpaper");
     }
+    
     function setInit(){
         //로컬스토리지에서 기존의 데이터 불러오기
         let chk = jsonLocalStorage.getItem('letterobj');
@@ -56,20 +58,7 @@ const LetterEditor=() => {
             return ;
         }
     }
-    //select 작동 확인용 배열 변수 (getTags 함수 썼다가 헷갈릴까봐 이걸로 사용합니다!) - hy 추가
-    const tags = [
-        // {
-        //     id: 0,
-        //     name: "#HBD",
-        //     color: "#FE8F8F"
-        // },
-        // {
-        //     id: 1,
-        //     name: "#Friends",
-        //     color: "#FCD2D1"
-        // }
-    ];
-    const currentTags = [];
+    
     const chkCondition= () => {
         if(data.sender.length >= 3 && data.content.length >=10){
             setIswritten( true);
@@ -100,19 +89,7 @@ const LetterEditor=() => {
         return newItem;
     }
     const handleSubmit = () => {
-        // if(data.sender.length <3){
-        //     //focus
-        //     senderInput.current.focus();
-        //     return ;
-        // }
-        // if(data.content.length < 10){
-        //     //focus
-        //     contentInput.current.focus();
-        //     setErrorMsg("편지가 너무 짧습니다. 편지는 10글자 이상이여야 합니다.");
-        //     return ;
-        // }else{
-        //     setErrorMsg("");
-        // }
+        
         console.log("최종 data", data);
         let newItem = onCreate();
         register(newItem);
@@ -122,7 +99,7 @@ const LetterEditor=() => {
         fetch("/posts/new", {
                 method: "POST",
                 headers: {
-                    Authorization: localStorage.getItem('login_token'),
+                    "X-ACCESS-TOKEN": localStorage.getItem('login_token'),
                     "Content-Type" : "application/json",
                 },
                 body: JSON.stringify(newItem),
@@ -146,16 +123,21 @@ const LetterEditor=() => {
         })
     }
     function getTagList(userId){
-        fetch(`/post/tags?${userId}=`,{
+        
+        fetch(`/posts/tags?userIdx=${userId}`,{
             method: "GET",
             headers: {
-                Authorization: localStorage.getItem('login_token')
+                "X-ACCESS-TOKEN": localStorage.getItem('login_token')
             },
         })
-        .then((res) => {console.log(res);})
+        .then((res) => res.json())
         .then((res) => {
-            // data.map(item => currentTags.push(item));
+            const currentTags = [];
+            res.result.map(item => currentTags.push(item));
             console.log(res.result);
+            console.log(currentTags);
+            let newArray = [...currentTags];
+            setTags(newArray);
         })
         .catch(err => console.log(err))
     }
@@ -230,12 +212,8 @@ const LetterEditor=() => {
                         <option value="-1"># 태그 선택</option>
                         {
                             tags.map((tag) => (
-                                <option key={tag.id} value={tag.id}>{tag.name}</option>
+                                <option key ={tag.tagIdx} value={tag.tagIdx}>{tag.tagName}</option>
                             ))
-                            //api로 태그목록 불러오기 성공하면 아래 주석 해제
-                            // currentTags.map((tag) => (
-                            //     <option key={tag.id} value={tag.id}>{tag.name}</option>
-                            // ))
                         }
                     </select>   
                 </div>

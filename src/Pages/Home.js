@@ -12,21 +12,39 @@ import Tagbox_hy from "../Components/Tagbox_hy";
 import MainHeader from "../Components/MainHeader";
 
 const Home = () => {
-  const tagList = useContext(DiaryStateContext);
+  const [taglist, setTaglist] = useState([]);
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData(tagList);
-  }, [tagList]);
+  
+  useEffect(()=>{       
+      const userId = JSON.parse(localStorage.getItem("userIdx")); 
+      fetch(`/posts/tags?userIdx=${userId}`,{
+          method: "GET",
+          headers: {
+              "X-ACCESS-TOKEN": localStorage.getItem('login_token')
+          },
+      })
+      .then((res) => res.json())
+      .then((res) => {
+          const currentTags = [];
+          res.result.map(item => currentTags.push(item));
+          console.log(res.result);
+          console.log(currentTags);
+          let newArray = [...currentTags];
+          setTaglist(newArray);
+      })
+      .catch(err => console.log(err))
+  }, [])
+  console.log(typeof(taglist));
+  console.log(typeof(taglist.taglist));
   return (
     <div class="sm: justify-center items-center m-0 px-3 min-h-screen">
-      {/*<MyHeader
+      {/* <MyHeader
         headText={""}
         leftChild={<MyButton text={"서함"} onClick={() => alert("안녕")} />}
         rightChild={
           <MyButton1 text={"프로필"} onClick={() => alert("프로필")} />
         }
-      />*/}
+      /> */}
       <MainHeader />
       <Select
         TagText={
@@ -57,7 +75,7 @@ const Home = () => {
       </div>
       */}
       <div className="flex justify-center">
-        <Tagbox_hy />
+        <Tagbox_hy taglist={taglist}/>
       </div>
       {/*<h2 class="text-red-400 pt-64">Hello World</h2>*/}
     </div>
