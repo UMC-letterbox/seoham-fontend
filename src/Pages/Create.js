@@ -8,7 +8,7 @@ const Create = () => {
   const [inputAdmire, setInputAdmire] = useState("");
   const [inputPwre, setInputPwre] = useState("");
   const [inputId, setInputId] = useState("");
-  const [validmail,setValidmail] = useState(false);
+  const [validmail, setValidmail] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
@@ -16,6 +16,8 @@ const Create = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
   const [emailMessage, setEmailMessage] = useState("");
+  const [state1, setState1] = useState(false);
+  const [state2, setState2] = useState(false);
   const handleInputId = (e) => {
     setInputId(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 10) {
@@ -24,8 +26,11 @@ const Create = () => {
       setIsId(true);
     }
   };
-  const onClick = () => {
-    alert("닉네임 설정이 완료되었습니다");
+  const onClick1 = () => {
+    setState1((current) => !current);
+  };
+  const onClick2 = () => {
+    setState2((current) => !current);
   };
   const handleInputPw = (e) => {
     setInputPw(e.target.value);
@@ -56,7 +61,7 @@ const Create = () => {
     if (
       isId === false ||
       isEmail === false ||
-      isPasswordConfirm === false ||
+      inputPw !== inputPwre ||
       isPassword === false
       // || isNumber === false
     ) {
@@ -71,8 +76,8 @@ const Create = () => {
         // 백엔드로 api호출!
         method: "POST",
         headers: {
-        "Content-Type": "application/json",
-         "Accept": "application/json"
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           email: inputEmail,
@@ -80,9 +85,9 @@ const Create = () => {
           nickName: inputId,
         }),
       }).then((res) => {
-        if (res.status === 200 ) {
+        if (res.status === 200) {
           alert("가입 완료 !");
-          navigate("/login"); 
+          navigate("/login");
         } else {
           // 가입완료부분
           alert("다시 한번 확인해주세요!"); //이게 error부분
@@ -92,44 +97,44 @@ const Create = () => {
   };
   //이건 formdata로 시도해본것!
   const clickSignup2 = () => {
-  if (
-    isId === false ||
-    isEmail === false ||
-    isPasswordConfirm === false ||
-    isPassword === false
-    // || isNumber === false
-  ) {
-    // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
-    alert("유효성 및 중복확인부분을 전부해주세요");
-  } else {
-     console.log(inputEmail);
-     console.log(inputPw);
-     console.log(inputId);
-    // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
-    fetch("/user/join", {
-      // 백엔드로 api호출!
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        //application/x-www-form-urlencoded; charset=UTF-8  으로 바꿔도 된다.
-      },
-      cache : 'no-cache',
-      body: new URLSearchParams({
-        email: inputEmail,
-        passWord: inputPw,
-        nickName: inputId,
-      }),
-    }).then((res) => {
-      if (res.status === 200) {
-        alert("가입 완료 !");
-        navigate("/login");
-      } else {
-        // 가입완료부분
-        alert("다시 한번 확인해주세요!"); //이게 error부분
-      }
-    });
-  }
-};
+    if (
+      isId === false ||
+      isEmail === false ||
+      inputPw !== inputPwre ||
+      isPassword === false
+      // || isNumber === false
+    ) {
+      // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
+      alert("유효성 및 중복확인부분을 전부해주세요");
+    } else {
+      console.log(inputEmail);
+      console.log(inputPw);
+      console.log(inputId);
+      // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
+      fetch("/user/join", {
+        // 백엔드로 api호출!
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          //application/x-www-form-urlencoded; charset=UTF-8  으로 바꿔도 된다.
+        },
+        cache: "no-cache",
+        body: new URLSearchParams({
+          email: inputEmail,
+          passWord: inputPw,
+          nickName: inputId,
+        }),
+      }).then((res) => {
+        if (res.status === 200) {
+          alert("가입 완료 !");
+          navigate("/login");
+        } else {
+          // 가입완료부분
+          alert("다시 한번 확인해주세요!"); //이게 error부분
+        }
+      });
+    }
+  };
   const idCheck = (e) => {
     e.preventDefault();
     if (isId === false) {
@@ -137,21 +142,25 @@ const Create = () => {
     } else {
       e.preventDefault();
       const { usableId } = isId;
-      fetch(`/user/check-join-nickname/?nickName=${inputId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => response.json())
+      fetch(
+        `/user/check-join-nickname/?nickName=${inputId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
         .then((response) => {
           if (response.result.valid === true) {
-          alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
-          setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
-        } else {
-          // 그 외에는 사용 불가한 아이디
-          alert("사용 불가한 아이디거나 중복됩니다.");
-        }
-      });
+            alert("사용 가능한 닉네임입니다."); // 백엔드로 보낸 데이터 결과 200 일 경우
+            setIsId(true); //사용 가능한 아이디 일 경우 state상태에 true값으로 변경, 나중에 회원가입 버튼 클릭 이벤트핸들러에 필요!
+          } else {
+            // 그 외에는 사용 불가한 아이디
+            alert("사용 불가한 아이디거나 중복됩니다.");
+          }
+        });
     }
   };
   const onChangeEmail = (e) => {
@@ -160,35 +169,41 @@ const Create = () => {
       alert("이메일 형식을 지켜주세요!");
     } else {
       const { email_number } = inputEmail;
-      fetch(`/user/check-join-email/?email=${inputEmail}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => response.json())
+      fetch(
+        `/user/check-join-email/?email=${inputEmail}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
         .then((response) => {
           if (response.result.valid === true) {
-          window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
-          setIsEmail(true);
-        } else {
-          alert("이미 사용이거나 유효하지 않는 이메일입니다.");
-        }
-      });
+            window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
+            setIsEmail(true);
+            console.log(response.result.valid);
+          } else {
+            alert("이미 사용이거나 유효하지 않는 이메일입니다.");
+          }
+        });
     }
   };
   const certifyNumber = (e) => {
     e.preventDefault();
-    const { email_number } = inputEmail;
-    const {certification_number} = inputAdmire;
     fetch("/user/check/code", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         num: parseInt(inputAdmire),
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.isSuccess === true) {
+        if (res.result.valid === true) {
           alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
           setIsNumber(true);
         } else {
@@ -209,22 +224,13 @@ const Create = () => {
       setIsPassword(true);
     }
   };
-  const onPwConfirm = () => {
-    if (inputPw === inputPwre) {
-      alert("비밀번호 확인되었습니다");
-      setIsPasswordConfirm(true);
-    } else {
-      alert("비밀번호를 확인해주세요");
-    }
-  };
   return (
     <div>
       <h1 class="my-5 py-2 text-xl text-center">회원가입</h1>
-      <h2 class="my-3 py-2 text-xl text-center">서함에 오신 것을 환영합니다</h2>
-      <h2 class="px-10 py-5 ">계정</h2>
+      <h2 class="px-10 text-lg font-semibold buri">계정</h2>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded border-b-2 w-3/5 leading-loose"
+          class="rounded text-sm border-b-2 w-1/2 leading-loose"
           placeholder="이메일을 입력해주세요"
           type="text"
           name="input_email"
@@ -233,14 +239,15 @@ const Create = () => {
         />
         <button
           onClick={onChangeEmail}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           인증번호 전송
         </button>
       </div>
+      <p class="text-sm mx-10">{emailMessage}</p>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded border-b-2 w-3/5 leading-loose"
+          class="rounded text-sm border-b-2 w-1/2 leading-loose"
           placeholder="인증번호를 입력해주세요"
           type="text"
           name="input_admire"
@@ -249,15 +256,15 @@ const Create = () => {
         />
         <button
           onClick={certifyNumber}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           확인
         </button>
       </div>
-      <h2 class="px-10 py-5">닉네임</h2>
+      <h2 class="px-10 py-5 font-semibold buri">닉네임</h2>
       <div class="flex justify-center">
         <input
-          class="rounded border-b-2 w-3/5 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose"
           placeholder="닉네임을 입력해주세요(2~10자)"
           type="text"
           name="input_email"
@@ -266,43 +273,51 @@ const Create = () => {
         />
         <button
           onClick={idCheck}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
         >
           중복확인
         </button>
       </div>
-      <h2 class="px-10 py-5 ">비밀번호</h2>
-      <div class="py-5">
+      <h2 class="px-10 py-5 font-semibold buri">비밀번호</h2>
+      <div>
         <input
-          class="mx-7 rounded border-b-2 w-4/5 leading-loose"
+          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose"
           placeholder="비밀번호를 입력해주세요"
-          type="password"
+          type={state1 ? "text" : "password"}
           name="input_pw"
           value={inputPw}
           onChange={onChangePassword}
         />
-        <p class="mx-7">{passwordMessage}</p>
+        <button onClick={onClick1}>
+          {state1 ? (
+            <img src="/img/show.png" className="w-6" />
+          ) : (
+            <img src="/img/hide.png" className="w-6" />
+          )}
+        </button>
       </div>
-      <div class="py-5 flex ">
+      <p class="text-sm mx-10">{passwordMessage}</p>
+      <div class="py-5">
         <input
-          class="mx-7 rounded border-b-2 w-4/5 leading-loose"
+          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose"
           placeholder="비밀번호를 확인해주세요"
-          type="password"
+          type={state2 ? "text" : "password"}
           name="input_pw"
           value={inputPwre}
           onChange={handleInputPwre}
         />
-        <button
-          onClick={onPwConfirm}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
-        >
-          중복확인
+        <button onClick={onClick2}>
+          {state2 ? (
+            <img src="/img/show.png" className="w-6" />
+          ) : (
+            <img src="/img/hide.png" className="w-6" />
+          )}
         </button>
       </div>
       <div class="flex justify-center ">
         <button
           onClick={clickSignup}
-          class="h-12 w-5/6 my-3 mx-10 border cursor-pointer rounded px-10 py-3 bg-[#FFB6C1] text-white"
+          class="h-12 w-5/6 my-3 mx-10 border cursor-pointer rounded px-10 py-3 bg-[#ff8080] buri text-lg text-white"
         >
           확인
         </button>
