@@ -11,10 +11,9 @@ const FindPw = () => {
   const [isEmail, setIsEmail] = useState(false);
   const [isNumber, setIsNumber] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [state1, setState1] = useState(false);
+  const [state2, setState2] = useState(false);
 
-  const handleInputPw = (e) => {
-    setInputPw(e.target.value);
-  };
   const handleInputEmail = (e) => {
     setInputEmail(e.target.value);
   };
@@ -24,6 +23,12 @@ const FindPw = () => {
   const handleInputNewPw = (e) => {
     setNewpw(e.target.value);
   };
+  const onClick1 = () => {
+    setState1((current) => !current);
+  };
+  const onClick2 = () => {
+    setState2((current) => !current);
+  };
 
   const onClick = () => {
     alert("비밀번호가 변경되었습니다.");
@@ -32,13 +37,31 @@ const FindPw = () => {
     alert("이메일로 인증번호가 전송되었습니다");
   };
 
-  const onConfirm = () => {
-    alert("일단은 맞다하자");
-  };
   const certifyEmail = (e) => {
     e.preventDefault();
     const { email_number } = inputEmail;
-    fetch(`/user/check-find-password/?email=${inputEmail}`, {
+    fetch(
+      `/user/check-find-password/?email=${inputEmail}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => {
+      if (res.status === 200) {
+        alert("이메일이 유효합니다 인증번호를 전송했습니다");
+        setIsEmail(true);
+      } else {
+        alert("이메일이 유효하지 않거나 존재하지 않습니다.");
+      }
+    });
+  };
+  const certifyNumber = (e) => {
+    e.preventDefault();
+    const inputNum = parseInt(inputAdmire);
+    console.log(inputNum);
+    fetch(`/user/check-code/?num=${inputNum}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -46,34 +69,14 @@ const FindPw = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response.result.exist === true){
-          alert("이메일이 유효합니다 인증번호를 전송했습니다"); 
-          setIsEmail(true);
+        if (response.isSuccess === true) {
+          alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
+          setIsNumber(true);
         } else {
-          alert("이메일이 유효하지 않거나 존재하지 않습니다.");
+          alert("인증번호가 맞지 않습니다.");
         }
       });
   };
-  const certifyNumber = (e) => {
-  e.preventDefault();
-  const { email_number } = inputEmail;
-  const {certification_number} = inputAdmire;
-  fetch("API주소", {
-    method: "/user/check/code",
-      body: JSON.stringify({
-        num: parseInt(inputAdmire),
-      }),
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.isSuccess === true) {
-        alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
-        setIsNumber(true);
-      } else {
-        alert("인증번호가 맞지 않습니다.");
-      }
-    });
-};
   const onChangePassword = (e) => {
     setInputPw(e.target.value);
     const passwordRegExp =
@@ -99,15 +102,16 @@ const FindPw = () => {
           email: inputEmail,
           passWord: newPw,
         }),
-      }).then((response) => response.json())
+      })
+        .then((response) => response.json())
         .then((response) => {
-          if (response.isSuccess === true)  {
-          alert("비밀번호 변경되었습니다.");
-          navigate("/login");
-        } else {
-          alert("조금 있다가 다시 시도해주십시오");
-        }
-      });
+          if (response.result.success === true) {
+            alert("비밀번호 변경되었습니다.");
+            navigate("/login");
+          } else {
+            alert("조금 있다가 다시 시도해주십시오");
+          }
+        });
     } else {
       alert("비밀번호를 확인해주세요");
     }
@@ -116,17 +120,21 @@ const FindPw = () => {
     <div>
       <h1 class="my-5 py-2 text-xl text-center">계정 / 비밀번호찾기</h1>
       <div class="py-3 my-3 flex justify-center border-b-2 border-red-300">
-        <Link to="/findid">
-          <button class="mx-7">계정찾기</button>
-        </Link>
-        <Link to="/findpw">
-          <button class="mx-7">비밀번호찾기</button>
-        </Link>
+        <div>
+          <Link to="/findid">
+            <button class="mx-7 buri">계정찾기</button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/findpw">
+            <button class="mx-7 buri text-[#ff8080]">비밀번호찾기</button>
+          </Link>
+        </div>
       </div>
-      <h2 class="px-10 py-5">비밀번호 찾기</h2>
-      <div class="py-5 flex justify-center">
+      <h2 class="pl-11 pt-5 font-semibold buri">비밀번호 찾기</h2>
+      <div class="py-3 flex justify-center">
         <input
-          class="rounded border-b-2 w-3/5 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose"
           placeholder="이메일을 입력해주세요"
           type="text"
           name="input_email"
@@ -135,14 +143,14 @@ const FindPw = () => {
         />
         <button
           onClick={certifyEmail}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="text-center border text-sm rounded-full text-red-300 w-1/4 border-red-300"
         >
           인증번호 전송
         </button>
       </div>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded border-b-2 w-3/5 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose"
           placeholder="인증번호를 입력해주세요"
           type="text"
           name="input_admire"
@@ -156,31 +164,45 @@ const FindPw = () => {
           확인
         </button>
       </div>
-      <h2 class="px-10 py-5">비밀번호 수정</h2>
+      <h2 class="pl-11 pt-5 font-semibold buri">비밀번호 수정</h2>
       <div class="py-5 flex">
         <input
-          class="mx-7 rounded border-b-2 w-4/5 leading-loose"
+          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose"
           placeholder="비밀번호를 입력해주세요"
-          type="password"
+          type={state1 ? "text" : "password"}
           name="input_pw"
           value={inputPw}
           onChange={onChangePassword}
         />
+        <button onClick={onClick1}>
+          {state1 ? (
+            <img src="/img/show.png" className="w-6" />
+          ) : (
+            <img src="/img/hide.png" className="w-6" />
+          )}
+        </button>
       </div>
       <div class="py-5 flex ">
         <input
-          class="mx-7 rounded border-b-2 w-4/5 leading-loose"
+          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose"
           placeholder="비밀번호를 확인해주세요"
-          type="password"
+          type={state2 ? "text" : "password"}
           name="input_pw"
           value={newPw}
           onChange={handleInputNewPw}
         />
+        <button onClick={onClick2}>
+          {state2 ? (
+            <img src="/img/show.png" className="w-6" />
+          ) : (
+            <img src="/img/hide.png" className="w-6" />
+          )}
+        </button>
       </div>
-      <div class="flex justify-center">
+      <div class="pt-5 flex justify-center">
         <button
           onClick={onPwConfirm}
-          class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 bg-[#FFB6C1] text-white"
+          class="h-12 w-4/5 my-3 mx-10 border cursor-pointer rounded-full px-12 py-3 buri bg-[#f4a0a0] text-white"
         >
           비밀번호 변경
         </button>
