@@ -69,10 +69,13 @@ const SelectPaper = () => {
                     ))
                 }
             </div>
+            
+            <div className = "flex justify-center items-center">
             <button
-                className=" bg-red-400 decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
+                className=" bg-red-400 flex justify-center items-center decoration-white w-28  h-10 text-center font-semibold rounded-full text-slate-50"
                 onClick = {goLetterEditor}
             > 편지지 선택완료</button>
+            </div>
         </div>
     )
 }

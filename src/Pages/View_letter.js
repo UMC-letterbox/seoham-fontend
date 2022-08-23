@@ -52,7 +52,7 @@ function View_letter () {
 
     const modiLetter = () => {
         console.log("편지 수정");
-        navigate(`/lettereditor/${postId}`);
+        navigate(`/letterupdate/${postId}`);
         //navigate로 넘기기?
     }
 
