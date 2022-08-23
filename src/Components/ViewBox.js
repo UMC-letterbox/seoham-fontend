@@ -4,7 +4,7 @@ import ViewItem from "./ViewItem";
 const Viewbox = ({ tagList }) => {
   console.log(tagList)
   return (
-    <div className="flex flex-row justify-center flex-wrap mt-7"> {/* 가운데 띙 하고 남아서 별로인거 같기도 */}
+    <div className="grid grid-cols-2 place-items-center mt-7">
       {tagList?.map((it) => (
         <ViewItem key={it.id} {...it} />
       ))}

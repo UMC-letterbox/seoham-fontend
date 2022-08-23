@@ -14,7 +14,7 @@ import "../css/font.css";
 import Modal_sender from "../Components/Modal_sender";
 
 const SenderUser = () => {
-  const tagList = useContext(DiaryStateContext);
+  //const tagList = useContext(DiaryStateContext);
   const { sender } = useParams();
   const {state} = useLocation();
   const navigate = useNavigate();
@@ -23,11 +23,12 @@ const SenderUser = () => {
   const [isopen, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
 
+  /*
   useEffect(() => {
     const User = `${sender}`;
     setData(tagList.filter((it) => User === it.sender));
   }, [tagList]);
-
+  */
   useEffect(() => {
     fetch(`/posts/senders/${sender}`, {
       method: 'GET',

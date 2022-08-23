@@ -39,16 +39,12 @@ const Senderbox = ({ tagList }) => {
 
   return (
     <div>
-      <div className="flex justify-end">
+      <div className="flex justify-end mr-8 buri text-sm">
         <ControlMenu
           value={sortType}
           onChange={setSortType}
           optionList={sortOptionList}
         />
-        ;
-        <button className="mx-10">
-          <img src="/img/up-down.png" className="w-5 h-5" onClick={() => {}} />
-        </button>
       </div>
       {getProcessedSenderBox().map(
         (
