@@ -87,7 +87,6 @@ const Sender = () => {
       <div class="whitespace-nowrap">
         <Senderbox tagList={data} />
       </div>
-      <h2 class="text-red-400 pt-64">Hello World</h2>
     </div>
   );
 };
