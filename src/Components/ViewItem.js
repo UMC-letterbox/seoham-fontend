@@ -12,7 +12,7 @@ const ViewItem = ({ postIdx, tagName, date, tagColor, tagIdx }) => { //tagColor,
       <div>
         <button
           onClick={getTag}
-          class="h-28 w-36 m-3  buri float-left cursor-pointer rounded-xl px-5 py-3 bg-[#E3B7A0] text-white"
+          class={`h-28 w-36 m-3  buri float-left cursor-pointer rounded-xl px-5 py-3 bg-[${tagColor}] text-white shadow-md`}
         >
           <div class="text-left py-2">#{tagName}</div>
           <br></br>
