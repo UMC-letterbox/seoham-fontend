@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function Letter({tagId, id, writer, year, month, day}) {
-    console.log('id들', tagId, id)
+function Letter({tagId, postId, sender, date}) {
+    console.log('id들', tagId, postId);
     useEffect(() => {
         AOS.init();
         AOS.refresh();
@@ -13,15 +13,15 @@ function Letter({tagId, id, writer, year, month, day}) {
     
     return(
         <div data-aos="fade-up" data-aos-duration="2000" className="relative w-full h-40 bg-zinc-100 m-3 p-5 rounded-md shadow-md">
-            <Link to={`/letter/${tagId}/${id}`}>
+            <Link to={`/letter/${tagId}/${postId}`}>
                 <div className="">
                     <span>
-                        보낸이: {writer}
+                        보낸이: {sender}
                     </span>
                     <span className="text-sm">
                         &nbsp;님
                     </span>
-                    <span className="absolute right-5 bottom-5">{year}.{month}.{day}</span>
+                    <span className="absolute right-5 bottom-5">{date}</span>
                 </div>
             </Link>
         </div>
