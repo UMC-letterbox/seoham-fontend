@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { DiaryStateContext } from "../App";
 import MyButton from "../Components/MyButton";
 import MyButton1 from "../Components/MyButton1";
@@ -16,9 +16,10 @@ import Modal_sender from "../Components/Modal_sender";
 const SenderUser = () => {
   const tagList = useContext(DiaryStateContext);
   const { sender } = useParams();
+  const {state} = useLocation();
   const navigate = useNavigate();
+
   const [data, setData] = useState([]);
-  const numLetter = 1; //편지 개수 입력받기
   const [isopen, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -26,6 +27,24 @@ const SenderUser = () => {
     const User = `${sender}`;
     setData(tagList.filter((it) => User === it.sender));
   }, [tagList]);
+
+  useEffect(() => {
+    fetch(`/posts/senders/${sender}`, {
+      method: 'GET',
+      headers: {
+        'X-ACCESS-TOKEN': localStorage.getItem('login_token')
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      setData(res.result);
+      const currentPosts = [];
+      res.result.map(item => currentPosts.push(item));
+      console.log(typeof(currentPosts), currentPosts)
+    })
+    .catch(err => console.log(err))
+  }, [])
 
   const onClick = () => {
     setOpen((current) => !current)
@@ -101,7 +120,7 @@ const SenderUser = () => {
                   <path d="M18.833 0.166668H2.16634C1.02051 0.166668 0.0830078 1.10417 0.0830078 2.25V14.75C0.0830078 15.8958 1.02051 16.8333 2.16634 16.8333H18.833C19.9788 16.8333 20.9163 15.8958 20.9163 14.75V2.25C20.9163 1.10417 19.9788 0.166668 18.833 0.166668ZM18.4163 4.59375L11.6038 8.85417C10.9268 9.28125 10.0726 9.28125 9.39551 8.85417L2.58301 4.59375C2.32259 4.42708 2.16634 4.14584 2.16634 3.84375C2.16634 3.14584 2.92676 2.72917 3.52051 3.09375L10.4997 7.45834L17.4788 3.09375C18.0726 2.72917 18.833 3.14584 18.833 3.84375C18.833 4.14584 18.6768 4.42708 18.4163 4.59375Z" fill="#F47C7C"/>
                 </svg>
               </div>
-              &nbsp;{numLetter}개
+              &nbsp;{state.letterCount}개
             </div>
         </div>
       </div>

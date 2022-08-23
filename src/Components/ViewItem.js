@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-const ViewItem = ({ id, tagName, date }) => {
+const ViewItem = ({ id, tagName, date, tagColor, tagIdx }) => { //tagColor, tagIdx 추가로 얻기
   const navigate = useNavigate();
+  //const tagIdx = 0; // 임시
   const getTag = () => {
-    navigate(`/view/${id}`);
+    navigate(`/letter/${tagIdx}/${id}`);
   };
-  const strDate = new Date(parseInt(date)).toLocaleDateString();
+  const strDate = new Date(parseInt(date))?.toLocaleDateString();
   return (
     <div>
       <div>
