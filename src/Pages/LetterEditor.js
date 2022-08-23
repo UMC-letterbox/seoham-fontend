@@ -163,19 +163,19 @@ const LetterEditor=() => {
     },[data]);
     
     return (
-        <div className="overflow-scroll">
+        <div className="overflow-scroll ">
             <header className="flex flex-row mx-11 mt-9 mb-2.5">
                 <Link to={"/home"}>
                     <button><img src="/img/close.png" className="w-3.5 h-3.5"/></button>
                 </Link>
-                <h2 className="text-center font-bold text-lg flex-grow">편지 작성</h2>
+                <h2 className="buri text-center font-bold text-lg flex-grow">편지 작성</h2>
                 <button
                     disabled={!isWritten}
                     onClick={handleSubmit}> 
                     {isWritten ? <img src="/img/check-green.png" className="w-4"/> : <img src="/img/check-empty.png" className="w-4"/>}
                 </button>
             </header>
-            <div className="flex justify-center items-center py-5">
+            <div className="buri flex justify-center items-center py-5">
                 <div className="w-72">
                     <span className="text-center font-semibold mr-1.5">보낸이:</span>
                     <input className="w-61"
@@ -193,7 +193,7 @@ const LetterEditor=() => {
                 <div className="w-72 h-96 rounded-t bg-[#F5F5F5] drop-shadow-lg">
                     
                     <textarea 
-                        className="w-72 h-72 rounded-t bg-[#F5F5F5] "
+                        className="w-72 h-72 rounded-t bg-[#F5F5F5] buri"
                         placeholder="편지내용을 작성해주세요"
                         ref={contentInput}
                         name="content"
@@ -211,7 +211,7 @@ const LetterEditor=() => {
                 <div className="text-center"> {/* 가져온 부분 */}
                     <select onChange={handleChangeState} 
                     value={tagSelected} name="tagId" className=" w-72 h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898]">
-                        <option value="-1"> {data.tagId == " " ? "태그선택하기" : tags.map((tag) => {if(tag.tagIdx == data.tagId){return tag.tagName}})}</option>
+                        <option value="-1"> {data.tagId == " " ? "# 태그 선택" : tags.map((tag) => {if(tag.tagIdx == data.tagId){return tag.tagName}})}</option>
                         {
                             tags.map((tag) => (
                                 <option key ={tag.tagIdx} value={tag.tagIdx}>{tag.tagName}</option>
