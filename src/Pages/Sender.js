@@ -14,13 +14,14 @@ const Sender = () => {
   const tagList = useContext(DiaryStateContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  
+  console.log(tagList)
+  /*
   useEffect(() => {
     setData(tagList);
   }, [tagList]);
-
-  //보낸이목록 저장용 배열
-  let senders = [];
+  */
+    //보낸이목록 저장용 배열
+    //let senders = []; //map으로 받아서 하면 안되네요
   //보낸이 목록조회
   function getSenderList(){
     const userId = JSON.parse(localStorage.getItem("userIdx"));
@@ -34,17 +35,18 @@ const Sender = () => {
     .then((res) => {
       console.log(res);
       if(res.isSuccess){
-        res.result.map(item => senders.push(item));
+        console.log('보낸이 리스트', res.result);
+        setData(res.result);
+        //res.result.map(item => senders.push(item));
       }
       else{
         console.log("실패");
       }
     })
-    console.log(senders);
   }
   useEffect(() => {
     //보낸이목록 불러오기 API 부분, 이후 test 시 주석해제
-    //getSenderList();
+    getSenderList();
   }, [])
 
 

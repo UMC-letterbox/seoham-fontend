@@ -8,8 +8,8 @@ const Senderbox = ({ tagList }) => {
           <img src="/img/up-down.png" className="w-5 h-5" onClick={()=>{console.log("정렬 버튼")}}/>
         </button>
       </div>
-      {tagList.map((it) => (
-        <SenderItem key={it.id} {...it} />
+      {tagList.map((it, index) => ( //어쩔 수 없이 index로 썼습니당...
+        <SenderItem key={index} {...it} />
       ))}
     </div>
   );
