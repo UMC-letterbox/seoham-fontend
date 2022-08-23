@@ -24,7 +24,8 @@ import LoginPage from "./Pages/LoginPage";
 import Contract from "./Pages/Contract";
 import Mypage from "./Pages/Mypage";
 import Modi_tag from "./Pages/Modi_tag";
-
+import Landing from "./Pages/Landing";
+import Letterupdate from "./Pages/Letterupdate";
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -146,7 +147,9 @@ function App() {
       <DiaryDispatchContext.Provider value={{ onCreate }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Home />} />
+            
             <Route path="/next" element={<Next />} />
             <Route path="/new" element={<New />} />
             <Route path="/tag/:tagName" element={<Tag />} />
@@ -158,6 +161,7 @@ function App() {
             <Route path="/selectlettertype" element={<SelectLetterType />} />
             <Route path="/fileeditor" element={ <FileEditor />} />
             <Route path="/lettereditor" element={<LetterEditor />} />
+            <Route path="/letterupdate/:postId" element={<Letterupdate />} />
             <Route path="/selectpaper" element={<SelectPaper />} />
             <Route path="/newTag" element={<New_tag />}/>
             <Route path="/tags/:id" element={<View_tags />}/>
