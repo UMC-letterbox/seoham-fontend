@@ -21,7 +21,7 @@ function New_tag() {
             fetch('/posts/tags/new', {
                 method: 'POST',
                 headers: {
-                    Authorization: localStorage.getItem("login_token"),
+                    "X-ACCESS-TOKEN": localStorage.getItem("login_token"),
                     "Content-Type" : "application/json",
                 },
                 body: JSON.stringify({
