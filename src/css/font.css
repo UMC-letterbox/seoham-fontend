@@ -1,5 +1,31 @@
 @import url('https://webfontworld.github.io/amore/AritaBuri.css');
-
+@font-face {
+    font-family: 'JeonHwaseon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/JeonHwaseon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GangwonEduHyeonokT_OTFMediumA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduHyeonokT_OTFMediumA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BBTreeTL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeTL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .buri {
     font-family : 'AritaBuri';
+}
+.hwasun {
+    font-family: 'JeonHwaseon';
+}
+.gangwon {
+    font-family: 'GangwonEduHyeonokT_OTFMediumA';
+}
+.tree {
+    font-family: 'BBTreeTL';
 }
