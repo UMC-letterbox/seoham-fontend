@@ -168,7 +168,7 @@ function App() {
             <Route path="/letter/:tagId/:id" element={<View_letter/>}/>
             <Route path="/lettereditor/:postId" element={<LetterEditor />} />
             <Route path="/mypage" element={<Mypage />} />
-            <Route path="/modiTag/:tagIdx" element={<Modi_tag/>}/>
+            <Route path="/modiTag" element={<Modi_tag/>}/>
 
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/findid" element={<FindId/>}/>

@@ -1,10 +1,11 @@
 import {useState} from "react";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import * as Data from '../getTags';
 
 function Modi_tag() {
-    const {tagIdx} = useParams();
-    console.log("tag id: ", tagIdx);
+    //const {tagIdx} = useParams();
+    const {state} = useLocation();
+    console.log(state.tagName, state.tagColor);
 
     const init_color = '#BF9270'
     const init_name = '생일'
@@ -14,6 +15,11 @@ function Modi_tag() {
     const [tagName, setTagName] = useState(init_name);
     const navigate = useNavigate();
 
+    useState(() => {
+        setTagName(state.tagName);
+        setColor(state.tagColor);
+    }, [])
+
     const changeTag = (event) => setTagName(event.target.value);
     const clickCheck = () => {
         if (tagName.length === 0) {
@@ -21,16 +27,15 @@ function Modi_tag() {
         }
         else{
             //
-            fetch(`/posts/tags/edit/${tagIdx}`, {
+            fetch(`/posts/tags/edit/${state.tagId}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type" : "application/json",
-                    Authorization: localStorage.getItem("login_token")
+                    "X-ACCESS-TOKEN": localStorage.getItem("login_token")
                 },
                 body: JSON.stringify({
                     tagName: tagName,
                     tagColor: color,
-                    userIdx: userId
                 })
             })
             .then(res => res.json())
@@ -53,7 +58,7 @@ function Modi_tag() {
     return (
         <div>
             <div className="flex justify-between m-5">
-                <Link to={'/'}>
+                <Link to={'/home'}>
                     <button>
                         <img src="/img/close.png" className="w-4 h-4"/>
                     </button>
