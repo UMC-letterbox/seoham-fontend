@@ -47,7 +47,7 @@ function New_tag() {
     return (
         <div>
             <div className="flex justify-between m-5">
-                <Link to={'/'}>
+                <Link to={'/home'}>
                     <button>
                         <img src="/img/close.png" className="w-4 h-4"/>
                     </button>
