@@ -5,6 +5,11 @@ const Login2 = () => {
   const navigate = useNavigate();
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
+  const [state1, setState1] = useState(false);
+
+  const onClick1 = () => {
+    setState1((current) => !current);
+  };
 
   const handleInputEmail = (e) => {
     setInputEmail(e.target.value);
@@ -17,7 +22,9 @@ const Login2 = () => {
   const signUp = () => {
     fetch("/user/login", {
       method: "POST",
-      headers: {"Content-Type" : "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: inputEmail,
         passWord: inputPw,
@@ -25,25 +32,26 @@ const Login2 = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         if (response.isSuccess === true) {
           localStorage.setItem("login_token", response.result.jwt);
-          console.log(response.data);
+          console.log(response.result.jwt);
           localStorage.setItem("userIdx", response.result.userIdx);
           alert("로그인 되었습니다");
-          navigate("/");
+          navigate("/home");
         } else {
           alert("이메일과 비밀번호를 다시 한 번 확인해 주세요.");
         }
       });
   };
-  
+
   return (
     <div class="m-5 px-5 py-4">
-      <h1 class="my-10 py-5 text-4xl text-center text-red-300">서함</h1>
+      <h1 class="my-10 pt-5 pb-7 text-4xl text-center buri font-bold text-[#ff8080]">
+        서함
+      </h1>
       <div class="my-3 flex justify-center">
         <input
-          class="rounded border w-4/5 leading-loose"
+          class="rounded border py-1 w-4/5 buri leading-loose"
           placeholder="이메일 입력"
           type="text"
           name="input_email"
@@ -53,31 +61,40 @@ const Login2 = () => {
       </div>
       <div class="my-3 flex justify-center">
         <input
-          class="rounded border w-4/5 leading-loose"
+          class="rounded border py-1 w-4/5 buri leading-loose"
           placeholder="비밀번호 입력(영문,숫자,특수문자 조합 8~16자)"
-          type="password"
+          type={state1 ? "text" : "password"}
           name="input_pw"
           value={inputPw}
           onChange={handleInputPw}
         />
+        <button class="absolute mt-2 right-20" onClick={onClick1}>
+          {state1 ? (
+            <img src="/img/show.png" className="w-6" />
+          ) : (
+            <img src="/img/hide.png" className="w-6" />
+          )}
+        </button>
       </div>
-      <div class="flex justify-center py-10">
-          <button
-            onClick={signUp}
-            class="border rounded-full cursor-pointer rounded px-12 py-2 bg-[#64c964] text-white"
-          >
-            로그인
-          </button>
+      <div class="flex justify-center pt-12 pb-5">
+        <button
+          onClick={signUp}
+          class="border rounded cursor-pointer rounded w-4/5 px-12 py-2 buri bg-[#ff8080] text-white"
+        >
+          로그인
+        </button>
       </div>
       <div class="flex justify-evenly">
         <Link to="/findid">
-          <button>계정찾기</button>
+          <button class="text-xs">계정찾기</button>
         </Link>
+        <p class="font-thin">|</p>
         <Link to="/findpw">
-          <button>비밀번호찾기</button>
+          <button class="text-xs">비밀번호찾기</button>
         </Link>
+        <p class="font-thin">|</p>
         <Link to="/contract">
-          <button>회원가입</button>
+          <button class="text-xs">회원가입</button>
         </Link>
       </div>
     </div>
@@ -86,15 +103,3 @@ const Login2 = () => {
 
 export default Login2;
 
-export function GetToken() {
-  fetch("API주소", {
-    method: "POST",
-    headers: {
-      Authorization: localStorage.getItem("access_token"),
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      console.log(res.data);
-    });
-}
