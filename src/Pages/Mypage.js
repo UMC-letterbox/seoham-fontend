@@ -131,7 +131,7 @@ function Mypage() {
         <div>
             <div className="bg-[#EF9F9F]"> {/* 핑크색 배경부분 - 프로필/편지수/이름 */}
                 <div className="flex justify-around pt-8 mb-2.5">
-                    <Link to={"/"}><button><img src="/img/left-arrow.png" className="w-4 h-4"/></button></Link>
+                    <Link to={"/home"}><button><img src="/img/left-arrow.png" className="w-4 h-4"/></button></Link>
                     <h1 className="text-white">MY PAGE</h1>
                     <span></span>
                 </div>
