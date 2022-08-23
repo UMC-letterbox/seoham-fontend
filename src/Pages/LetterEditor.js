@@ -164,7 +164,7 @@ const LetterEditor=() => {
     return (
         <div className="overflow-scroll">
             <header className="flex flex-row mx-11 mt-9 mb-2.5">
-                <Link to={"/"}>
+                <Link to={"/home"}>
                     <button><img src="/img/close.png" className="w-3.5 h-3.5"/></button>
                 </Link>
                 <h2 className="text-center font-bold text-lg flex-grow">편지 작성</h2>
