@@ -52,7 +52,15 @@ function New_tag() {
                         <img src="/img/close.png" className="w-4 h-4"/>
                     </button>
                 </Link>
-                <p className="font-bold text-2xl">TAG</p>
+                <div className="flex justify-center items-center">
+                    <p className="font-bold text-xl buri">태그</p>
+                    
+                    <span className="w-5">
+                        <svg  viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.3813 6.13125L6.8625 0.6125C6.63125 0.38125 6.3125 0.25 5.98125 0.25H1.5C0.8125 0.25 0.25 0.8125 0.25 1.5V5.98125C0.25 6.3125 0.38125 6.63125 0.61875 6.8625L6.1375 12.3813C6.625 12.8687 7.41875 12.8687 7.90625 12.3813L12.3875 7.9C12.875 7.4125 12.875 6.625 12.3813 6.13125ZM3.0625 4C2.54375 4 2.125 3.58125 2.125 3.0625C2.125 2.54375 2.54375 2.125 3.0625 2.125C3.58125 2.125 4 2.54375 4 3.0625C4 3.58125 3.58125 4 3.0625 4Z" fill="black"/>
+                        </svg>
+                    </span>
+                </div>
                 <button>
                     <img src="/img/check-green.png" className="w-6 h-6" onClick={clickCheck}/>
                 </button>
