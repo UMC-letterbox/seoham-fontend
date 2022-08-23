@@ -59,7 +59,7 @@ const Date = () => {
       <MainHeader />
       <Select
         TagText={
-          <MyButton text={"태그별"} onClick={() => {navigate("/");}} isClick={false}/>
+          <MyButton text={"태그별"} onClick={() => {navigate("/home");}} isClick={false}/>
         }
         DateText={
           <MyButton text={"날짜별"} onClick={() => navigate("/date")} isClick={true}/>

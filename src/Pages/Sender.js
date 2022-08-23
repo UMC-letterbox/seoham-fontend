@@ -14,6 +14,7 @@ const Sender = () => {
   const tagList = useContext(DiaryStateContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  
   useEffect(() => {
     setData(tagList);
   }, [tagList]);
@@ -26,19 +27,20 @@ const Sender = () => {
     fetch(`/posts/senders?userIdx=${userId}`,{
       method: "GET",
       headers: {
-        Authorization: localStorage.getItem('login_token')
+        "x-access-token": localStorage.getItem('login_token')
       }
     })
     .then((res)=>res.json())
     .then((res) => {
       console.log(res);
-      if(res.isSuccess == true){
+      if(res.isSuccess){
         res.result.map(item => senders.push(item));
       }
       else{
         console.log("실패");
       }
     })
+    console.log(senders);
   }
   useEffect(() => {
     //보낸이목록 불러오기 API 부분, 이후 test 시 주석해제
@@ -59,13 +61,13 @@ const Sender = () => {
       />*/}
       <MainHeader />
       <Select
-        TagText={<MyButton text={"태그별"} onClick={() => {navigate("/");}} isClick={false}/>
+        TagText={<MyButton text={"태그별"} onClick={() => {navigate("/home");}} isClick={false}/>
         }
         DateText={
           <MyButton text={"날짜별"} onClick={() => navigate("/date")} isClick={false}/>
         }
         SenderText={
-          <MyButton text={"보낸이별"} onClick={() => navigate("/senderUser")} isClick={true}/>
+          <MyButton text={"보낸이별"} onClick={() => navigate("/sender")} isClick={true}/>
         }
       />
       <UpButton

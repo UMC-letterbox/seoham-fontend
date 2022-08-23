@@ -48,7 +48,7 @@ const Home = () => {
       <MainHeader />
       <Select
         TagText={
-          <MyButton text={"태그별"} onClick={() => {navigate("/");}} isClick={true}/>
+          <MyButton text={"태그별"} onClick={() => {navigate("/home");}} isClick={true}/>
         }
         DateText={
           <MyButton text={"날짜별"} onClick={() => navigate("/date")} isClick={false}/>
