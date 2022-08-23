@@ -6,7 +6,7 @@ const ViewItem = ({ id, tagName, date, tagColor, tagIdx }) => { //tagColor, tagI
   const getTag = () => {
     navigate(`/letter/${tagIdx}/${id}`);
   };
-  const strDate = new Date(parseInt(date))?.toLocaleDateString();
+  const strDate = new Date(date).toLocaleDateString();
   return (
     <div>
       <div>
