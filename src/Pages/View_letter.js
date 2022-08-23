@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useParams, useNavigate} from "react-router-dom";
 import Menubox from '../Components/Menubox';
 import * as Data from '../getTags';
-
+import "../css/font.css"
 function View_letter () {
     //param 받기. 편지보는 버튼에서 연결시키기 - 지금은 임의로 확인하기 위해 프로필이랑 연결함
     const useParam = useParams();
@@ -92,21 +92,24 @@ function View_letter () {
                     <img src="/img/dots.png" className="w-4 h-4"/>
                 </button>
             </div>
-            <div className='mx-10 my-5'>
+            <div className='mx-10 my-5 buri'>
                 <span>보낸이: {post?.sender}</span>
                 <span className='text-sm'>&nbsp;님</span>
             </div>
-            <div className="h-3/6 mx-10 p-3 bg-gray-100 shadow-lg rounded-md">
-                <div className="w-11/12 h-5/6 m-2 overflow-y-auto">
+            <div style={{backgroundImage:`url('/img/paper${post?.letterIdx + 1}.jpg')` }}
+            className="h-4/6 mx-10 p-3 bg-gray-100 shadow-lg rounded-md">
+                <div className="w-11/12 h-full m-2 overflow-y-auto gangwon text-xl">
                     {post?.content}
                 </div>
             </div>
             <div className="flex justify-between mt-5 mx-10">
-                <span className='bg-rose-300 px-6 py-2 rounded-full shadow-lg text-white'>
+                <span 
+                
+                className='bg-rose-300 px-6 py-2 rounded-full shadow-lg text-white'>
                     {/*style={{backgroundColor: info.tagColor}} className='rounded'>*/}
                     #{post?.tagName}
                 </span>
-                <span className='text-rose-300 border-y-2 border-rose-300 py-2'>
+                <span className='text-rose-300 border-y-2 border-rose-300 py-2 buri'>
                     <span>날짜: {post?.date.slice(0,10)}&nbsp;</span>
                 </span>
             </div>
