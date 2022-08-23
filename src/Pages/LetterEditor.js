@@ -161,6 +161,7 @@ const LetterEditor=() => {
     React.useEffect(()=>{
         chkCondition();
     },[data]);
+    
     return (
         <div className="overflow-scroll">
             <header className="flex flex-row mx-11 mt-9 mb-2.5">
@@ -208,8 +209,9 @@ const LetterEditor=() => {
 
             <div className="flex flex-col justify-center">
                 <div className="text-center"> {/* 가져온 부분 */}
-                    <select onChange={handleChangeState} value={tagSelected} name="tagId" className="bg-white w-72 h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898]">
-                        <option value="-1"># 태그 선택</option>
+                    <select onChange={handleChangeState} 
+                    value={tagSelected} name="tagId" className=" w-72 h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898]">
+                        <option value="-1"> {data.tagId == " " ? "태그선택하기" : tags.map((tag) => {if(tag.tagIdx == data.tagId){return tag.tagName}})}</option>
                         {
                             tags.map((tag) => (
                                 <option key ={tag.tagIdx} value={tag.tagIdx}>{tag.tagName}</option>
