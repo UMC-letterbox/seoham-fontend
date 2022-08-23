@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 const SelectLetterType= () => {
     return(
 
-        <div>
+        <div className="buri">
             <header>
                 <h1 className= "mt-8 mb-11 text-center font-bold text-lg ">편지 작성</h1>
             </header>
