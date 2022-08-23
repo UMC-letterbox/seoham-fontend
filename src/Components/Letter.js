@@ -14,7 +14,7 @@ function Letter({tagId, postId, sender, date}) {
     return(
         <div data-aos="fade-up" data-aos-duration="2000" className="relative w-full h-40 bg-zinc-100 m-3 p-5 rounded-md shadow-md">
             <Link to={`/letter/${tagId}/${postId}`}>
-                <div className="">
+                <div className="w-full h-full">
                     <span>
                         보낸이: {sender}
                     </span>
