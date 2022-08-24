@@ -128,6 +128,7 @@ const Letterupdate = () => {
                 console.log(res.result);
                 //초기화
                 localStorage.removeItem("letterobj");
+                navigate(-1);
             }
         })
     }  
