@@ -113,7 +113,7 @@ function View_tags() {
                 <button onClick={clickBack}>
                     <img src="/img/left-arrow.png" className="w-4 h-4"/>
                 </button>
-                <p className="font-bold text-lg">태그 별 편지 조회</p>
+                <p className="font-bold buri text-lg">태그 별 편지 조회</p>
                 <button onClick={onClick}>
                     <img src="/img/dots.png" className="w-4 h-4"/>
                 </button>
