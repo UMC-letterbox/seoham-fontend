@@ -119,6 +119,7 @@ const LetterEditor=() => {
                     letterIdx: 0,
                 });
                 localStorage.removeItem("letterobj");
+                navigate('/home');
             }
         })
     }
