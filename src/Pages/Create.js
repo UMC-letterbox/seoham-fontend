@@ -20,7 +20,7 @@ const Create = () => {
   const [state2, setState2] = useState(false);
   const handleInputId = (e) => {
     setInputId(e.target.value);
-    if (e.target.value.length < 2 || e.target.value.length > 10) {
+    if (e.target.value.length < 2 || e.target.value.length > 8) {
       setIsId(false);
     } else {
       setIsId(true);
@@ -222,7 +222,7 @@ const Create = () => {
       <div class="flex justify-center">
         <input
           class="rounded border-b-2 text-sm w-1/2 leading-loose"
-          placeholder="닉네임을 입력해주세요(2~10자)"
+          placeholder="닉네임을 입력해주세요(2~8자)"
           type="text"
           name="input_email"
           value={inputId}
