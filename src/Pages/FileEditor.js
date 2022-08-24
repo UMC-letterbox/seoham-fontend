@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {useRef, useState} from "react";
-import axios from 'axios';
 
 const FileEditor = () => {
     const dropBox=useRef();
