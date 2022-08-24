@@ -100,6 +100,7 @@ function View_tags() {
         .then(res => {
             if (res.isSuccess === true){
                 window.alert("태그가 삭제되었습니다.");
+                navigate(-1);
             }
             else {
                 window.alert("오류가 발생했습니다.");
