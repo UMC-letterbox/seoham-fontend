@@ -20,7 +20,7 @@ const Login2 = () => {
   };
 
   const signUp = () => {
-    fetch("/user/login", {
+    fetch("www.duke0410.shop/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
