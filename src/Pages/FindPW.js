@@ -41,7 +41,7 @@ const FindPw = () => {
     e.preventDefault();
     const { email_number } = inputEmail;
     fetch(
-      `/user/check-find-password/?email=${inputEmail}`,
+      `https://www.duke0410.shop/user/check-find-password/?email=${inputEmail}`,
       {
         method: "GET",
         headers: {
@@ -61,8 +61,8 @@ const FindPw = () => {
     e.preventDefault();
     const inputNum = parseInt(inputAdmire);
     console.log(inputNum);
-    fetch(`/user/check-code/?num=${inputNum}`, {
-      method: "GET",
+    fetch(`https://www.duke0410.shop/user/check-code/?num=${inputNum}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -92,7 +92,7 @@ const FindPw = () => {
   };
   const onPwConfirm = () => {
     if (isEmail === true && isPassword === true && inputPw === newPw) {
-      fetch("/user/find-password", {
+      fetch("https://www.duke0410.shop/user/find-password", {
         // 백엔드로 api호출!
         method: "PATCH",
         headers: {
