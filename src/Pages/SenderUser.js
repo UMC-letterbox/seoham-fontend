@@ -30,7 +30,7 @@ const SenderUser = () => {
   }, [tagList]);
   */
   useEffect(() => {
-    fetch(`/posts/senders/${sender}`, {
+    fetch(`https://www.duke0410.shop/posts/senders/${sender}`, {
       method: 'GET',
       headers: {
         'X-ACCESS-TOKEN': localStorage.getItem('login_token')
