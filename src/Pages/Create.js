@@ -149,7 +149,7 @@ const Create = () => {
   };
   const certifyNumber = (e) => {
     e.preventDefault();
-    fetch("https://www.duke0410.shop/user/check/code", {
+    fetch("https://www.duke0410.shop/user/check-code", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
