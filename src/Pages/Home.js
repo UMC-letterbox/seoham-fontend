@@ -17,7 +17,7 @@ const Home = () => {
   
   useEffect(()=>{       
       const userId = JSON.parse(localStorage.getItem("userIdx")); 
-      fetch(`/posts/tags?userIdx=${userId}`,{
+      fetch(`https://www.duke0410.shop/posts/tags?userIdx=${userId}`,{
           method: "GET",
           headers: {
               "X-ACCESS-TOKEN": localStorage.getItem('login_token')
