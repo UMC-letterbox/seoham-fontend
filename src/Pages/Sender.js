@@ -25,7 +25,7 @@ const Sender = () => {
   //보낸이 목록조회
   function getSenderList(){
     const userId = JSON.parse(localStorage.getItem("userIdx"));
-    fetch(`/posts/senders?userIdx=${userId}`,{
+    fetch(`https://www.duke0410.shop/posts/senders?userIdx=${userId}`,{
       method: "GET",
       headers: {
         "x-access-token": localStorage.getItem('login_token')
