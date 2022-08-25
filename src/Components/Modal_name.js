@@ -23,7 +23,7 @@ function Modal_name({modalClose, modalCheck, setNickname}){
         /* 중복체크 api 연결하기 - 400 에러*/
         console.log(name, typeof(name))
         
-        fetch("/mypage/nickname/check/", {
+        fetch("https://www.duke0410.shop/mypage/nickname/check/", {
             method: "POST",
             headers : {
                 "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function Modal_name({modalClose, modalCheck, setNickname}){
         //setNickname(name)
         if (isValid) {
             /* 닉네임 수정 api 연결하기 - 400 에러 */
-            fetch('/mypage/nickname/modify', {
+            fetch('https://www.duke0410.shop/mypage/nickname/modify', {
                 method : "PATCH",
                 headers :  {
                     "x-access-token" : localStorage.getItem("login_token"),
