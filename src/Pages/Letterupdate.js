@@ -59,7 +59,10 @@ const Letterupdate = () => {
     //데이터불러오는 함수들-------------------------------------------------
     function getPostbyId(){
         fetch(`https://www.duke0410.shop/posts/${postId}`,{
-            method: "GET"
+            method: "GET",
+            headers: {
+                "X-ACCESS-TOKEN": localStorage.getItem('login_token')
+            },
         })
         .then((res) => res.json())
         .then((res)=> {
