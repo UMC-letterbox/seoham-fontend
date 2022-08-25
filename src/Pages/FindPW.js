@@ -59,13 +59,14 @@ const FindPw = () => {
   };
   const certifyNumber = (e) => {
     e.preventDefault();
-    const inputNum = parseInt(inputAdmire);
-    console.log(inputNum);
-    fetch(`https://www.duke0410.shop/user/check-code/?num=${inputNum}`, {
+    fetch("https://www.duke0410.shop/user/check/code", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        num: parseInt(inputAdmire),
+      }),
     })
       .then((response) => response.json())
       .then((response) => {
