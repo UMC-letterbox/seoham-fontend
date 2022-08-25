@@ -96,7 +96,7 @@ const LetterEditor=() => {
     }
     function register(newItem){
         console.log(newItem);
-        fetch("/posts/new", {
+        fetch("https://www.duke0410.shop/posts/new", {
                 method: "POST",
                 headers: {
                     "X-ACCESS-TOKEN": localStorage.getItem('login_token'),
@@ -125,7 +125,7 @@ const LetterEditor=() => {
     }
     function getTagList(userId){
         
-        fetch(`/posts/tags?userIdx=${userId}`,{
+        fetch(`https://www.duke0410.shop/posts/tags?userIdx=${userId}`,{
             method: "GET",
             headers: {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
