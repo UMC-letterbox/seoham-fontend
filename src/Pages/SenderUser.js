@@ -64,7 +64,7 @@ const SenderUser = () => {
   const deleteTag = () => {
     console.log("보낸이 삭제 버튼");
     /* 보낸이 id 값 확인 필요 메시지... */
-    fetch(`/posts/senders/delete/${sender}`,{
+    fetch(`https://www.duke0410.shop/posts/senders/delete/${sender}`,{
       method: 'DELETE',
       headers: {
         'x-access-token': localStorage.getItem('login_token')
