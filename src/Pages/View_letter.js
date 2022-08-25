@@ -22,7 +22,7 @@ function View_letter () {
     // 14~17번째 줄에서 api로 대체하기
     let data = [];
     useEffect(()=>{
-        fetch(`/posts/${postId}`,{  //postIdx == useParams의 id // ~/posts/{id} 이렇게 쓰면 될 듯
+        fetch(`https://www.duke0410.shop/posts/${postId}`,{  //postIdx == useParams의 id // ~/posts/{id} 이렇게 쓰면 될 듯
             method:"GET",
             headers: {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
@@ -61,7 +61,7 @@ function View_letter () {
         Data.deleteLetter(tagId, postId);
 
         //
-        fetch(`/posts/delete/${postId}`, {
+        fetch(`https://www.duke0410.shop/posts/delete/${postId}`, {
             method: "DELETE",
         })
         .then(res => res.json())
