@@ -63,6 +63,9 @@ function View_letter () {
         //
         fetch(`https://www.duke0410.shop/posts/delete/${postId}`, {
             method: "DELETE",
+            headers: {
+                "X-ACCESS-TOKEN": localStorage.getItem('login_token')
+            },
         })
         .then(res => res.json())
         .then(res => {
