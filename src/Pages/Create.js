@@ -60,10 +60,10 @@ const Create = () => {
   const clickSignup = () => {
     if (
       isId === false ||
+      isNumber === false ||
       isEmail === false ||
       inputPw !== inputPwre ||
       isPassword === false
-      // || isNumber === false
     ) {
       // 조건 1. 아이디 중복체크를 통해서 저장한 usableId값이 false라면
       alert("유효성 및 중복확인부분을 전부해주세요");
@@ -126,42 +126,40 @@ const Create = () => {
     if (validmail === false) {
       alert("이메일 형식을 지켜주세요!");
     } else {
-      const { email_number } = inputEmail;
-      fetch(
-        `https://www.duke0410.shop/user/check-join-email/?email=${inputEmail}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      fetch("https://www.duke0410.shop/mail/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: inputEmail,
+        }),
+      }).then((response) => {
+        if (response.status === 200) {
+          window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
+          setIsEmail(true);
+        } else {
+          alert("이미 사용이거나 유효하지 않는 이메일입니다.");
         }
-      )
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.result.valid === true) {
-            window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
-            setIsEmail(true);
-          } else {
-            alert("이미 사용이거나 유효하지 않는 이메일입니다.");
-          }
-        });
+      });
     }
   };
   const certifyNumber = (e) => {
     e.preventDefault();
-    fetch("https://www.duke0410.shop/user/check-code", {
+    fetch("https://www.duke0410.shop/mail/check", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        num: parseInt(inputAdmire),
+        authCode: inputAdmire,
+        email: inputEmail,
       }),
     })
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((res) => {
-        if (res.result.valid === true) {
-          alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
+        if (res.result === true) {
+          alert("인증번호가 맞습니다 비밀번호 설정을 해주세요");
           setIsNumber(true);
         } else {
           alert("인증번호가 맞지 않습니다.");
@@ -187,7 +185,7 @@ const Create = () => {
       <h2 class="px-10 text-lg font-semibold buri">계정</h2>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded text-sm border-b-2 w-1/2 leading-loose"
+          class="rounded text-sm border-b-2 w-1/2 leading-loose bg-transparent border-[#989898]"
           placeholder="이메일을 입력해주세요"
           type="text"
           name="input_email"
@@ -196,7 +194,7 @@ const Create = () => {
         />
         <button
           onClick={onChangeEmail}
-          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           인증번호 전송
         </button>
@@ -204,7 +202,7 @@ const Create = () => {
       <p class="text-sm mx-10">{emailMessage}</p>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded text-sm border-b-2 w-1/2 leading-loose"
+          class="rounded text-sm border-b-2 w-1/2 leading-loose bg-transparent border-[#989898]"
           placeholder="인증번호를 입력해주세요"
           type="text"
           name="input_admire"
@@ -213,7 +211,7 @@ const Create = () => {
         />
         <button
           onClick={certifyNumber}
-          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           확인
         </button>
@@ -221,7 +219,7 @@ const Create = () => {
       <h2 class="px-10 py-5 font-semibold buri">닉네임</h2>
       <div class="flex justify-center">
         <input
-          class="rounded border-b-2 text-sm w-1/2 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose bg-transparent border-[#989898]"
           placeholder="닉네임을 입력해주세요(2~8자)"
           type="text"
           name="input_email"
@@ -230,7 +228,7 @@ const Create = () => {
         />
         <button
           onClick={idCheck}
-          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="ml-2 text-center border rounded-full text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           중복확인
         </button>
@@ -238,7 +236,7 @@ const Create = () => {
       <h2 class="px-10 py-5 font-semibold buri">비밀번호</h2>
       <div>
         <input
-          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose"
+          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose bg-transparent border-[#989898]"
           placeholder="비밀번호를 입력해주세요"
           type={state1 ? "text" : "password"}
           name="input_pw"
@@ -256,7 +254,7 @@ const Create = () => {
       <p class="text-sm mx-10">{passwordMessage}</p>
       <div class="py-5">
         <input
-          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose"
+          class="ml-10 rounded text-sm border-b-2 w-2/3 leading-loose bg-transparent border-[#989898]"
           placeholder="비밀번호를 확인해주세요"
           type={state2 ? "text" : "password"}
           name="input_pw"

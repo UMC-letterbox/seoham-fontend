@@ -39,39 +39,59 @@ const FindPw = () => {
 
   const certifyEmail = (e) => {
     e.preventDefault();
-    const { email_number } = inputEmail;
-    fetch(
-      `https://www.duke0410.shop/user/check-find-password/?email=${inputEmail}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((res) => {
-      if (res.status === 200) {
-        alert("이메일이 유효합니다 인증번호를 전송했습니다");
-        setIsEmail(true);
-      } else {
-        alert("이메일이 유효하지 않거나 존재하지 않습니다.");
-      }
-    });
-  };
-  const certifyNumber = (e) => {
-    e.preventDefault();
-    fetch("https://www.duke0410.shop/user/check-code", {
+    fetch("https://www.duke0410.shop/mail/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        num: parseInt(inputAdmire),
+        email: inputEmail,
+      }),
+    }).then((response) => {
+      if (response.status === 200) {
+        window.alert("사용 가능한 이메일 입니다. 인증번호를 보냈습니다");
+        setIsEmail(true);
+      } else {
+        alert("이미 사용이거나 유효하지 않는 이메일입니다.");
+      }
+    });
+  };
+  // const certifyEmail = (e) => {
+  //   e.preventDefault();
+  //   const { email_number } = inputEmail;
+  //   fetch(
+  //     `https://www.duke0410.shop/user/check-find-password/?email=${inputEmail}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   ).then((res) => {
+  //     if (res.status === 200) {
+  //       alert("이메일이 유효합니다 인증번호를 전송했습니다");
+  //       setIsEmail(true);
+  //     } else {
+  //       alert("이메일이 유효하지 않거나 존재하지 않습니다.");
+  //     }
+  //   });
+  // };
+  const certifyNumber = (e) => {
+    e.preventDefault();
+    fetch("https://www.duke0410.shop/mail/check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        authCode: inputAdmire,
+        email: inputEmail,
       }),
     })
       .then((response) => response.json())
-      .then((response) => {
-        if (response.isSuccess === true) {
-          alert("인증번호가 맞습니다 비밀번호 변경을 해주세요");
+      .then((res) => {
+        if (res.result === true) {
+          alert("인증번호가 맞습니다 비밀번호 설정을 해주세요");
           setIsNumber(true);
         } else {
           alert("인증번호가 맞지 않습니다.");
@@ -92,7 +112,12 @@ const FindPw = () => {
     }
   };
   const onPwConfirm = () => {
-    if (isEmail === true && isPassword === true && inputPw === newPw) {
+    if (
+      isEmail === true &&
+      isPassword === true &&
+      inputPw === newPw &&
+      isNumber === true
+    ) {
       fetch("https://www.duke0410.shop/user/find-password", {
         // 백엔드로 api호출!
         method: "PATCH",
@@ -135,7 +160,7 @@ const FindPw = () => {
       <h2 class="pl-11 pt-5 font-semibold buri">비밀번호 찾기</h2>
       <div class="py-3 flex justify-center">
         <input
-          class="rounded border-b-2 text-sm w-1/2 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose bg-transparent border-[#989898]"
           placeholder="이메일을 입력해주세요"
           type="text"
           name="input_email"
@@ -144,14 +169,14 @@ const FindPw = () => {
         />
         <button
           onClick={certifyEmail}
-          class="text-center border text-sm rounded-full text-red-300 w-1/4 border-red-300"
+          class="text-center border text-sm rounded-full text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           인증번호 전송
         </button>
       </div>
       <div class="py-5 flex justify-center">
         <input
-          class="rounded border-b-2 text-sm w-1/2 leading-loose"
+          class="rounded border-b-2 text-sm w-1/2 leading-loose bg-transparent border-[#989898]"
           placeholder="인증번호를 입력해주세요"
           type="text"
           name="input_admire"
@@ -160,7 +185,7 @@ const FindPw = () => {
         />
         <button
           onClick={certifyNumber}
-          class="text-center border rounded-full text-red-300 w-1/4 border-red-300"
+          class="text-center border rounded-full text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           확인
         </button>
@@ -168,7 +193,7 @@ const FindPw = () => {
       <h2 class="pl-11 pt-5 font-semibold buri">비밀번호 수정</h2>
       <div class="py-5 flex">
         <input
-          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose"
+          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose bg-transparent border-[#989898]"
           placeholder="비밀번호를 입력해주세요"
           type={state1 ? "text" : "password"}
           name="input_pw"
@@ -185,7 +210,7 @@ const FindPw = () => {
       </div>
       <div class="py-5 flex ">
         <input
-          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose"
+          class="ml-11 rounded border-b-2 text-sm w-2/3 leading-loose bg-transparent border-[#989898]"
           placeholder="비밀번호를 확인해주세요"
           type={state2 ? "text" : "password"}
           name="input_pw"

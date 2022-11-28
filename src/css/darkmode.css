@@ -1,0 +1,17 @@
+/* label > input[type="checkbox"] {
+  display: none;
+} */
+
+/* label > input:checked + span {
+  background-color: #ef9f9f;
+  color: white;
+  border-color: #ef9f9f;
+} */
+.dark {
+  background-color: #232425;
+  color: #fff;
+}
+.light {
+  background-color: #fff;
+  color: #000000;
+}
