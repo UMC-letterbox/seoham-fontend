@@ -202,7 +202,7 @@ const LetterEditor = () => {
             <img src="/img/close.png" className="w-3.5 h-3.5" />
           </button>
         </Link>
-        <h2 className="buri text-center font-bold text-lg flex-grow">
+        <h2 className="text-center font-bold text-lg flex-grow">
           편지 작성
         </h2>
         <button disabled={!isWritten} onClick={handleSubmit}>
@@ -213,7 +213,7 @@ const LetterEditor = () => {
           )}
         </button>
       </header>
-      <div className="buri flex justify-center items-center py-5">
+      <div className="flex justify-center items-center py-5">
         <div className="w-72">
           <span className="text-center font-semibold mr-1.5">보낸이:</span>
           <input
@@ -230,7 +230,7 @@ const LetterEditor = () => {
       <div className="flex flex-col justify-center items-center">
         <div className="w-72 h-96 rounded-t bg-[#F5F5F5] drop-shadow-lg">
           <textarea
-            className="w-72 h-72 rounded-t bg-[#F5F5F5] text-black buri"
+            className="w-72 h-72 rounded-t bg-[#F5F5F5] text-black"
             placeholder="편지내용을 작성해주세요"
             ref={contentInput}
             name="content"

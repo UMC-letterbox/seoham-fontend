@@ -70,7 +70,7 @@ const Datebox = ({ dataList }) => {
 
   return (
     <div>
-      <div class="flex justify-end buri text-sm">
+      <div class="flex justify-end text-sm">
         <ControlMenu
           value={sortType}
           onChange={setSortType}
@@ -88,7 +88,7 @@ const Datebox = ({ dataList }) => {
       {
         sortedLetter.map((array, index) => 
           {
-            return <div key={index} className="mt-2 mb-8 ml-5 buri">
+            return <div key={index} className="mt-2 mb-8 ml-5">
               <h1>{getDate(array[0].date).getFullYear()}년 {getDate(array[0].date).getMonth()+1}월 {getDate(array[0].date).getDate()}일</h1>
               {console.log(array[0].date)}
               <div  className="overflow-x-scroll whitespace-nowrap mt-2">

@@ -26,6 +26,9 @@ import Mypage from "./Pages/Mypage";
 import Modi_tag from "./Pages/Modi_tag";
 import Landing from "./Pages/Landing";
 import Letterupdate from "./Pages/Letterupdate";
+import Setting from "./Pages/Setting";
+import GlobalStyle from "./font/GlobalStyle";
+
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -142,10 +145,36 @@ function App() {
     });
     dataId.current += 1;
   };
+  
+  let currentFont = localStorage.getItem('font');
+  console.log('전역폰트', currentFont);
+  if(currentFont == 'buri'){
+    currentFont = 'Aritaburi';
+  }
+  else if(currentFont == 'Iropke'){
+    currentFont = 'IropkebatangM';
+  }
+  else if(currentFont == 'Chosun'){
+    currentFont = 'ChosunNm';
+  }
+  else if(currentFont == 'Mapo'){
+    currentFont = 'MapoGoldenPier';
+  }
+  else{
+    currentFont = 'Aritaburi';
+  }
+
+  let currentMode = localStorage.getItem('mode');
+  console.log('전역모드', currentMode);
+  if(currentMode == null){
+    localStorage.setItem('mode', 'light');
+  } 
+
   return (
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={{ onCreate }}>
         <BrowserRouter>
+          <GlobalStyle inputFont={currentFont}/>
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/home" element={<Home />} />
@@ -169,6 +198,7 @@ function App() {
             <Route path="/lettereditor/:postId" element={<LetterEditor />} />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/modiTag" element={<Modi_tag/>}/>
+            <Route path="/setting" element={<Setting/>}/>
 
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/findid" element={<FindId/>}/>

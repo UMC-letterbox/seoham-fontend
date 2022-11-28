@@ -95,7 +95,7 @@ function View_letter () {
                     <img src="/img/dots.png" className="w-4 h-4"/>
                 </button>
             </div>
-            <div className='mx-10 my-5 buri'>
+            <div className='mx-10 my-5'>
                 <span>보낸이: {post?.sender}</span>
                 <span className='text-sm'>&nbsp;님</span>
             </div>
@@ -112,7 +112,7 @@ function View_letter () {
                     {/*style={{backgroundColor: info.tagColor}} className='rounded'>*/}
                     #{post?.tagName}
                 </span>
-                <span className='text-rose-300 border-y-2 border-rose-300 py-2 buri'>
+                <span className='text-rose-300 border-y-2 border-rose-300 py-2'>
                     <span>날짜: {post?.date.slice(0,10)}&nbsp;</span>
                 </span>
             </div>

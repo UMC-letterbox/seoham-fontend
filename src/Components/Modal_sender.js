@@ -49,7 +49,7 @@ function Modal_sender({modalClose, sender}){
             <div className='modal w-10/12 h-36 rounded-xl shadow-md px-8 py-4'>
                 <div className='flex justify-center'>
                     <div className="flex flex-col">
-                    <h1 className='text-center font-semibold buri'>보낸이 수정</h1>
+                    <h1 className='text-center font-semibold'>보낸이 수정</h1>
                     <input className="w-40 border-b-2 my-3 text-center"
                             name="nickname"
                             value= {name}

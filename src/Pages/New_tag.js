@@ -53,7 +53,7 @@ function New_tag() {
                     </button>
                 </Link>
                 <div className="flex justify-center items-center">
-                    <p className="font-bold text-xl buri">태그</p>
+                    <p className="font-bold text-xl">태그</p>
                     
                     <span className="w-5">
                         <svg  viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">

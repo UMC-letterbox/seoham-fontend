@@ -73,7 +73,7 @@ const SenderItem = ({ randid, sender, count }) => {
 
   return (
     <div >
-      <div className="buri">
+      <div>
         <button
           onClick={getTag}
           className="flex justify h-20 w-4/5 my-7 mx-10 border cursor-pointer rounded-md shadow-md bg-white"

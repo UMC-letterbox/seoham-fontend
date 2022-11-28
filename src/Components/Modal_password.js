@@ -99,10 +99,10 @@ function Modal_password({ modalClose }) {
   return (
     <div className="modal_container" onClick={onCloseModal}>
       <div className="modal w-10/12 rounded-xl shadow-md px-8 py-4 dark:bg-[#323435]">
-        <h1 className="mb-7 mt-2 text-lg buri">비밀번호 변경</h1>
+        <h1 className="mb-7 mt-2 text-lg">비밀번호 변경</h1>
         <div>
           <input
-            className="w-10/12 border-b-2 mt-3 mr-1 buri bg-transparent border-[#989898]"
+            className="w-10/12 border-b-2 mt-3 mr-1 bg-transparent border-[#989898]"
             name="new_password"
             placeholder="새 비밀번호"
             value={new_pass}
@@ -118,7 +118,7 @@ function Modal_password({ modalClose }) {
           </button>
 
           <input
-            className="w-10/12 border-b-2 mt-6 mr-1 buri bg-transparent border-[#989898]"
+            className="w-10/12 border-b-2 mt-6 mr-1 bg-transparent border-[#989898]"
             name="new2_password"
             placeholder="비밀번호 확인"
             value={new2_pass}
@@ -140,7 +140,7 @@ function Modal_password({ modalClose }) {
 
         <div className="flex justify-center">
           <button
-            className="bg-[#EF9F9F] rounded-full mt-6 py-3 px-5 text-white buri"
+            className="bg-[#EF9F9F] rounded-full mt-6 py-3 px-5 text-white"
             onClick={ChangePassword}
           >
             변경 완료

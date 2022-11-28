@@ -39,7 +39,7 @@ const Senderbox = ({ tagList }) => {
 
   return (
     <div>
-      <div className="flex justify-end mr-8 buri text-sm">
+      <div className="flex justify-end mr-8 text-sm">
         <ControlMenu
           value={sortType}
           onChange={setSortType}

@@ -176,7 +176,7 @@ const Letterupdate = () => {
                 <Link to={"/home"}>
                     <button><img src="/img/close.png" className="w-3.5 h-3.5"/></button>
                 </Link>
-                <h2 className="buri text-center font-bold text-lg flex-grow">편지 수정</h2>
+                <h2 className="text-center font-bold text-lg flex-grow">편지 수정</h2>
                 <button
                     disabled={!isWritten}
                     onClick={handleSubmit}
@@ -184,7 +184,7 @@ const Letterupdate = () => {
                     {isWritten ? <img src="/img/check-green.png" className="w-4"/> : <img src="/img/check-empty.png" className="w-4"/>}
                 </button>
             </header>
-            <div className="buri flex justify-center items-center py-5">
+            <div className="flex justify-center items-center py-5">
                 <div className="w-72">
                     <span className="text-center font-semibold mr-1.5">보낸이:</span>
                     <input className="w-61"
@@ -201,7 +201,7 @@ const Letterupdate = () => {
                 <div className="w-72 h-96 rounded-t bg-[#F5F5F5] drop-shadow-lg">
                     
                     <textarea 
-                        className="w-72 h-full rounded-t bg-[#F5F5F5] buri"
+                        className="w-72 h-full rounded-t bg-[#F5F5F5]"
                         placeholder="편지내용을 작성해주세요"
                         name="content"
                         value= {data?.content}

@@ -14,6 +14,7 @@ function Mypage() {
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const [font, setFont] = useState("");
 
   //추가된 부분
   const toggleTheme = () => {
@@ -28,6 +29,7 @@ function Mypage() {
     localStorage.setItem("theme", theme);
     document.body.className = theme;
   }, [theme]);
+
 
   // 해당 api 없음.
   useEffect(() => {
@@ -45,6 +47,18 @@ function Mypage() {
         setLetterNum(res.result.letter);
       })
       .catch((err) => console.log(err));
+
+      //폰트 확인 - 추가된 부분
+      let currentFont = localStorage.getItem("font");
+      //console.log(currentFont);
+      if(currentFont == null) {
+          //console.log("글꼴 없음");
+          setFont('buri')
+      }
+      else{
+          setFont(currentFont);
+      }
+
   }, []);
   //
 
@@ -174,7 +188,7 @@ function Mypage() {
             </button>
           </Link>
           <h1 className="text-white">MY PAGE</h1>
-          <span></span>
+          <Link to={"/setting"}><button><img src="/img/settings.png" className="w-4 h-4"/></button></Link>
         </div>
         <div className="flex justify-center">
           <div className="w-32">
@@ -183,12 +197,12 @@ function Mypage() {
         </div>
         <div className="flex justify-center items-center mt-5">
           <LetterIcon />
-          <p className="text-white buri">{letterNum}</p>
+          <p className="text-white">{letterNum}</p>
         </div>
         <div className="flex justify-center mt-2.5 pb-6">
-          <div className="text-white buri">
+          <div className="text-white">
             <span>{name}</span>
-            <span className="text-sm buri"> 님</span>
+            <span className="text-sm"> 님</span>
           </div>
         </div>
       </div>
@@ -196,10 +210,10 @@ function Mypage() {
         {" "}
         {/* 입력칸 부분 */}
         <div>
-          <p className="mb-2.5 mt-5 buri">이메일</p>
+          <p className="mb-2.5 mt-5">이메일</p>
           <p>{email}</p>
 
-          <p className="my-2.5 buri">닉네임</p>
+          <p className="my-2.5">닉네임</p>
           <div className="flex justify">
             <input
               className="w-61 border-b-2 bg-transparent"
@@ -208,7 +222,7 @@ function Mypage() {
             />
             <ModalContainer_name setNickname={setName} />
           </div>
-          <p className="my-2.5 buri">현재 비밀번호</p>
+          <p className="my-2.5">현재 비밀번호</p>
           <div className="flex justify">
             <input
               className="w-61 border-b-2 bg-transparent"
@@ -233,14 +247,14 @@ function Mypage() {
       <div className="grid place-items-center">
         {theme === "light" ? (
           <button
-            className="rounded-2xl w-64 mt-5 mb-5 py-2.5 bg-[#F47C7C] text-white text-lg buri"
+            className="rounded-2xl w-64 mt-5 mb-5 py-2.5 bg-[#F47C7C] text-white text-lg"
             onClick={toggleTheme}
           >
             Light
           </button>
         ) : (
           <button
-            className="rounded-2xl w-64 mt-5 mb-5 py-2.5 bg-[#989898] text-white text-lg buri"
+            className="rounded-2xl w-64 mt-5 mb-5 py-2.5 bg-[#989898] text-white text-lg"
             onClick={toggleTheme}
           >
             Dark
@@ -249,12 +263,12 @@ function Mypage() {
       </div>
       <div className="grid place-items-center">
         <button
-          className="rounded-2xl w-64 mt-14 mb-3 py-2.5 bg-[#F47C7C] text-white text-lg buri"
+          className="rounded-2xl w-64 mt-14 mb-3 py-2.5 bg-[#F47C7C] text-white text-lg"
           onClick={logout}
         >
           로그아웃
         </button>
-        <button className="buri" onClick={Withdrawal}>
+        <button className="" onClick={Withdrawal}>
           회원탈퇴
         </button>
       </div>

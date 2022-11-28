@@ -19,7 +19,7 @@ function Tags({id, name, letters, color}) {
                 <Link to={`/tags/${id}`}>
                 <button 
                     style={{backgroundColor: color}}
-                    className="grid place-items-start w-32 h-20 m-3 p-2 font-bold rounded-md shadow-md buri text-white text-sm"
+                    className="grid place-items-start w-32 h-20 m-3 p-2 font-bold rounded-md shadow-md text-white text-sm"
                 >
                     #{name}
                 </button>
