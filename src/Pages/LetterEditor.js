@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import ModalContainer from "../Components/ModalContainer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { render } from "@testing-library/react";
+import PaperModalContainer from "../Components/PaperModalContainer";
+import papers from "./SelectPaper";
 const jsonLocalStorage = {
   setItem: (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
@@ -27,6 +29,7 @@ const LetterEditor = () => {
   const [isWritten, setIswritten] = useState(false);
   const [daySelected, setDaySelected] = useState([]); //날짜 선택 여부 - hy 추가
   const [tagSelected, setTagSelected] = useState(""); //태그 선택 여부 - hy 추가
+  const [paperSelected, setPaperSelected] = useState(0);// 편지 선택 - js 추가
   const [tags, setTags] = useState([]);
   const senderInput = useRef(); //DOM요소 접근
   const contentInput = useRef();
@@ -324,14 +327,10 @@ const LetterEditor = () => {
           </select>
         </div>
         <div className="text-center my-2.5">
-          <button
-            className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#EF9F9F] border border-[#EF9F9F]"
-            onClick={goSelectPaper}
-          >
-            {" "}
-            편지지선택
-          </button>
-        </div>
+                    <PaperModalContainer setSelected = {setPaperSelected} selected = {paperSelected} />
+
+                </div>
+        
       </div>
     </div>
   );
