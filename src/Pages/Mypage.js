@@ -33,7 +33,7 @@ function Mypage() {
 
   // 해당 api 없음.
   useEffect(() => {
-    fetch("https://www.duke0410.shop/mypage/info", {
+    fetch("https://seohamserver.shop/mypage/info", {
       method: "GET",
       headers: {
         "x-access-token": localStorage.getItem("login_token"),
@@ -72,7 +72,7 @@ function Mypage() {
   const onClick = () => {
     setPassword(passRef.current.value);
     console.log(passRef.current.value);
-    fetch("https://www.duke0410.shop/mypage/password/check", {
+    fetch("https://seohamserver.shop/mypage/password/check", {
       method: "POST",
       headers: {
         "x-access-token": localStorage.getItem("login_token"),
@@ -117,7 +117,7 @@ function Mypage() {
       console.log("회원탈퇴");
       console.log(localStorage.getItem("login_token"));
 
-      fetch("https://www.duke0410.shop/mypage/delete", {
+      fetch("https://seohamserver.shop/mypage/delete", {
         method: "DELETE",
         headers: { "x-access-token": localStorage.getItem("login_token") },
       })
