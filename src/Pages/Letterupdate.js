@@ -58,7 +58,7 @@ const Letterupdate = () => {
     }
     //데이터불러오는 함수들-------------------------------------------------
     function getPostbyId(){
-        fetch(`https://www.duke0410.shop/posts/${postId}`,{
+        fetch(`https://seohamserver.shop/posts/${postId}`,{
             method: "GET",
             headers: {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
@@ -77,7 +77,7 @@ const Letterupdate = () => {
     }
     function getTagList(userId){
         
-        fetch(`https://www.duke0410.shop/posts/tags?userIdx=${userId}`,{
+        fetch(`https://seohamserver.shop/posts/tags?userIdx=${userId}`,{
             method: "GET",
             headers: {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
@@ -116,7 +116,7 @@ const Letterupdate = () => {
     }
     function register(newItem){
         console.log(newItem);
-        fetch(`https://www.duke0410.shop/posts/edit/${postId}`, {
+        fetch(`https://seohamserver.shop/posts/edit/${postId}`, {
                 method: "PATCH",
                 headers: {
                     "X-ACCESS-TOKEN": localStorage.getItem('login_token'),
