@@ -27,7 +27,7 @@ function Modi_tag() {
         }
         else{
             //
-            fetch(`https://www.duke0410.shop/posts/tags/edit/${state.tagId}`, {
+            fetch(`https://seohamserver.shop/posts/tags/edit/${state.tagId}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type" : "application/json",
