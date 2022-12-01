@@ -69,7 +69,7 @@ const Create = () => {
       alert("유효성 및 중복확인부분을 전부해주세요");
     } else {
       // 조건 3. 아이디도 사용가능하고 필수항목도 전부 입력 되었다면
-      fetch("https://www.duke0410.shop/user/join", {
+      fetch("https://seohamserver.shop/user/join", {
         // 백엔드로 api호출!
         method: "POST",
         headers: {
@@ -101,7 +101,7 @@ const Create = () => {
       e.preventDefault();
       const { usableId } = isId;
       fetch(
-        `https://www.duke0410.shop/user/check-join-nickname/?nickName=${inputId}`,
+        `https://seohamserver.shop/user/check-join-nickname/?nickName=${inputId}`,
         {
           method: "GET",
           headers: {
@@ -126,7 +126,7 @@ const Create = () => {
     if (validmail === false) {
       alert("이메일 형식을 지켜주세요!");
     } else {
-      fetch("https://www.duke0410.shop/mail/send", {
+      fetch("https://seohamserver.shop/mail/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -146,7 +146,7 @@ const Create = () => {
   };
   const certifyNumber = (e) => {
     e.preventDefault();
-    fetch("https://www.duke0410.shop/mail/check", {
+    fetch("https://seohamserver.shop/mail/check", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
