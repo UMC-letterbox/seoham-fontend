@@ -19,7 +19,7 @@ const Date = () => {
   let postsByDates = [];
   //날짜별 편지 받는 api
   function getPostbyDates(){
-    fetch(`https://www.duke0410.shop/posts/date`,{
+    fetch(`https://seohamserver.shop/posts/date`,{
       method: "GET",
       headers: {
         'X-ACCESS-TOKEN': localStorage.getItem('login_token')
