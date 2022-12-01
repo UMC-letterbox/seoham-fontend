@@ -39,7 +39,7 @@ const FindPw = () => {
 
   const certifyEmail = (e) => {
     e.preventDefault();
-    fetch("https://www.duke0410.shop/mail/send", {
+    fetch("https://seohamserver.shop/mail/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const FindPw = () => {
   // };
   const certifyNumber = (e) => {
     e.preventDefault();
-    fetch("https://www.duke0410.shop/mail/check", {
+    fetch("https://seohamserver.shop/mail/check", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,7 +118,7 @@ const FindPw = () => {
       inputPw === newPw &&
       isNumber === true
     ) {
-      fetch("https://www.duke0410.shop/user/find-password", {
+      fetch("https://seohamserver.shop/user/find-password", {
         // 백엔드로 api호출!
         method: "PATCH",
         headers: {
