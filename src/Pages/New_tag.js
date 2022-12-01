@@ -18,7 +18,7 @@ function New_tag() {
             Data.addTag(tagName, color); //api 연결 후 삭제
 
             //
-            fetch('https://www.duke0410.shop/posts/tags/new', {
+            fetch('https://seohamserver.shop/posts/tags/new', {
                 method: 'POST',
                 headers: {
                     "X-ACCESS-TOKEN": localStorage.getItem("login_token"),
