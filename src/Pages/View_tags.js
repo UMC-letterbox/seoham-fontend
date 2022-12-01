@@ -15,7 +15,7 @@ function View_tags() {
     let thisTagColor = "";
     useEffect(()=>{
         console.log("fetch 들어옴");
-        fetch(`https://www.duke0410.shop/posts/tags/${id}`,{
+        fetch(`https://seohamserver.shop/posts/tags/${id}`,{
             method: "GET",
             headers : {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
@@ -90,7 +90,7 @@ function View_tags() {
     // 태그 삭제
     const deleteTag = () => {
         console.log("태그삭제");
-        fetch(`https://www.duke0410.shop/posts/tags/delete/${id}`,{
+        fetch(`https://seohamserver.shop/posts/tags/delete/${id}`,{
             method:"DELETE",
             headers: {
                 "X-ACCESS-TOKEN": localStorage.getItem('login_token')
