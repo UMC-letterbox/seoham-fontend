@@ -18,7 +18,7 @@ const FindId = () => {
   const certifyId = (e) => {
     e.preventDefault();
     fetch(
-      `https://www.duke0410.shop/user/check-find-email/?nickName=${inputId}`,
+      `https://seohamserver.shop/user/check-find-email/?nickName=${inputId}`,
       {
         method: "GET",
         headers: {
@@ -41,7 +41,7 @@ const FindId = () => {
   const findEmail = () => {
     const { id_number } = inputId;
     if (isId === true) {
-      fetch(`https://www.duke0410.shop/user/find-email/?nickName=${inputId}`, {
+      fetch(`https://seohamserver.shop/user/find-email/?nickName=${inputId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
