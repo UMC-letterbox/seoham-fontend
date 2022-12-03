@@ -49,7 +49,7 @@ function Modal_password({ modalClose }) {
         setText("숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!");
       } else {
         setText("안전한 비밀번호 입니다.");
-        fetch("https://www.duke0410.shop/mypage/password/check", {
+        fetch("https://seohamserver.shop/mypage/password/check", {
           method: "POST",
           headers: {
             "x-access-token": localStorage.getItem("login_token"),
@@ -66,7 +66,7 @@ function Modal_password({ modalClose }) {
                 "현재 비밀번호와 같습니다. 다른 비밀번호를 입력해주세요."
               );
             } else {
-              fetch("https://www.duke0410.shop/mypage/password/modify", {
+              fetch("https://seohamserver.shop/mypage/password/modify", {
                 method: "PATCH",
                 headers: {
                   "x-access-token": localStorage.getItem("login_token"),
