@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
@@ -18,6 +18,11 @@ const Create = () => {
   const [emailMessage, setEmailMessage] = useState("");
   const [state1, setState1] = useState(false);
   const [state2, setState2] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
   const handleInputId = (e) => {
     setInputId(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 8) {
@@ -180,7 +185,7 @@ const Create = () => {
     }
   };
   return (
-    <div>
+    <div className={`${theme}`}>
       <h1 class="my-5 py-2 text-xl text-center">회원가입</h1>
       <h2 class="px-10 text-lg font-semibold buri">계정</h2>
       <div class="py-5 flex justify-center">

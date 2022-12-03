@@ -17,19 +17,18 @@ function Mypage() {
   const [font, setFont] = useState("");
 
   //추가된 부분
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+  // const toggleTheme = () => {
+  //   if (theme === "light") {
+  //     setTheme("dark");
+  //   } else {
+  //     setTheme("light");
+  //   }
+  // };
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.body.className = theme;
   }, [theme]);
-
 
   // 해당 api 없음.
   useEffect(() => {
@@ -48,17 +47,15 @@ function Mypage() {
       })
       .catch((err) => console.log(err));
 
-      //폰트 확인 - 추가된 부분
-      let currentFont = localStorage.getItem("font");
-      //console.log(currentFont);
-      if(currentFont == null) {
-          //console.log("글꼴 없음");
-          setFont('buri')
-      }
-      else{
-          setFont(currentFont);
-      }
-
+    //폰트 확인 - 추가된 부분
+    let currentFont = localStorage.getItem("font");
+    //console.log(currentFont);
+    if (currentFont == null) {
+      //console.log("글꼴 없음");
+      setFont("buri");
+    } else {
+      setFont(currentFont);
+    }
   }, []);
   //
 
@@ -188,7 +185,11 @@ function Mypage() {
             </button>
           </Link>
           <h1 className="text-white">MY PAGE</h1>
-          <Link to={"/setting"}><button><img src="/img/settings.png" className="w-4 h-4"/></button></Link>
+          <Link to={"/setting"}>
+            <button>
+              <img src="/img/settings.png" className="w-4 h-4" />
+            </button>
+          </Link>
         </div>
         <div className="flex justify-center">
           <div className="w-32">
@@ -244,7 +245,7 @@ function Mypage() {
           </div>
         </div>
       </div>
-      <div className="grid place-items-center">
+      {/* <div className="grid place-items-center">
         {theme === "light" ? (
           <button
             className="rounded-2xl w-64 mt-5 mb-5 py-2.5 bg-[#F47C7C] text-white text-lg"
@@ -260,7 +261,7 @@ function Mypage() {
             Dark
           </button>
         )}
-      </div>
+      </div> */}
       <div className="grid place-items-center">
         <button
           className="rounded-2xl w-64 mt-14 mb-3 py-2.5 bg-[#F47C7C] text-white text-lg"

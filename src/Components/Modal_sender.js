@@ -21,7 +21,7 @@ function Modal_sender({modalClose, sender}){
         /* 분명 보낸이 id 값 없다했는데, 오류는 아이디를 확인하래... */
         console.log(name, typeof(name))
         
-        fetch(`https://seohamserver.shop/posts/senders/edit/${sender}`, {
+        fetch(`https://www.duke0410.shop/posts/senders/edit/${sender}`, {
             method: "PATCH",
             headers : {
                 "x-access-token" : localStorage.getItem('login_token'),

@@ -20,16 +20,15 @@ const LetterEditor = () => {
     sender: "",
     content: "",
     date: 0,
-    tagId: 0,
+    tagIdx: [],
     letterIdx: 0, //편지지 ID
-    
   });
 
   const [errorMsg, setErrorMsg] = useState("");
   const [isWritten, setIswritten] = useState(false);
   const [daySelected, setDaySelected] = useState([]); //날짜 선택 여부 - hy 추가
   const [tagSelected, setTagSelected] = useState(""); //태그 선택 여부 - hy 추가
-  const [paperSelected, setPaperSelected] = useState(0);// 편지 선택 - js 추가
+  const [paperSelected, setPaperSelected] = useState(0); // 편지 선택 - js 추가
   const [tags, setTags] = useState([]);
   const senderInput = useRef(); //DOM요소 접근
   const contentInput = useRef();
@@ -37,9 +36,9 @@ const LetterEditor = () => {
   const { state } = useLocation();
   const userId = jsonLocalStorage.getItem("userIdx");
   //추가된 state들
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const [testTag, setTestTag] = useState([]);
   const [visible, setvisible] = useState(false);
-
 
   const chkCondition = () => {
     if (data.sender.length >= 3 && data.content.length >= 10) {
@@ -152,7 +151,6 @@ const LetterEditor = () => {
   React.useEffect(() => {
     //태그목록 불러오기
     getTagList(userId);
-    
   }, []);
   React.useEffect(() => {
     let tempdate = parseInt(
@@ -173,16 +171,14 @@ const LetterEditor = () => {
   }, [data]);
   console.log("선택된 편지지 확인 at letterEdtor", paperSelected);
   return (
-    <div className="overflow-scroll ">
+    <div className={`${theme} overflow-scroll`}>
       <header className="flex flex-row mx-11 mt-9 mb-2.5">
         <Link to={"/home"}>
           <button>
             <img src="/img/close.png" className="w-3.5 h-3.5" />
           </button>
         </Link>
-        <h2 className="text-center font-bold text-lg flex-grow">
-          편지 작성
-        </h2>
+        <h2 className="text-center font-bold text-lg flex-grow">편지 작성</h2>
         <button disabled={!isWritten} onClick={handleSubmit}>
           {isWritten ? (
             <img src="/img/check-green.png" className="w-4" />
@@ -302,12 +298,13 @@ const LetterEditor = () => {
           </select>
         </div>
         <div className="text-center my-2.5">
-          <PaperModalContainer setSelected = {setPaperSelected} selected = {paperSelected} />
+          <PaperModalContainer
+            setSelected={setPaperSelected}
+            selected={paperSelected}
+          />
         </div>
-        
       </div>
     </div>
   );
 };
 export default LetterEditor;
-

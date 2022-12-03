@@ -14,12 +14,17 @@ import MainHeader from "../Components/MainHeader";
 const Home = () => {
   const [taglist, setTaglist] = useState([]);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   // useEffect(() => {
   //   localStorage.setItem("theme", theme);
   //   document.body.className = theme;
   // }, [theme]);
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("userIdx"));
@@ -43,7 +48,9 @@ const Home = () => {
   console.log(typeof taglist);
   console.log(typeof taglist.taglist);
   return (
-    <div class="sm: justify-center items-center m-0 px-3 min-h-screen`">
+    <div
+      class={`${theme} sm: justify-center items-center m-0 px-3 min-h-screen`}
+    >
       {/* <MyHeader
         headText={""}
         leftChild={<MyButton text={"서함"} onClick={() => alert("안녕")} />}

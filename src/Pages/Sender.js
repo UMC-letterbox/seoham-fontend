@@ -14,46 +14,49 @@ const Sender = () => {
   const tagList = useContext(DiaryStateContext);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  console.log(tagList)
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
+  console.log(tagList);
   /*
   useEffect(() => {
     setData(tagList);
   }, [tagList]);
   */
-    //보낸이목록 저장용 배열
-    //let senders = []; //map으로 받아서 하면 안되네요
+  //보낸이목록 저장용 배열
+  //let senders = []; //map으로 받아서 하면 안되네요
   //보낸이 목록조회
-  function getSenderList(){
+  function getSenderList() {
     const userId = JSON.parse(localStorage.getItem("userIdx"));
-    fetch(`https://seohamserver.shop/posts/senders?userIdx=${userId}`,{
+    fetch(`https://seohamserver.shop/posts/senders?userIdx=${userId}`, {
       method: "GET",
       headers: {
-        "x-access-token": localStorage.getItem('login_token')
-      }
+        "x-access-token": localStorage.getItem("login_token"),
+      },
     })
-    .then((res)=>res.json())
-    .then((res) => {
-      console.log(res);
-      if(res.isSuccess){
-        console.log('보낸이 리스트', res.result);
-        setData(res.result);
-        //res.result.map(item => senders.push(item));
-      }
-      else{
-        console.log("실패");
-      }
-    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res.isSuccess) {
+          console.log("보낸이 리스트", res.result);
+          setData(res.result);
+          //res.result.map(item => senders.push(item));
+        } else {
+          console.log("실패");
+        }
+      });
   }
   useEffect(() => {
     //보낸이목록 불러오기 API 부분, 이후 test 시 주석해제
     getSenderList();
-  }, [])
-
-
-
+  }, []);
 
   return (
-    <div class="sm: justify-center items-center m-0 px-3 min-h-screen">
+    <div
+      class={`${theme} sm: justify-center items-center m-0 px-3 min-h-screen`}
+    >
       {/*<MyHeader
         headText={""}
         leftChild={<MyButton text={"서함"} onClick={() => alert("안녕")} />}
@@ -63,13 +66,28 @@ const Sender = () => {
       />*/}
       <MainHeader />
       <Select
-        TagText={<MyButton text={"태그별"} onClick={() => {navigate("/home");}} isClick={false}/>
+        TagText={
+          <MyButton
+            text={"태그별"}
+            onClick={() => {
+              navigate("/home");
+            }}
+            isClick={false}
+          />
         }
         DateText={
-          <MyButton text={"날짜별"} onClick={() => navigate("/date")} isClick={false}/>
+          <MyButton
+            text={"날짜별"}
+            onClick={() => navigate("/date")}
+            isClick={false}
+          />
         }
         SenderText={
-          <MyButton text={"보낸이별"} onClick={() => navigate("/sender")} isClick={true}/>
+          <MyButton
+            text={"보낸이별"}
+            onClick={() => navigate("/sender")}
+            isClick={true}
+          />
         }
       />
       <UpButton

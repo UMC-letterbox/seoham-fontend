@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const FindId = () => {
   const [inputId, setInputId] = useState("");
   const [isId, setIsId] = useState(false);
   const [EmailMessage, setEmailMessage] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -63,7 +68,7 @@ const FindId = () => {
     }
   };
   return (
-    <div>
+    <div className={`${theme}`}>
       <h1 class="my-5 py-2 text-xl text-center">계정 / 비밀번호찾기</h1>
       <div class="py-3 my-3 flex justify-center border-b-2 border-red-300">
         <div>
