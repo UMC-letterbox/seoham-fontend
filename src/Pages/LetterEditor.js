@@ -22,7 +22,7 @@ const LetterEditor = () => {
     date: 0,
     tagId: 0,
     letterIdx: 0, //편지지 ID
-    //postIdx: 0, 발행된 편지 Id -> 수정, 삭제시 사용
+    
   });
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -40,28 +40,6 @@ const LetterEditor = () => {
   const [testTag, setTestTag] = useState([]);
   const [visible, setvisible] = useState(false);
 
-  let letsgo = 0;
-  // const {paper} = state;
-  const goSelectPaper = () => {
-    jsonLocalStorage.setItem("letterobj", data);
-    navigate("/selectpaper");
-  };
-
-  function setInit() {
-    //로컬스토리지에서 기존의 데이터 불러오기
-    let chk = jsonLocalStorage.getItem("letterobj");
-    if (chk != null) {
-      setData({
-        ...data,
-        sender: chk.sender,
-        content: chk.content,
-        date: chk.date,
-      });
-      console.log(data);
-    } else {
-      return;
-    }
-  }
 
   const chkCondition = () => {
     if (data.sender.length >= 3 && data.content.length >= 10) {
@@ -108,21 +86,19 @@ const LetterEditor = () => {
   };
   const onCreate = () => {
     //새로운 편지 만들기
-    const temp = jsonLocalStorage.getItem("letterobj");
-    const { paper } = state;
     const newItem = {
       userIdx: userId,
-      sender: temp.sender,
-      date: temp.date,
-      tagIdx: parseInt(temp.tagId),
-      content: temp.content,
-      letterIdx: parseInt(state),
+      sender: data.sender,
+      date: data.date,
+      // tagIdx: parseInt(data.tagId),
+      tagIdx: testTag,
+      content: data.content,
+      letterIdx: parseInt(paperSelected),
     };
     console.log("서버에 전달될 newItem", newItem);
     return newItem;
   };
   const handleSubmit = () => {
-    console.log("최종 data", data);
     let newItem = onCreate();
     register(newItem);
   };
@@ -150,7 +126,6 @@ const LetterEditor = () => {
             tagId: 0,
             letterIdx: 0,
           });
-          localStorage.removeItem("letterobj");
           navigate("/home");
         }
       });
@@ -177,7 +152,7 @@ const LetterEditor = () => {
   React.useEffect(() => {
     //태그목록 불러오기
     getTagList(userId);
-    setInit();
+    
   }, []);
   React.useEffect(() => {
     let tempdate = parseInt(
@@ -196,7 +171,7 @@ const LetterEditor = () => {
   React.useEffect(() => {
     chkCondition();
   }, [data]);
-
+  console.log("선택된 편지지 확인 at letterEdtor", paperSelected);
   return (
     <div className="overflow-scroll ">
       <header className="flex flex-row mx-11 mt-9 mb-2.5">
@@ -327,12 +302,12 @@ const LetterEditor = () => {
           </select>
         </div>
         <div className="text-center my-2.5">
-                    <PaperModalContainer setSelected = {setPaperSelected} selected = {paperSelected} />
-
-                </div>
+          <PaperModalContainer setSelected = {setPaperSelected} selected = {paperSelected} />
+        </div>
         
       </div>
     </div>
   );
 };
 export default LetterEditor;
+
