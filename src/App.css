@@ -96,3 +96,12 @@
     rgba(244, 124, 124, 0.94) 100%
   );
 }
+.gradientBack {
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 237, 211, 0.82) 0%, rgba(244, 124, 124, 0.94) 100%);
+}
+.paperBtn:focus {
+  border: 2px solid gray;
+}
+.paperBtn {
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
