@@ -85,12 +85,14 @@ const LetterEditor = () => {
   };
   const onCreate = () => {
     //새로운 편지 만들기
+    let newTaglist = [];
+    newTaglist.push(testTag.map(v => parseInt(v)));
+    
     const newItem = {
       userIdx: userId,
       sender: data.sender,
       date: data.date,
-      // tagIdx: parseInt(data.tagId),
-      tagIdx: testTag,
+      tagIdx: newTaglist,
       content: data.content,
       letterIdx: parseInt(paperSelected),
     };
@@ -202,19 +204,22 @@ const LetterEditor = () => {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <div className="w-72 h-96 rounded-t bg-[#F5F5F5] drop-shadow-lg">
+        
           <textarea
-            className="w-72 h-72 rounded-t bg-[#F5F5F5] text-black"
+            className="w-72 h-72 rounded-t bg-[#F5F5F5] drop-shadow-lg text-black"
             placeholder="편지내용을 작성해주세요"
             ref={contentInput}
             name="content"
             value={data.content}
             onChange={handleChangeState}
+            style={{ 
+              backgroundImage: `url(img/paper${paperSelected}.jpg)`, 
+          }}
           />
           <p style={{ color: "red" }} className="text-sm">
             {errorMsg}
           </p>
-        </div>
+        
       </div>
 
       <ModalContainer setSelected={setDaySelected} selected={daySelected} />
