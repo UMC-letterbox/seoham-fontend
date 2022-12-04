@@ -1,13 +1,15 @@
-function Menubox({menuContents, menuFunc}){
-
-
-    return(
-        <ul className="menuBtn bg-white p-3 rounded-md shadow-xl text-sm">
-            {menuContents.map((content, index) => (
-                <li key={index}><button className="my-1" onClick={menuFunc[index]}>{content}</button></li>
-            ))}
-        </ul>
-    );
+function Menubox({ menuContents, menuFunc }) {
+  return (
+    <ul className="menuBtn bg-white p-3 rounded-md shadow-xl text-sm dark:bg-[#47474A]">
+      {menuContents.map((content, index) => (
+        <li key={index}>
+          <button className="my-1" onClick={menuFunc[index]}>
+            {content}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 /*

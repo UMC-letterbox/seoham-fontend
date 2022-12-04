@@ -23,7 +23,7 @@ function Modal_name({ modalClose, modalCheck, setNickname }) {
     /* 중복체크 api 연결하기 - 400 에러*/
     console.log(name, typeof name);
 
-    fetch("https://seohamserver.shop/mypage/nickname/check/", {
+    fetch("https://www.duke0410.shop/mypage/nickname/check/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

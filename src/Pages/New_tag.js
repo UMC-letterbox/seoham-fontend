@@ -91,7 +91,7 @@ function New_tag() {
           <span className="text-zinc-400">태그 이름</span>
           <input
             type="text"
-            className="border-b-4 w-6/12 ml-5"
+            className="border-b-2 w-6/12 ml-5 bg-transparent border-[#989898] text-[#989898]"
             onChange={changeTag}
           />
         </div>

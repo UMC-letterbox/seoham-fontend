@@ -114,7 +114,7 @@ function View_letter() {
         }}
         className="h-4/6 mx-10 p-3 bg-gray-100 shadow-lg rounded-md"
       >
-        <div className="w-11/12 h-full m-2 overflow-y-auto gangwon text-xl">
+        <div className="w-11/12 h-full m-2 overflow-y-auto gangwon text-xl text-black">
           {post?.content}
         </div>
       </div>

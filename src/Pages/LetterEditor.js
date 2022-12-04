@@ -204,29 +204,27 @@ const LetterEditor = () => {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        
-          <textarea
-            className="w-72 h-72 rounded-t bg-[#F5F5F5] drop-shadow-lg text-black"
-            placeholder="편지내용을 작성해주세요"
-            ref={contentInput}
-            name="content"
-            value={data.content}
-            onChange={handleChangeState}
-            style={{ 
-              backgroundImage: `url(img/paper${paperSelected}.jpg)`, 
+        <textarea
+          className="w-72 h-72 rounded-t bg-[#F5F5F5] drop-shadow-lg text-black dark:bg-[#303435]"
+          placeholder="편지내용을 작성해주세요"
+          ref={contentInput}
+          name="content"
+          value={data.content}
+          onChange={handleChangeState}
+          style={{
+            backgroundImage: `url(img/paper${paperSelected}.jpg)`,
           }}
-          />
-          <p style={{ color: "red" }} className="text-sm">
-            {errorMsg}
-          </p>
-        
+        />
+        <p style={{ color: "red" }} className="text-sm">
+          {errorMsg}
+        </p>
       </div>
 
       <ModalContainer setSelected={setDaySelected} selected={daySelected} />
       <div className="flex flex-col justify-center">
         <div className="text-center my-2.5">
           <button
-            className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898]"
+            className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898] dark:bg-[#47484A]"
             onClick={chkVisible}
           >
             {" "}

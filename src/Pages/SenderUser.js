@@ -125,7 +125,7 @@ const SenderUser = () => {
         </button>
       </div>
 
-      <div className="flex justify h-20 w-full m-auto  cursor-pointer  bg-white">
+      <div className="flex justify h-20 w-full m-auto  cursor-pointer">
         <div className="h-20 flex justify-center items-center">
           <div className=" ml-5 w-12">
             <UserSvgPink />
