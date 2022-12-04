@@ -58,7 +58,7 @@ function Setting() {
           setFont={setFont}
         />
       </div>
-      <div className="bg-[#FCE2DB] p-5">
+      <div className="bg-[#FCE2DB] p-5 text-black">
         <p>서함 글꼴 변경 미리보기</p>
         <p>가나다라마바사아자차카타파하</p>
         <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
