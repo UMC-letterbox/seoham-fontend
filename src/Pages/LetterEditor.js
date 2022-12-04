@@ -85,14 +85,14 @@ const LetterEditor = () => {
   };
   const onCreate = () => {
     //새로운 편지 만들기
-    let newTaglist = [];
-    newTaglist.push(testTag.map(v => parseInt(v)));
-    
+    // let newTaglist = [];
+    // newTaglist.push(testTag.map((v) => parseInt(v)));
+
     const newItem = {
       userIdx: userId,
       sender: data.sender,
       date: data.date,
-      tagIdx: newTaglist,
+      tagIdx: testTag.map((v) => parseInt(v)),
       content: data.content,
       letterIdx: parseInt(paperSelected),
     };
