@@ -1,4 +1,4 @@
-# Seoham project Develeopment
+# Seoham project Development
 ### 추가된 기능
 - 다크모드 추가
 - 사용자 폰트 설정
