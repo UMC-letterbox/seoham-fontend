@@ -276,30 +276,7 @@ const LetterEditor = () => {
           </>
         ) : null}
 
-        <div className="text-center">
-          <select
-            onChange={handleChangeState}
-            value={tagSelected}
-            name="tagId"
-            className=" w-72 h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898]"
-          >
-            <option value="-1">
-              {" "}
-              {data.tagId == " "
-                ? "# 태그 선택"
-                : tags.map((tag) => {
-                    if (tag.tagIdx == data.tagId) {
-                      return tag.tagName;
-                    }
-                  })}
-            </option>
-            {tags.map((tag) => (
-              <option key={tag.tagIdx} value={tag.tagIdx}>
-                {tag.tagName}
-              </option>
-            ))}
-          </select>
-        </div>
+        
         <div className="text-center my-2.5">
           <PaperModalContainer
             setSelected={setPaperSelected}
