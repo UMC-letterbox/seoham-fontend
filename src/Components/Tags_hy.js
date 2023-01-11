@@ -1,6 +1,16 @@
 import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/pulse.css";
 function Tags({id, name, letters, color}) {
+    const navigate = useNavigate();
+    const onClick = () => {
+        navigate(`/tags/${id}`, {
+            state: {
+                tagName: name,
+                tagColor: color
+            }
+        });
+    }
     console.log(id, name, color)
     return(
         <div className="effect">
@@ -16,14 +26,15 @@ function Tags({id, name, letters, color}) {
                 </button>
                 </Link>
                 :
-                <Link to={`/tags/${id}`}>
+                // <Link to={`/tags/${id}`}>
                 <button 
                     style={{backgroundColor: color}}
                     className="grid place-items-start w-32 h-20 m-3 p-2 font-bold rounded-md shadow-md text-white text-sm"
+                    onClick={onClick}
                 >
                     #{name}
                 </button>
-                </Link>
+                // </Link>
             }
         </div>
     );

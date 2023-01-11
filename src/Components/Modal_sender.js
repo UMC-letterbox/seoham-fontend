@@ -10,37 +10,47 @@ function Modal_sender({ modalClose, sender }) {
       modalClose();
     }
   };
-
+  const [IsSender, setIsSender] = useState("");
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
-    setName(e.target.value);
-    console.log("보낸이 변경: ", e.target.value);
+    console.log(e.target.value.length, e.target.value)
+    setName(e.target.value)
+    if (e.target.value.length <= 0) {
+      setIsSender(false);
+    } else {
+      setIsSender(true);
+    }
+    console.log("보낸이 변경: ", e.target.value, IsSender);
   };
 
   const changeSender = () => {
     /* 분명 보낸이 id 값 없다했는데, 오류는 아이디를 확인하래... */
-    console.log(name, typeof name);
-
-    fetch(`https://seohamserver.shop/posts/senders/edit/${sender}`, {
-      method: "PATCH",
-      headers: {
-        "x-access-token": localStorage.getItem("login_token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        changedSender: name,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        if (res.isSuccess) {
-          alert("수정되었습니다.");
-          modalClose();
-        } else {
-          alert("오류가 발생했습니다.");
-        }
-      });
+    console.log(name, typeof name, IsSender);
+    if(IsSender){
+      fetch(`https://seohamserver.shop/posts/senders/edit/${sender}`, {
+        method: "PATCH",
+        headers: {
+          "x-access-token": localStorage.getItem("login_token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          changedSender: name,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          if (res.isSuccess) {
+            alert("수정되었습니다.");
+            modalClose();
+          } else {
+            alert("오류가 발생했습니다.");
+          }
+        });
+    }
+    else{
+      alert("보낸이 이름을 입력해주세요");
+    }
   };
 
   return (

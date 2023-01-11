@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import * as Data from "../getTags";
 import Letterbox from "../Components/Letterbox";
 import MyButton3 from "../Components/MyButton3";
@@ -12,8 +12,11 @@ function View_tags() {
   const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const { id } = useParams();
   const navigate = useNavigate();
-  let thisTagName = "";
-  let thisTagColor = "";
+  const location = useLocation();
+
+  const thisTagName = location.state.tagName;
+  const thisTagColor = location.state.tagColor;
+  console.log(thisTagName, thisTagColor);
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.body.className = theme;
@@ -34,9 +37,10 @@ function View_tags() {
         res.result.map((item) => currentPosts.push(item));
         console.log(typeof currentPosts);
         let newArray = [...currentPosts];
-        thisTagName = newArray[0].tagName;
-        thisTagColor = newArray[0].tagColor;
+        //thisTagName = newArray[0].tagName;
+        //thisTagColor = newArray[0].tagColor;
         setLetters(newArray);
+        console.log(thisTagColor, thisTagName, newArray);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -86,8 +90,8 @@ function View_tags() {
     navigate("/modiTag", {
       state: {
         tagId: id,
-        tagName: letters[0]?.tagName,
-        tagColor: letters[0]?.tagColor,
+        tagName: thisTagName,
+        tagColor: thisTagColor,
       },
     });
   };
@@ -125,9 +129,9 @@ function View_tags() {
       <div className="sticky flex justify-center bg-white">
         <div
           className="font-bold text-xl mt-2 p-2 w-10/12 rounded-md"
-          style={{ backgroundColor: letters[0]?.tagColor }}
+          style={{ backgroundColor: thisTagColor }} //letters[0]?.tagColor }}
         >
-          #{letters[0]?.tagName}
+          # {thisTagName}
         </div>
       </div>
       <div className="flex justify-center">
