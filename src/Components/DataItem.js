@@ -28,7 +28,8 @@ const DateItem = ({ postIdx, tagIdx, tagName, sender, tagColor, date }) => {
             <div class="text-left">{sender}</div>
             <br></br>
             <div class="text-right">
-              #{tagName[0]} 외 {tagName.length - 1}개 태그
+              #{tagName[0]} 외<div></div>
+              {tagName.length - 1}개 태그
             </div>
           </button>
         </div>
