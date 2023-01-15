@@ -26,6 +26,10 @@ import Mypage from "./Pages/Mypage";
 import Modi_tag from "./Pages/Modi_tag";
 import Landing from "./Pages/Landing";
 import Letterupdate from "./Pages/Letterupdate";
+import Setting from "./Pages/Setting";
+import GlobalStyle from "./font/GlobalStyle";
+import ModifyLetter from "./Pages/ModifyLetter";
+
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -142,14 +146,35 @@ function App() {
     });
     dataId.current += 1;
   };
+
+  let currentFont = localStorage.getItem("font");
+  console.log("전역폰트", currentFont);
+  if (currentFont == "buri") {
+    currentFont = "Aritaburi";
+  } else if (currentFont == "Iropke") {
+    currentFont = "IropkebatangM";
+  } else if (currentFont == "Chosun") {
+    currentFont = "ChosunNm";
+  } else if (currentFont == "Mapo") {
+    currentFont = "MapoGoldenPier";
+  } else {
+    currentFont = "Aritaburi";
+  }
+
+  let currentMode = localStorage.getItem("mode");
+  console.log("전역모드", currentMode);
+  if (currentMode == null) {
+    localStorage.setItem("mode", "light");
+  }
+
   return (
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={{ onCreate }}>
         <BrowserRouter>
+          <GlobalStyle inputFont={currentFont} />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/home" element={<Home />} />
-            
             <Route path="/next" element={<Next />} />
             <Route path="/new" element={<New />} />
             <Route path="/tag/:tagName" element={<Tag />} />
@@ -159,22 +184,23 @@ function App() {
             <Route path="/letter" element={<Letter />} />
             <Route path="/view/:id" element={<View />} />
             <Route path="/selectlettertype" element={<SelectLetterType />} />
-            <Route path="/fileeditor" element={ <FileEditor />} />
+            <Route path="/fileeditor" element={<FileEditor />} />
             <Route path="/lettereditor" element={<LetterEditor />} />
-            <Route path="/letterupdate/:postId" element={<Letterupdate />} />
+            <Route path="/modifyletter/:postId" element={<ModifyLetter />} />
             <Route path="/selectpaper" element={<SelectPaper />} />
-            <Route path="/newTag" element={<New_tag />}/>
-            <Route path="/tags/:id" element={<View_tags />}/>
-            <Route path="/letter/:tagId/:id" element={<View_letter/>}/>
+            <Route path="/newTag" element={<New_tag />} />
+            <Route path="/tags/:id" element={<View_tags />} />
+            <Route path="/letter/:tagId/:id" element={<View_letter />} />
             <Route path="/lettereditor/:postId" element={<LetterEditor />} />
             <Route path="/mypage" element={<Mypage />} />
-            <Route path="/modiTag" element={<Modi_tag/>}/>
+            <Route path="/modiTag" element={<Modi_tag />} />
+            <Route path="/setting" element={<Setting />} />
 
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/findid" element={<FindId/>}/>
-            <Route path="/findpw" element={<FindPw/>}/>
-            <Route path="/create" element={<Create/>}/>
-            <Route path="/contract" element={<Contract/>}/>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/findid" element={<FindId />} />
+            <Route path="/findpw" element={<FindPw />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/contract" element={<Contract />} />
           </Routes>
         </BrowserRouter>
       </DiaryDispatchContext.Provider>

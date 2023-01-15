@@ -20,7 +20,7 @@ const Login2 = () => {
   };
 
   const signUp = () => {
-    fetch("https://www.duke0410.shop/user/login", {
+    fetch("https://seohamserver.shop/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Login2 = () => {
       </h1>
       <div class="my-3 flex justify-center">
         <input
-          class="rounded border py-1 w-4/5 buri leading-loose"
+          class="rounded border py-1 w-4/5 buri leading-loose bg-transparent"
           placeholder="이메일 입력"
           type="text"
           name="input_email"
@@ -61,7 +61,7 @@ const Login2 = () => {
       </div>
       <div class="my-3 flex justify-center">
         <input
-          class="rounded border py-1 w-4/5 buri leading-loose"
+          class="rounded border py-1 w-4/5 buri leading-loose bg-transparent"
           placeholder="비밀번호 입력(영문,숫자,특수문자 조합 8~16자)"
           type={state1 ? "text" : "password"}
           name="input_pw"
@@ -102,4 +102,3 @@ const Login2 = () => {
 };
 
 export default Login2;
-

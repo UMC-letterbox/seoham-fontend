@@ -15,12 +15,19 @@ const Tag = () => {
   const { tagName } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
   useEffect(() => {
     const Name = `${tagName}`;
     setData(tagList.filter((it) => Name === it.tagName));
   }, [tagList]);
   return (
-    <div class="sm: justify-center items-center m-0 px-3 bg-gray-200 min-h-screen">
+    <div
+      class={`${theme} sm: justify-center items-center m-0 px-3 bg-gray-200 min-h-screen`}
+    >
       <MyHeader
         leftChild={
           <MyButton2

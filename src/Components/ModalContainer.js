@@ -17,7 +17,7 @@ function ModalContainer({setSelected, selected}){
     
     return(
         <div className='w-full'>
-            <div className="flex justify-end mr-11">
+            <div className="flex justify-end">
                 <button className={`border-y-2 px-3 py-2 my-4 border-[${dayColor}]`} onClick={modalCheck}>
                     {
                         selected.length === 0 ?

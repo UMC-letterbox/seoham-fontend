@@ -147,7 +147,7 @@ function Join() {
       </div>
       <button
         onClick={onClick}
-        class="py-1 m-auto joinBtn block text-center bg-white border rounded-full text-red-300 cursor-pointer w-3/5"
+        class="py-1 m-auto joinBtn block text-center bg-white border rounded-full text-red-300 cursor-pointer w-3/5 dark:bg-[#48484A] dark:text-[#F47C7C]"
       >
         다음
       </button>

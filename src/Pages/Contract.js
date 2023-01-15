@@ -1,7 +1,13 @@
 import Join from "../Components/Join";
 import "../App.css";
+import { useState, useEffect } from "react";
 
 const Contract = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
   const LogoSvg = () => {
     return (
       <svg
@@ -211,7 +217,7 @@ const Contract = () => {
     );
   };
   return (
-    <div>
+    <div className={`${theme}`}>
       <h1 class="my-5 py-2 text-xl text-center">회원가입</h1>
       <div class="mx-7">
         <LogoSvg />

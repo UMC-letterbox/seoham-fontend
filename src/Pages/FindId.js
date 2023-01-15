@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const FindId = () => {
   const [inputId, setInputId] = useState("");
   const [isId, setIsId] = useState(false);
   const [EmailMessage, setEmailMessage] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -18,7 +23,7 @@ const FindId = () => {
   const certifyId = (e) => {
     e.preventDefault();
     fetch(
-      `https://www.duke0410.shop/user/check-find-email/?nickName=${inputId}`,
+      `https://seohamserver.shop/user/check-find-email/?nickName=${inputId}`,
       {
         method: "GET",
         headers: {
@@ -41,15 +46,12 @@ const FindId = () => {
   const findEmail = () => {
     const { id_number } = inputId;
     if (isId === true) {
-      fetch(
-        `https://www.duke0410.shop/user/find-email/?nickName=${inputId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(`https://seohamserver.shop/user/find-email/?nickName=${inputId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => response.json())
         .then((response) => {
           if (response.isSuccess === true) {
@@ -66,7 +68,7 @@ const FindId = () => {
     }
   };
   return (
-    <div>
+    <div className={`${theme}`}>
       <h1 class="my-5 py-2 text-xl text-center">계정 / 비밀번호찾기</h1>
       <div class="py-3 my-3 flex justify-center border-b-2 border-red-300">
         <div>
@@ -82,7 +84,7 @@ const FindId = () => {
       </div>
       <div class="pt-10 pb-4 flex justify-center">
         <input
-          class="rounded border-b-2 w-1/2 text-sm leading-loose"
+          class="rounded border-b-2 w-1/2 text-sm leading-loose bg-transparent border-[#989898]"
           placeholder="닉네임을 입력해주세요"
           type="text"
           name="input_id"
@@ -91,12 +93,12 @@ const FindId = () => {
         />
         <button
           onClick={certifyId}
-          class="text-center text-sm border rounded-full py-1 text-red-300 w-1/4 border-red-300"
+          class="text-center text-sm border rounded-full py-1 text-red-300 w-1/4 border-red-300 dark:bg-[#323435]"
         >
           확인
         </button>
       </div>
-      <p class="ml-10 text-xs">인증결과 {EmailMessage}</p>
+      <p class="ml-10 text-xs text-[#989898]">인증결과 {EmailMessage}</p>
       <div class="pt-10 flex justify-center">
         <button
           onClick={findEmail}

@@ -10,17 +10,17 @@
   }
 }
 
-@import url('https://webfontworld.github.io/amore/AritaBuri.css');
+@import url("https://webfontworld.github.io/amore/AritaBuri.css");
 
 .buri {
-    font-family : 'AritaBuri';
+  font-family: "AritaBuri";
 }
 .shLogo {
   position: absolute;
-width: 150px;
-height: 150px;
-left: 113px;
-top: 169px;
+  width: 150px;
+  height: 150px;
+  left: 113px;
+  top: 169px;
 }
 .shLogo2 {
   width: 120px;
@@ -28,36 +28,36 @@ top: 169px;
   left: 113px;
   top: 169px;
 }
-.sh-lettering{
+.sh-lettering {
   position: absolute;
-height: 125px;
-left: 5.33%;
-right: 5.33%;
-top: calc(50% - 125px/2 + 103px);
+  height: 125px;
+  left: 5.33%;
+  right: 5.33%;
+  top: calc(50% - 125px / 2 + 103px);
 
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #FFFFFF;}
+  color: #ffffff;
+}
 .App {
   min-height: 100vh;
 }
-.startBtn{
+.startBtn {
   position: absolute;
-width: 135px;
-height: 60px;
-left: calc(50% - 135px/2);
-bottom: 34px;
+  width: 135px;
+  height: 60px;
+  left: calc(50% - 135px / 2);
+  bottom: 34px;
 
-background: #FFFFFF;
-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
-border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
 }
 .joinBtn {
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
@@ -74,21 +74,44 @@ border-radius: 30px;
 }
 
 /*태그 */
-.sticky{
+.sticky {
   position: sticky;
   top: 0px;
   z-index: 1055;
 }
 
 .menuBtn {
-  position: fixed; 
-  opacity: 0; 
-  top: 10px; 
+  position: fixed;
+  opacity: 0;
+  top: 10px;
   right: 40px;
-  z-index: 1055; 
-  opacity: 1; 
+  z-index: 1055;
+  opacity: 1;
 }
 
 .gradientBack {
-  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 237, 211, 0.82) 0%, rgba(244, 124, 124, 0.94) 100%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(255, 237, 211, 0.82) 0%,
+    rgba(244, 124, 124, 0.94) 100%
+  );
 }
+.gradientBack {
+   background: radial-gradient(50% 50% at 50% 50%, rgba(255, 237, 211, 0.82) 0%, rgba(244, 124, 124, 0.94) 100%);
+ }
+ .paperBtn {
+   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
+   
+ }
+ .radio-btn {
+  display:block;
+   margin-left:auto;
+  appearance: none;
+  border : max(1px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+ }
+ .radio-btn:checked{
+    border: 0.4em solid #EF9F9F;
+ }
