@@ -132,8 +132,8 @@ const ModifyLetter = () => {
   };
   function register(newItem) {
     console.log(newItem);
-    fetch("https://seohamserver.shop/posts/new", {
-      method: "POST",
+    fetch(`https://seohamserver.shop/posts/edit/${postId}`, {
+      method: "PATCH",
       headers: {
         "X-ACCESS-TOKEN": localStorage.getItem("login_token"),
         "Content-Type": "application/json",
