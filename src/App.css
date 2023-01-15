@@ -99,9 +99,19 @@
 .gradientBack {
    background: radial-gradient(50% 50% at 50% 50%, rgba(255, 237, 211, 0.82) 0%, rgba(244, 124, 124, 0.94) 100%);
  }
- .paperBtn:focus {
-   border: 2px solid gray;
- }
  .paperBtn {
    box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2);
+   
+ }
+ .radio-btn {
+  display:block;
+   margin-left:auto;
+  appearance: none;
+  border : max(1px, 0.1em) solid gray;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+ }
+ .radio-btn:checked{
+    border: 0.4em solid #EF9F9F;
  }
