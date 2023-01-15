@@ -15,7 +15,7 @@ const PaperModalContainer = ({ setSelected, selected }) => {
   return (
     <div>
       <button
-        className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#EF9F9F] border border-[#EF9F9F] buri dark:bg-[#47484A]"
+        className=" decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#EF9F9F] border border-[#EF9F9F] buri dark:bg-[#47484A]"
         onClick={handleModalClick}
       >
         편지지 선택하기
