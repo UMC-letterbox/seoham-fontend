@@ -172,6 +172,7 @@ const LetterEditor = () => {
     chkCondition();
   }, [data]);
   console.log("선택된 편지지 확인 at letterEdtor", paperSelected);
+  console.log("testTag들",testTag);
   return (
     <div className={`${theme} overflow-scroll`}>
       <header className="flex flex-row mx-11 mt-9 mb-2.5">
@@ -212,19 +213,20 @@ const LetterEditor = () => {
           value={data.content}
           onChange={handleChangeState}
           style={{
-            backgroundImage: `url(img/paper${paperSelected}.jpg)`,
+            backgroundImage: `url(img/paper${paperSelected}.jpg)`
           }}
         />
         <p style={{ color: "red" }} className="text-sm">
           {errorMsg}
         </p>
       </div>
-
-      <ModalContainer setSelected={setDaySelected} selected={daySelected} />
+      <div className="w-72 flex-row m-auto">
+          <ModalContainer setSelected={setDaySelected} selected={daySelected} />
+        </div>
       <div className="flex flex-col justify-center">
         <div className="text-center my-2.5">
           <button
-            className=" bg-white decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898] dark:bg-[#47484A]"
+            className=" decoration-white w-72  h-10 text-center font-semibold rounded-xl text-[#989898] border border-[#989898] dark:bg-[#47484A]"
             onClick={chkVisible}
           >
             {" "}
@@ -276,7 +278,6 @@ const LetterEditor = () => {
           </>
         ) : null}
 
-        
         <div className="text-center my-2.5">
           <PaperModalContainer
             setSelected={setPaperSelected}
