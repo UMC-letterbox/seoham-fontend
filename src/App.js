@@ -28,6 +28,7 @@ import Landing from "./Pages/Landing";
 import Letterupdate from "./Pages/Letterupdate";
 import Setting from "./Pages/Setting";
 import GlobalStyle from "./font/GlobalStyle";
+import ModifyLetter from "./Pages/ModifyLetter";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -185,7 +186,7 @@ function App() {
             <Route path="/selectlettertype" element={<SelectLetterType />} />
             <Route path="/fileeditor" element={<FileEditor />} />
             <Route path="/lettereditor" element={<LetterEditor />} />
-            <Route path="/letterupdate/:postId" element={<Letterupdate />} />
+            <Route path="/modifyletter/:postId" element={<ModifyLetter />} />
             <Route path="/selectpaper" element={<SelectPaper />} />
             <Route path="/newTag" element={<New_tag />} />
             <Route path="/tags/:id" element={<View_tags />} />
