@@ -28,35 +28,41 @@ function Setting() {
         <h1>설정</h1>
         <span></span>
       </div>
-      <div className="text-center my-10">
-        <div className="">화면</div>
-        <SettingModeBtn text={"라이트모드"} textClassName={"light"} />
-        <SettingModeBtn text={"다크모드"} textClassName={"dark"} />
-        {/* <SettingBtn text={"시스템 설정"}/> */}
+      <div className="flex justify-center">
+        <div className="flex flex-col my-10">
+          <div className="text-center">화면</div>
+          <SettingModeBtn text={"라이트모드"} textClassName={"light"} />
+          <SettingModeBtn text={"다크모드"} textClassName={"dark"} />
+          {/* <SettingBtn text={"시스템 설정"}/> */}
+        </div>
       </div>
-      <div className="text-center my-10">
-        <h3 className="">글꼴</h3>
-        <SettingBtn
-          text={"아리따 부리"}
-          textClassName={"buri"}
-          setFont={setFont}
-        />
-        <SettingBtn
-          text={"이롭게 바탕체"}
-          textClassName={"Iropke"}
-          setFont={setFont}
-        />
-        <SettingBtn
-          text={"조선일보명조"}
-          textClassName={"Chosun"}
-          setFont={setFont}
-        />{" "}
-        {/**조선일보명조가 디코딩이 안돼서 일단 조선굵은명조로 넣었습니다.*/}
-        <SettingBtn
-          text={"Mapo 금빛나루"}
-          textClassName={"Mapo"}
-          setFont={setFont}
-        />
+
+      <div className="flex justify-center">
+        <div className="flex flex-col my-10">
+          <h3 className="text-center">글꼴</h3>
+          <SettingBtn
+            text={"아리따 부리"}
+            textClassName={"buri"}
+            setFont={setFont}
+          />
+          <SettingBtn
+            text={"이롭게 바탕체"}
+            textClassName={"Iropke"}
+            setFont={setFont}
+          />
+          <SettingBtn
+            text={"조선일보명조"}
+            textClassName={"Chosun"}
+            setFont={setFont}
+          />{" "}
+          {/**조선일보명조가 디코딩이 안돼서 일단 조선굵은명조로 넣었습니다.*/}
+          <SettingBtn
+            text={"Mapo 금빛나루"}
+            textClassName={"Mapo"}
+            setFont={setFont}
+          />
+        </div>
+
       </div>
       <div className="bg-[#FCE2DB] p-5 text-black">
         <p>서함 글꼴 변경 미리보기</p>
