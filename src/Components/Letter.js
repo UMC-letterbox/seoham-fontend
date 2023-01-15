@@ -12,7 +12,7 @@ function Letter({tagId, postId, sender, date}) {
     }, []);
     
     return(
-        <div data-aos="fade-up" data-aos-duration="2000" className="relative w-full h-40 bg-zinc-100 m-3 p-5 rounded-md shadow-md">
+        <div data-aos="fade-up" data-aos-duration="2000" className="relative w-full h-40 bg-zinc-100 m-3 p-5 rounded-md shadow-md text-black">
             <Link to={`/letter/${tagId}/${postId}`}>
                 <div className="w-full h-full">
                     <span>

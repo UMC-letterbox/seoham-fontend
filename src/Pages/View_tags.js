@@ -126,7 +126,7 @@ function View_tags() {
           <img src="/img/dots.png" className="w-4 h-4" />
         </button>
       </div>
-      <div className="sticky flex justify-center bg-white">
+      <div className="sticky flex justify-center bg-white dark:bg-[#232425]">
         <div
           className="font-bold text-xl mt-2 p-2 w-10/12 rounded-md"
           style={{ backgroundColor: thisTagColor }} //letters[0]?.tagColor }}
