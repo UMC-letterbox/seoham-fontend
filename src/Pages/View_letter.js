@@ -47,7 +47,7 @@ function View_letter() {
 
   const modiLetter = () => {
     console.log("편지 수정");
-    navigate(`/letterupdate/${postId}`);
+    navigate(`/modifyletter/${postId}`);
     //navigate로 넘기기?
   };
 
@@ -126,7 +126,7 @@ function View_letter() {
       </div>
       <div
         style={{
-          backgroundImage: `url('/img/paper${post?.letterIdx + 1}.jpg')`,
+          backgroundImage: `url('/img/paper${post?.letterIdx}.jpg')`,
         }}
         className="h-4/6 mx-10 p-3 bg-gray-100 shadow-lg rounded-md"
       >
@@ -139,7 +139,7 @@ function View_letter() {
           <span>날짜: {post?.date.slice(0, 10)}&nbsp;</span>
         </span>
       </div>
-      <div className="flex justify-start mt-2 mx-10">
+      <div className="flex flex-wrap justify-start mt-2 mx-10">
         {post?.tagName.map((t, index)=>( 
           <span 
             style={{backgroundColor: post?.tagColor[index]}}
